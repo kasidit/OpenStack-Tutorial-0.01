@@ -1,0 +1,1308 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>บทที่ ๑ การใช้งานโอเพนสแตค</title>
+<meta name="description" content="การใช้งานระบบโอเพนสแตค ผ่าน Dashboard และ Command Line Interfaces">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@500;600;700&family=Sarabun:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" type="button" aria-label="สารบัญ" aria-expanded="false">☰</button>
+  <a class="brand" href="#top">บทที่ ๑ การใช้งานโอเพนสแตค</a>
+  <button class="theme-btn" type="button" aria-label="สลับโหมดสว่าง/มืด"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+</header>
+<div class="progress"><span></span></div>
+<div class="layout">
+  <nav class="sidebar" aria-label="สารบัญ">
+    <p class="toc-title">สารบัญ</p>
+    <ol class="toc">
+<li><a href="#sec-1-1">๑.1 ขอบเขตการเข้าถึงและใช้งานทรัพยากร</a>
+<ol><li><a href="#sec-1-1-1">๑.1.1 ความสัมพันธ์ระหว่าง User Role Scope และ Policy</a></li><li><a href="#sec-1-1-2">๑.1.2 บุคลิกภาพที่เกิดจากความสัมพันธ์ User Role Scope และ Policy</a></li><li><a href="#sec-1-1-3">๑.1.3 การสร้างบุคลิกภาพของเริ่มต้นของ User เมื่อติดตั้งโอเพนสแตค</a></li></ol>
+</li>
+<li><a href="#sec-1-2">๑.2 การใช้งานด้วย Dashboard</a>
+<ol><li><a href="#sec-1-2-1">๑.2.1 การเพิ่ม Project และผู้ใช้</a></li><li><a href="#sec-1-2-2">๑.2.2 การสร้าง cirros VM instance</a></li><li><a href="#sec-1-2-3">๑.2.3 การใช้งาน cirros VM instance ทางคอนโซล</a></li><li><a href="#sec-1-2-4">๑.2.4 การเปลี่ยนแปลงกฎไฟร์วอลโดยเปลี่ยนแปลงค่าในกลุ่มกฎรักษาความปลอดภัย</a></li><li><a href="#sec-1-2-5">๑.2.5 การเพิ่มกลุ่มกฎรักษาความปลอดภัยให้วีเอ็ม</a></li><li><a href="#sec-1-2-6">๑.2.6 การเพิ่ม Template ของเกสต์โอเอสอิมเมจใน Component แกลนซ์</a></li><li><a href="#sec-1-2-7">๑.2.7 การเพิ่ม Flavor</a></li><li><a href="#sec-1-2-8">๑.2.8 การรันวีเอ็มโดยใช้เกสต์โอเอสอิมเมจของ Ubuntu</a></li><li><a href="#sec-1-2-9">๑.2.9 การสร้างคู่คีย์สำหรับล็อกอินเข้าสู่วีเอ็มโดยไม่ต้องใส่พาสเวิร์ด</a></li><li><a href="#sec-1-2-10">๑.2.10 การสร้างวีเอ็มและกำหนดค่าคู่คีย์ให้กับวีเอ็ม</a></li><li><a href="#sec-1-2-11">๑.2.11 การลบวีเอ็ม</a></li><li><a href="#sec-1-2-12">๑.2.12 การสร้างระบบเครือข่ายเสมือนภายใน Project</a></li><li><a href="#sec-1-2-13">๑.2.13 การสร้างเร้าเตอร์สำหรับเชื่อมต่อระบบเครือข่ายเสมือน</a></li><li><a href="#sec-1-2-14">๑.2.14 การสร้างวีเอ็มเชื่อมต่อระบบเครือข่ายเสมือน</a></li><li><a href="#sec-1-2-15">๑.2.15 การจัดสรร Floating IP ให้วีเอ็ม</a></li><li><a href="#sec-1-2-16">๑.2.16 การ Pause, Suspend, Shelve และ Shut off เครื่องวีเอ็ม</a></li><li><a href="#sec-1-2-17">๑.2.17 การรันวีเอ็มบนหน่วยเก็บข้อมูล Volume</a></li><li><a href="#sec-1-2-18">๑.2.18 การสร้าง Volume ข้อมูลและเชื่อมต่อ Volume ข้อมูลเข้ากับวีเอ็มแบบ Hot Plug</a></li><li><a href="#sec-1-2-19">๑.2.19 การสร้างระบบเครือข่ายเสมือนใหม่และเชื่อมต่อเข้ากับวีเอ็มแบบ Hot Plug</a></li><li><a href="#sec-1-2-20">๑.2.20 การปรับเปลี่ยน quota ของ Project</a></li><li><a href="#sec-1-2-21">๑.2.21 การรันวีเอ็มจากเกสต์โอเอสอิมเมจใน Volume เก่า</a></li></ol>
+</li>
+<li><a href="#sec-1-3">๑.3 การใช้งานด้วย Command Line Interfaces</a>
+<ol><li><a href="#sec-1-3-1">๑.3.1 การสร้าง Client คอมพิวเตอร์และเตรียมพร้อมสำหรับรันคำสั่ง Command Line</a></li><li><a href="#sec-1-3-2">๑.3.2 การสร้างและใช้งานสคริปต์สำหรับพิสูจน์ตัวตนของผู้ใช้ด้วย Command Line</a></li><li><a href="#sec-1-3-3">๑.3.3 การสร้าง Project ผู้ใช้ และบทบาท</a></li><li><a href="#sec-1-3-4">๑.3.4 การ upload อิมเมจและสร้าง Flavor</a></li><li><a href="#sec-1-3-5">๑.3.5 การล็อกอินเข้าใช้งานและสร้างคู่คีย์</a></li><li><a href="#sec-1-3-6">๑.3.6 การสร้างระบบเครือข่ายภายในและซับเน็ต</a></li><li><a href="#sec-1-3-7">๑.3.7 การสร้างเร้าเตอร์และเชื่อมต่อเร้าเตอร์กับระบบเครือข่าย</a></li><li><a href="#sec-1-3-8">๑.3.8 การสร้างกลุ่มกฎรักษาความปลอดภัย ICMP-SSH-HTTP-HTTPS</a></li><li><a href="#sec-1-3-9">๑.3.9 การรันวีเอ็ม</a></li><li><a href="#sec-1-3-10">๑.3.10 การสร้าง Floating IP และสร้างความเกี่ยวข้องกับวีเอ็ม</a></li><li><a href="#sec-1-3-11">๑.3.11 ข้อแนะนำเกี่ยวกับการใช้คำสั่ง Command Line Interfaces อื่น</a></li></ol>
+</li>
+<li><a href="#sec-1-4">๑.4 บทสรุป</a>
+</li>
+<li><a href="#sec-1-5">๑.5 แบบฝึกหัด</a>
+</li>
+</ol>
+  </nav>
+  <main class="content">
+    <header class="hero" id="top">
+      <p class="eyebrow">OpenStack</p>
+      <h1>บทที่ ๑ การใช้งานโอเพนสแตค</h1>
+      <p class="lede">การใช้งานระบบโอเพนสแตคผ่าน Web Dashboard และ Command Line Interfaces</p>
+    </header>
+    <article>
+
+<p>การใช้งานระบบโอเพนสแตคสามารถทำได้ 3 วิธีได้แก่</p>
+<ol type="1">
+<li><p>Web Interface หรือ OpenStack Dashboard ออกแบบมาให้สะดวกต่อการใช้งานและทำให้ผู้ใช้มองเห็นภาพรวมของระบบประมวลผลแบบโครงสร้างพื้นฐานที่ผู้ใช้สร้างขึ้นได้ง่าย (Jackson 2018) (บรรยายในบทที่ ๑.2)</p></li>
+<li><p>Command Line Interfaces (CLI) เพื่อสร้างสคริปต์สำหรับออกคำสั่งเป็นปริมาณมาก (Jackson 2018) (บรรยายในบทที่ ๑.3)</p></li>
+<li><p>Application Programming Interfaces อนุญาตให้ผู้ใช้สั่งงานโอเพนสแตคจากแอปพลิเคชัน (นอกขอบเขตของหนังสือเล่มนี้ ผู้อ่านสามารถดูเพิ่มเติมได้ที่ <a href="https://developer.openstack.org" rel="noopener" target="_blank">https://developer.openstack.org</a>)</p></li>
+</ol>
+<h2 id="sec-1-1">๑.1 ขอบเขตการเข้าถึงและใช้งานทรัพยากร</h2>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image1.png"><img alt="ภาพ ๑-1 ขอบเขตการใช้งานทรัพยากรของโอเพนสแตค" decoding="async" loading="lazy" src="images/image1.png" style="width:335px"/></a></div><figcaption>ภาพ ๑-1 ขอบเขตการใช้งานทรัพยากรของโอเพนสแตค</figcaption></figure>
+
+<p>ขอบเขตการใช้งานทรัพยากรของโอเพนสแตคมีสามระดับดังภาพ ๑-1 ได้แก่ ระดับ System (หรือ system-wide) ระดับ Domain และระดับ Project ระดับ System หมายถึงทรัพยากรทั้งหมด ระดับ Domain คือทรัพยากรส่วนหนึ่งที่ถูกจัดสรรให้กับผู้ใช้ขนาดใหญ่ เช่น องค์กร หรือบริษัท เป็นต้น ระดับ Project คือการแบ่งทรัพยากรภายใน Domain หนึ่งย่อยลงไปอีกให้กับผู้ใช้กลุ่มย่อยภายใน Domain เช่น แผนกของบริษัท หรือโครงการภายในองค์กร เป็นต้น</p>
+<p>ใน System ผู้ดูแลระบบสามารถสร้าง Domain หลาย Domain โดยที่แต่ละ Domain มี Namespace แยกจากกัน ทำให้ผู้ใช้ใน Domain หนึ่งสามารถกำหนดชื่อ Project ชื่อบัญชีผู้ใช้ หรือชื่ออื่นๆ ซ้ำกับของ Domain ได้ ด้วยเหตุนี้ โอเพนสแตคจึงสามารถรองรับการประมวลผลขององค์กรหลายองค์กรได้โดยไม่ต้องกังวลว่าชื่อจะซ้ำกัน ตามปกติแล้ว โอเพนสแตคจะสร้าง default domain ขึ้นเป็น Domain เริ่มต้น ผู้ดูแลระบบสามารถสร้าง Domain เพิ่มเติมได้ภายหลัง เช่นเดียวกัน ผู้ใช้ในระดับ Domain สามารถสร้าง Project ได้หลาย Project ซึ่งแต่ละอันมี Namespace แยกจากกันโดยไม่ต้องกังวลว่าชื่อของ Instances ภายใน Project หนึ่งจะซ้ำกับของ Project อื่น</p>
+<p>Project คือนามธรรมที่เป็นตัวแทนของ quota ของทรัพยากร ที่ผู้ใช้สามารถใช้สร้าง instances เช่น วีเอ็ม volume และ virtual network เป็นต้น ตัวอย่างของ quota ทรัพยากรภายใน Project ได้แก่ จำนวน vcpu cores ขนาด RAM รวมสำหรับสร้างวีเอ็ม ขนาดพื้นที่ storage สำหรับสร้าง volumes จำนวน virtual network จำนวน floating IP และ จำนวน security group เป็นต้น นอกจากนั้น ผู้ใช้ต้องมีสิทธิการใช้งาน Project ในระดับ member หรือมากกว่า เท่านั้นจึงจะสามารถใช้ทรัพยากรภายใน Project ได้</p>
+<h3 id="sec-1-1-1">๑.1.1 ความสัมพันธ์ระหว่าง User Role Scope และ Policy</h3>
+<p>ระบบคีย์สโตนของโอเพนสแตคใช้วิธีการ Role-Based Access Control (RBAC) ในการบริหารจัดการสิทธิการเข้าใช้งานระบบโอเพนสแตค วิธีการ RBAC คือการพิจารณาสิทธิการใช้งานทรัพยากรจากการจับกลุ่ม keys สามอย่างประกอบไปด้วย (1) User (2) Role และ (3) Scope เข้าด้วยกันและใช้ combination ของ key เหล่านี้กำหนดสิทธิการใช้งานทรัพยากร (อ้างอิงเพจ <a href="https://docs.openstack.org/keystone/latest/admin/service-api-protection.html" rel="noopener" target="_blank">Default Roles</a>)</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image2.png"><img alt="ภาพ ๑-2 ความสัมพันธ์ระหว่าง user role และ scope" decoding="async" loading="lazy" src="images/image2.png" style="width:592px"/></a></div><figcaption>ภาพ ๑-2 ความสัมพันธ์ระหว่าง user role และ scope</figcaption></figure>
+
+<p>ในภาพ ๑-2 User คือนามธรรมของผู้ใช้ของระบบเพนสแตค ในรูปแบบของบัญชีผู้ใช้ (account) ผู้ใช้จะต้องผ่านการพิสูจน์ตัวตน (WHO เข้าใช้ระบบในภาพ) จึงจะสามารถใช้บัญชีของตนได้ <strong>User จะต้องถูกสร้างขึ้นภายใต้ Domain ใด Domain หนึ่งเสมอ</strong> ผู้ดูแลระบบสามารถนำ User หลาย User ภายใต้ Domain เดียวกันมารวมกันเป็น Group ซึ่งหมายถึงกลุ่มของ Users ที่ถ้าพิสูจน์ตัวตนแล้วว่าเป็นหนึ่งใน User ในกลุ่มก็จะผ่านการพิสูจน์ตัวตนของกลุ่ม หมายเหตุ: ในโอเพนสแตค ผู้ดูแลระบบสามารถกำหนดให้ User ที่ถูกสร้างใน Domain หนึ่งเป็น member ของ Project ใน Domain อื่นได้</p>
+<p>Role คือนามธรรมของสิทธิในการใช้งานทรัพยากรของผู้ใช้ในโอเพนสแตค Role เหล่านี้เป็น string ของชื่อบทบาทที่ถูกสร้างขึ้นเพื่อสื่อความหมายให้เข้าใจกันโดยทั่วไป แต่กฎเกณฑ์ของทุกบทบาทจะถูกกำหนดอยู่ในนโยบาย (ซึ่งจะได้กล่าวถึงต่อไป) รายชื่อของ Role ในโอเพนสแตค ได้แก่</p>
+<ol type="1">
+<li><p>admin คือบทบาทของผู้ดูแลระบบ</p></li>
+<li><p>manager คือบทบาทของผู้จัดการระบบ</p></li>
+<li><p>member คือบทบาทของผู้ใช้ระบบ</p></li>
+<li><p>reader คือบทบาทของผู้ดูที่สามารถ view instance มีอยู่ในระบบเท่านั้น</p></li>
+<li><p>บทบาทที่สร้างขึ้นใหม่หรือ custom ในภาพ เป็นบทบาทที่สร้างขึ้นเฉพาะกิจตามความต้องการพิเศษของผู้ใช้</p></li>
+<li><p>service เป็นบทบาทสำหรับ User ที่เป็นซอฟต์แวร์ส่วนประกอบของโอเพนสแตค เช่น โนวา นิวตรอน และอื่นๆ</p></li>
+</ol>
+<p>ในภาพ ๑-2 บทบาท admin จะครอบคลุมความสามารถของบทบาท manager ซึ่งจะครอบคลุมความสามารถของ member ซึ่งจะครอบคลุมความสามารถของ reader ดังนั้นถ้า User มีความสามารถ admin ก็หมายความว่ามีความสามารถของ บทบาท manager member และ reader อยู่แล้ว</p>
+<p>Scope คือนามธรรมของขอบเขตการใช้งานทรัพยากร สามระดับได้แก่</p>
+<ol type="1">
+<li><p>System-scope คือการกำหนดค่า Identity ของการเข้าถึงทรัพยากรทั้งระบบ</p></li>
+<li><p>Domain-scope คือการกำหนดค่า Identity ของการเข้าถึงทรัพยากรของ Domain ในระบบ และ</p></li>
+<li><p>Project-scope คือการกำหนดค่า Identity ของการใช้งานชุดของทรัพยากรที่ถูกแบ่งย่อยภายใน Domain</p></li>
+</ol>
+<p>ระบบคีย์สโตนรวมกลุ่ม User Role และ Scope เข้าด้วยกันเป็น (User, Role, Scope) Tuple เมื่อผู้ดูแลระบบออกคำสั่งทาง Web Interface หรือ CLI เพื่อกำหนดให้ User มี Role อะไรและใช้กับ Scope ใด (พร้อมทั้งระบุชื่อของ Scope นั้นด้วย) Tuple นั้นจะถูกใช้เป็น Combined Key สำหรับกำหนดสิทธิในการใช้งาน (Authorization)</p>
+<p>สุดท้าย นโยบาย (หรือ Policies) คือการกำหนดกฎ Authorization ว่าแต่ละ Combined Key สามารถใช้งานฟังก์ชันใดของโอเพนสแตคได้บ้าง โอเพนสแตคใช้ไฟล์ /etc/COMPONENT/policy.json (โดยที่ COMPONENT หมายถึงชื่อ Component ของระบบโอเพนส‍แตค ได้แก่ keystone, glance, nova, neutron และ cinder เป็นต้น) เพื่อกำหนดกฎ Authorization ดังกล่าว</p>
+<p>โอเพนสแตค อนุญาตให้ผู้ใช้เปลี่ยนกฎ Authorization ได้สองวิธีได้แก่ (1) ใช้ OpenStack CLI หรือ (2) แก้ไขไฟล์ policy.json โดยตรง</p>
+<h3 id="sec-1-1-2">๑.1.2 บุคลิกภาพที่เกิดจากความสัมพันธ์ User Role Scope และ Policy</h3>
+<p>การสร้างความสัมพันธ์ของ (User, Role, Scope) Tuple ทำให้เกิด<strong>บุคลิกภาพ (Persona)</strong> 3 ระดับดังนี้ (อ้างอิง <a href="https://docs.openstack.org/keystone/latest/admin/service-api-protection.html" rel="noopener" target="_blank">OpenStack Default Role</a> และ <a href="https://docs.redhat.com/en/documentation/red_hat_openstack_services_on_openshift/18.0/html/performing_security_operations/assembly_srbac-in-rhoso_performing-security-services" rel="noopener" target="_blank">Red Hat OpenStack Services on OpenShift</a>)</p>
+<p><strong>1. Scope: ทั้งระบบ (หรือ System)</strong></p>
+<p>ใน Scope ระดับ System ผู้ดูแลระบบสามารถสร้างบุคลิกภาพดังต่อไปนี้</p>
+<ol type="1">
+<li><p>บุคลิกภาพจากความสัมพันธ์ (User=admin, Role=admin, Scope=system) Tuple หมายถึงบัญชีผู้ใช้ชื่อ “admin” มีบทบาทเป็น admin ผู้ดูแลระบบของทรัพยากรทั้งหมด มีสิทธิใช้งานระบบตามกำหนดใน Policy คือ สามารถบริหารจัดการทุกสิ่งในระบบคีย์สโตน ยกตัวอย่างเช่น (1) สามารถเพิ่มหรือลบ Service (หรือ Component) ของโอเพนสแตค ซึ่งอนุมานความสามารถในการเข้าถึงเครื่องคอมพิวเตอร์และระบบเครือข่ายที่ใช้ติดตั้งระบบโอเพนสแตค (2) สามารถสร้างและจัดการ Service endpoint สำหรับติดต่อ Services ของโอเพนสแตค (3) สร้างและจัดการ Domain (4) สร้าง Federated Mapping (Map Identity ของระบบซอฟต์แวร์อื่นมายังของโอเพนสแตค) และ (5) ล้าง credentials ที่ค้างอยู่ในระบบ เป็นต้น</p></li>
+<li><p>บุคลิกภาพจากความสัมพันธ์ (User=userA, Role=member, Scope=system) Tuple หมายถึงบัญชีผู้ใช้ “userA” มีบทบาทเป็น member หรือสมาชิกของผู้ใช้ระบบ ในระดับทั้งระบบ มีสิทธิใช้งานระบบ (ตามกำหนดใน Policy) คือ สามารถ view ทุกสิ่งที่ระบบคีย์สโตนจัดการ ผู้ใช้ “UserA” สามารถ (1) ดูรายการของ Role ในระบบ (2) ดูรายการการกำหนด Role ให้กับผู้ใช้ (3) ดูรายการ Project (4) รายการกลุ่มผู้ใช้และสมาชิกในกลุ่ม เป็นต้น บุคลิกภาพนี้ใกล้เคียงกับของจากความสัมพันธ์ (User=userA, Role=reader, Scope=system) Tuple ต่างกันตรงที่ Role “reader” มีความสามารถในการ view น้อยกว่า</p></li>
+</ol>
+<blockquote>
+<p><strong>2. Scope: ระดับ Domain</strong></p>
+</blockquote>
+<p>ใน Scope ระดับ Domain ผู้ดูแลระบบสามารถสร้างบุคลิกภาพดังต่อไปนี้</p>
+<ol type="1">
+<li><p>บุคลิกภาพจากความสัมพันธ์ (User=userB, Role=admin, Scope=domain) Tuple หมายถึงบัญชีผู้ใช้ชื่อ “userB” มีบทบาทเป็น admin ผู้ดูแลระบบภายใน Domain มีสิทธิใช้งานระบบ (ตามกำหนดใน Policy) คือ (1) สามารถจัดการสิ่งที่อยู่ภายใน Domain <strong>เกือบทุกเรื่อง</strong> (2) สามารถสร้าง Projects และ Users ภายใน Domain และ (3) สามารถตรวจสอบว่า User ที่ใช้ Project ที่อยู่ใน Domain นี้มี Role อะไรบ้าง</p></li>
+</ol>
+<blockquote>
+<p>อย่างไรก็ตาม สิ่งที่ User ที่มีบุคลิกภาพนี้<em><strong>ไม่สามารถทำได้</strong></em>เกี่ยวกับ Domain ที่มันอยู่ มีดังนี้</p>
+</blockquote>
+<ol type="1">
+<li><p>ไม่สามารถลบหรือ Disable Domain ที่มันอยู่ได้ เนื่องจากผู้สร้างคือ admin ในระดับ System</p></li>
+<li><p>ไม่สามารถเข้าถึงทรัพยากร เช่น คอมพิวเตอร์และระบบเครือข่ายที่ใช้ติดตั้งโอเพนสแตค และ</p></li>
+<li><p>ไม่สามารถเปลี่ยนแปลง Configuration เกี่ยวกับการใช้งานทรัพยากรภายใน Domain เนื่องจากเป็นสิ่งที่ทำได้ในระดับ System เท่านั้น</p></li>
+</ol>
+<blockquote>
+<p><strong>มาตรการป้องกันความผิดพลาด:</strong> ใน admin role แบบดั้งเดิม (Legacy) โอเพนสแตคเปิดช่องให้ผู้ใช้ที่มี Role admin ระดับ Domain สามารถขยายสิทธิ์การเข้าถึง (Privilege Escalation) เป็นRole admin ในระดับ System ได้ ถ้าผู้ดูแลระบบในระดับ System ไม่ทราบหรือกำหนดค่า Configuration ของระบบคีย์สโตนผิดพลาด จะทำให้ admin ระดับ Domain สามารถเข้าถึงและจัดการทรัพยากรนอก Domain โดยไม่คาดคิดได้ (อ้างอิง <a href="https://github.com/SovereignCloudStack/standards/blob/main/Standards/scs-0302-v1-domain-manager-role.md" rel="noopener" target="_blank">domain manager github</a>) ด้วยเหตุนี้ ผู้พัฒนาระบบคีย์สโตนจึงได้สร้าง Role <strong>manager</strong> ของ Domain ขึ้นเพื่อป้องการความผิดพลาดนี้ ซึ่งจะกล่าวถึงต่อไป</p>
+</blockquote>
+<ol start="2" type="1">
+<li><p>บุคลิกภาพจากความสัมพันธ์ (User=userC, Role=<strong>manager</strong>, Scope=domain) Tuple หมายถึงบัญชีผู้ใช้ชื่อ “userC” มีบทบาทเป็น <strong>manager ผู้จัดการระบบ</strong>ภายใน Domain มีสิทธิใช้งานระบบ (ตามกำหนดใน Policy) คือสามารถบริหารจัดการทรัพยากรที่เกี่ยวข้องกับ Identity ภายใน Domain เท่านั้น ยกตัวอย่างเช่น สร้างและเปลี่ยนแปลง Users Projects และ Groups ภายใน Domain และสามารถสร้างและยกเลิก Roles ที่ใช้ใน Domain และสามารถเรียกดูความสัมพันธ์ระหว่าง Roles และ Identity ภายใน Domain เป็นต้น</p></li>
+</ol>
+<blockquote>
+<p>Domain manager role ไม่สามารถจัดการการใช้งานทรัพยากรได้เหมือนกับ Domain admin role ถึงแม้ว่า Domain manager จะสามารถกำหนดหรือเปลี่ยนแปลง Role ของ User ได้แต่ก็มีข้อจำกัด ที่ไม่สามารถเปลี่ยนแปลงสิ่งที่กำหนดโดย Domain admin และไม่สามารถกำหนดหรือเปลี่ยน Role ของ User ใน Domain ให้เป็น Role admin ได้</p>
+</blockquote>
+<ol start="3" type="1">
+<li><p>บุคลิกภาพจากความสัมพันธ์ (User=userD, Role=member, Scope=domain) และ Tuple หมายถึง “userD” เป็นสมาชิกของ Domain ที่สามารถ view ทรัพยากรและข้อมูล metadata ภายใน Domain เท่านั้น ส่วนบุคลิกภาพจากความสัมพันธ์ (User=userD, Role=reader, Scope=domain) ก็คล้ายกันกับ Role member เพียงแต่สามารถดูข้อมูลได้น้อยกว่า ทั้งสองแบบเหมาะสมกับการ Monitor หรือ Audit การใช้งานทรัพยากรภายใน Domain</p></li>
+</ol>
+<blockquote>
+<p><strong>3. Scope: ระดับ Project</strong></p>
+</blockquote>
+<p>User ใน Project Scope มีความแตกต่างจาก User ในระดับ System และ Domain คือ <strong>User ใน Project Scope เท่านั้นสามารถใช้งาน (หรือ consume) ทรัพยากรภายใต้โควตาของ Project ได้</strong> ในขณะที่ User ในระดับ System และ Domain ไม่ว่าจะมี Role เป็นอะไรก็ไม่สามารถใช้งานทรัพยากรใน Project ได้</p>
+<p>ใน Project Scope ผู้ดูแลระบบสามารถสร้างบุคลิกภาพให้ User ดังต่อไปนี้</p>
+<ol type="1">
+<li><p>บุคลิกภาพจากความสัมพันธ์ (User=admin, Role=admin, Scope=project) Tuple หมายถึงบัญชีผู้ใช้ชื่อ “admin” มีบทบาทเป็น admin (หรือผู้ดูแลระบบ) ภายใน Project ซึ่งตาม Default Policy ของโอเพนสแตคมีสิทธิใช้งานระบบดังนี้</p>
+<ol type="a">
+<li><p>สร้าง เพิ่ม/ลด User และ Group ที่สามารถใช้งาน Project</p></li>
+<li><p>สร้างและจัดการทรัพยากรใน Project และ</p></li>
+<li><p>แชร์ทรัพยากรภายใน Project กับ Project อื่น แต่ไม่สามารถ view หรือจัดการทรัพยากรในระดับ System หรือ Domain scope ได้</p></li>
+</ol></li>
+</ol>
+<blockquote>
+<p>User ที่มี Role แบบ admin สามารถทำทุกอย่างที่ Role member ทำได้</p>
+</blockquote>
+<ol start="2" type="1">
+<li><p>บุคลิกภาพจากความสัมพันธ์ (User=userE, Role=member, Scope=project) Tuple หมายถึงบัญชีผู้ใช้ชื่อ “userE” มีบทบาทเป็น member (หรือสมาชิกของ) Project มีสิทธิใช้งานทรัพยากรภายใต้ Quota ที่กำหนด เช่นสร้างและใช้งานวีเอ็ม Volume Security Groups virtual network และ virtual router เป็นต้น User มี Role แบบ member สามารถทำทุกอย่างที่ Role reader ทำได้</p></li>
+<li><p>บุคลิกภาพจากความสัมพันธ์ (User=userE, Role=reader, Scope=project) Tuple หมายถึงบัญชีผู้ใช้ชื่อ “userE” มีบทบาทเป็น reader ที่สามารถอ่านหรือดูข้อมูลเกี่ยวกับการใช้งานทรัพยากรภายใน Project ได้อย่างเดียว แต่ไม่สามารถใช้งานหรือจัดการได้เหมือน Role member และ admin</p></li>
+</ol>
+<h3 id="sec-1-1-3">๑.1.3 การสร้างบุคลิกภาพของเริ่มต้นของ User เมื่อติดตั้งโอเพนสแตค</h3>
+<p>เมื่อติดตั้งโอเพนสแตค ระบบคีย์สโตนจะรัน keystone-manage bootstrap operation ซึ่งจะทำสิ่งต่อไปนี้ (อ้างอิง <a href="https://docs.openstack.org/keystone/11.0.1/configuration.html" rel="noopener" target="_blank">Keystone 11.0.1 Configuration</a>)</p>
+<ol type="1">
+<li><p>สร้าง Default domain</p></li>
+<li><p>สร้าง User “admin” และ Project “admin” ใน default domain</p></li>
+<li><p>สร้าง Role “admin” เป็น Role แรกในระบบโอเพนสแตค (หมายเหตุ: Role เป็นนามธรรม Global )</p></li>
+<li><p>สร้าง (User=admin, Role=admin, Scope=project) Tuple และสร้าง Policy ให้ admin user ใน Default domain เป็นผู้ดูแลระบบของ Project “admin” และสามารถใช้ทรัพยากรใน Project ภายในปริมาณที่กำหนดใน Quota เพื่อสร้างวีเอ็มและ Instance ชนิดอื่นได้</p></li>
+<li><p>สร้าง (User=admin, Role=admin, Scope=system) Tuple ซึ่งเป็นการกำหนดให้ admin user ใน Default domain เป็นผู้ดูแลระบบที่สามารถติดตั้ง เปลี่ยนแปลง configuration ของระบบโอเพนสแตคและสามารถจัดการทรัพยากรที่ใช้ติดตั้งระบบฯได้</p></li>
+</ol>
+<p>ระบบคีย์สโตนจะกำหนดความสัมพันธ์ (User=admin, Role=admin, Scope=project) และ (User=admin, Role=admin, Scope=system) tuples พร้อมทั้งกฎการกำหนดสิทธิ์ (Authorization Rules) ในไฟล์ policy อันจะส่งผลให้ admin user สามารถเข้าถึงทรัพยากรคอมพิวเตอร์และระบบเครือข่ายเพื่อติดตั้งและจัดการ Identity และ Service ทุกอย่างของโอเพนสแตคได้ ในขณะเดียวกัน admin user ก็สามารถสร้างวีเอ็มและ Instance อื่นภายใน Project admin ได้ด้วย หลังจากนั้น User admin สามารถสร้าง User Role Project และ Domain เพิ่มเติมได้ตามต้องการ</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image3.png"><img alt="ภาพ ๑-3 หน้าล็อกอินของ OpenStack Horizon หรือ OpenStack Dashboard" decoding="async" loading="lazy" src="images/image3.png" style="width:376px"/></a></div><figcaption>ภาพ ๑-3 หน้าล็อกอินของ OpenStack Horizon หรือ OpenStack Dashboard</figcaption></figure>
+
+<h2 id="sec-1-2">๑.2 การใช้งานด้วย Dashboard</h2>
+<aside class="callout"><p class="callout-title">Note</p>หนังสือฉบับนี้เน้นบรรยายการใช้งานหลังการติดตั้ง แทนที่จะเป็นคู่มือการใช้งานซึ่งสามารถอ่านเพิ่มเติมได้จาก (1) <a href="https://docs.openstack.org/2026.1/" rel="noopener" target="_blank">OpenStack Documentation</a> และ (2) <a href="https://docs.openstack.org/operations-guide/" rel="noopener" target="_blank">OpenStack Operations Guide</a></aside>
+<p>หลังจากติดตั้ง ผู้ใช้โอเพนสแตคสามารถเข้าใช้งานระบบได้ทางยูอาร์แอล http://&lt;virtual IP address&gt;/horizon โดยที่ &lt;virtual IP address&gt; คือ IP address ที่ผู้ใช้สามารถเข้าถึง OpenStack Dashboard หลังจากติดตั้ง (ยกตัวอย่างเช่น จากการติดตั้งในบทที่ ๐ ยูอาร์แอลนี้คือ http://172.16.81.254/horizon) ซึ่งผู้ใช้จะเห็นหน้าล็อคอินดังภาพ ๑-3</p>
+<p>ในขณะที่ติดตั้งโอเพนสแตค ซอฟต์แวร์ที่ใช้ติดตั้ง (Kolla Ansible) จะสร้างบัญชีผู้ใช้ admin และพาสเวิร์ดของบัญชีนั้นให้ บัญชี admin มีบทบาทเป็นผู้ดูแลระบบ (System Administrator) และเป็นสมาชิก (Member) จะมี Admin Project ในภาพที่ ๑-1 เราจะล็อกอินเข้าสู่ Project admin (หมายเหตุ: หนังสือเล่มนี้สมมุติว่าระบบโอเพนสแตคมี Domain ที่ใช้งานเพียง Domain เดียวคือ default domain เท่านั้น)</p>
+<p>หลังจากล็อกอินผู้ใช้ admin จะพบหน้าเว็บเพจในภาพ ๑-2 ซึ่งด้านขวาของภาพแสดงข้อมูลสรุปการใช้งานทรัพยากรในภาพรวมที่ผู้ใช้มีสิทธิใช้ได้ตาม quota ชนิดของทรัพยากรที่รายงานในเพจนี้มีสามชนิด ได้แก่ ทรัพยากรสำหรับประมวลผล (Compute) ทรัพยากรหน่วยเก็บข้อมูล Volume (Volume) และทรัพยากรระบบเครือข่าย (Network) นอกจากนั้นผู้ใช้ยังสามารถเรียกดูสถิติการใช้งานทรัพยากรในรายละเอียดตามช่วงเวลาจากส่วน “Usage Summary” ของเพจได้ด้วย สำหรับรายละเอียดของทรัพยากร จะกล่าวถึงอีกครั้งเมื่อแสดงการสร้างทรัพยากรเสมือนแบบต่างๆเพื่อใช้งาน ด้านซ้ายของภาพ ๑-2 แสดงแท็บที่รวบรวมข้อมูลและฟังก์ชันการปฏิบัติงาน 3 หมวดหมู่ได้แก่</p>
+<ol type="1">
+<li><p>แท็บ Project รวมฟังก์ชันการจัดการทรัพยากรสำหรับ Project ของผู้ใช้ จากตัวอย่างในภาพคือ Admin Project ในภาพแสดงแท็บย่อยของแท็บ Project ได้แก่ API Access Compute Volume และ Network และภายใต้แท็บย่อย Compute แสดงแท็บย่อย Overview Instances Images Key Pairs และ Server Groups</p></li>
+<li><p>แท็บ Admin รวมฟังก์ชันสำหรับจัดการทรัพยากรของทุก Project ในระบบโอเพนสแตค ผู้ใช้ที่เป็นผู้ดูแลระบบเท่านั้นที่เห็นและสามารถใช้งานแท็บนี้ได้</p></li>
+<li><p>แท็บ Identity รวมฟังก์ชันสำหรับจัดการ Profile และรายการผู้ใช้ใน Project เดียวกันกับของบัญชีผู้ใช้ที่ล็อกอิน ในกรณีที่ผู้ใช้เป็นผู้ดูแลระบบ แท็บนี้จะแสดงฟังก์ชันสำหรับจัดการ Profile ผู้ใช้ของทุก Project</p></li>
+</ol>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image4.png"><img alt="ภาพ ๑-2 เว็บเพจแสดงภาพรวมการใช้ทรัพยากรของ Project admin" decoding="async" loading="lazy" src="images/image4.png" style="width:390px"/></a></div><figcaption>ภาพ ๑-2 เว็บเพจแสดงภาพรวมการใช้ทรัพยากรของ Project admin</figcaption></figure>
+
+<p>จากภาพ ๑-2 ภายใต้แท็บ Project จะมีแท็บย่อยที่เป็นตัวแทนฟังก์ชันการปฏิบัติงานของโอเพนสแตค 4 แท็บได้แก่</p>
+<ol type="1">
+<li><p>API Access แสดง URL endpoints ของ OpenStack Service และสคริปต์สำหรับให้ผู้ใช้ดาวน์โหลดเพื่อใช้คำสั่ง Command Line</p></li>
+<li><p>Compute แสดงข้อมูลและคำสั่งที่เกี่ยวข้องกับวีเอ็ม เมื่อกดแท็บ Compute จะมีเมนูปรากฏดังภาพ ๑-3 ได้แก่รายการ VM instance รายการ image template รายการ key pairs รายการ server groups</p></li>
+<li><p>Volume (Volume) เมื่อกดแท็บ Volumes จะมีเมนูปรากฏดังภาพ ๑-3 ซึ่งจะแสดงรายการหน่วยเก็บข้อมูลเสมือน (Volume) และรายการ Snapshot (Snapshots) รายการกลุ่มของ Volume (Group) และรายการกลุ่มของ Snapshot (Group Snapshots)</p></li>
+<li><p>เน็ตเวิร์ค (Network) เมื่อกดแท็บ Network จะมีเมนูปรากฏดังภาพ ๑-3 แสดง Topology ของระบบเครือข่าย (Network Topology) รายการระบบเครือข่ายสเมือน (Network) รายการของเร้าเตอร์ (Router) และรายการของ Floating IP</p></li>
+</ol>
+<figure class="fig multi"><div class="fig-row"><a class="zoom" href="images/image5.png"><img alt="ภาพ ๑-3 ฟังก์ชันในเมนู Compute, Volume และ Network ของ Project" decoding="async" loading="lazy" src="images/image5.png" style="width:405px"/></a><a class="zoom" href="images/image6.png"><img alt="ภาพ ๑-3 ฟังก์ชันในเมนู Compute, Volume และ Network ของ Project" decoding="async" loading="lazy" src="images/image6.png" style="width:405px"/></a><a class="zoom" href="images/image7.png"><img alt="ภาพ ๑-3 ฟังก์ชันในเมนู Compute, Volume และ Network ของ Project" decoding="async" loading="lazy" src="images/image7.png" style="width:405px"/></a></div><figcaption>ภาพ ๑-3 ฟังก์ชันในเมนู Compute, Volume และ Network ของ Project</figcaption></figure>
+
+<p>ภายใต้แท็บ Admin ในภาพ ๑-2 ซึ่งเป็นแท็บที่จะปรากฏเฉพาะที่หน้า Dashboard ของผู้ใช้ที่มีบทบาทเป็นผู้ดูแลระบบเท่านั้น (ผู้ใช้ที่เป็นสมาชิกธรรมดาจะไม่เห็นแท็บนี้) เมื่อกดแท็บ Admin จะมีแท็บย่อยสี่แท็บได้แก่ compute, volume, network และ system ซึ่งเมื่อเลือกแท็บย่อยสามแท็บย่อยแรกจะแสดงรายการฟังก์ชันดังเมนูด้านซ้ายสุดของภาพ ๑-4 ซึ่งเมื่อกดแท็บย่อยเหล่านั้น OpenStack Dashboard จะแสดงเมนูย่อยลงไปอีกดังภาพ เมนูเหล่านี้แสดงข้อมูลการใช้งานทรัพยากรรวมของทุก Project และฟังก์ชันสำหรับจัดการกับทรัพยากรเหล่านั้น (ซึ่งจะไม่บรรยายรายละเอียดในหนังสือเล่มนี้)</p>
+<figure class="fig multi"><div class="fig-row"><a class="zoom" href="images/image11.png"><img alt="ภาพ ๑-4 ฟังก์ชันภายใต้เมนู Admin สำหรับผู้ดูแลระบบเท่านั้น" decoding="async" loading="lazy" src="images/image11.png" style="width:592px"/></a><a class="zoom" href="images/image12.png"><img alt="ภาพ ๑-4 ฟังก์ชันภายใต้เมนู Admin สำหรับผู้ดูแลระบบเท่านั้น" decoding="async" loading="lazy" src="images/image12.png" style="width:592px"/></a><a class="zoom" href="images/image13.png"><img alt="ภาพ ๑-4 ฟังก์ชันภายใต้เมนู Admin สำหรับผู้ดูแลระบบเท่านั้น" decoding="async" loading="lazy" src="images/image13.png" style="width:592px"/></a><a class="zoom" href="images/image14.png"><img alt="ภาพ ๑-4 ฟังก์ชันภายใต้เมนู Admin สำหรับผู้ดูแลระบบเท่านั้น" decoding="async" loading="lazy" src="images/image14.png" style="width:592px"/></a></div><figcaption>ภาพ ๑-4 ฟังก์ชันภายใต้เมนู Admin สำหรับผู้ดูแลระบบเท่านั้น</figcaption></figure>
+
+<h3 id="sec-1-2-1">๑.2.1 การเพิ่ม Project และผู้ใช้</h3>
+<p>ในอันดับถัดไป จะบรรยายการสร้าง Project และผู้ใช้ใหม่ในระบบโอเพนสแตค โดยที่ผู้ใช้ Admin ซึ่งเป็นผู้ดูแลระบบจะเป็นผู้สร้างด้วยการใช้แท็บIdentity เมื่อกดขยายแล้วจะได้แท็บย่อยดังภาพที่ ๑-5 ซึ่งประกอบไปด้วยแท็บ Project (Projects) แท็บผู้ใช้ (Users) แท็บกลุ่ม (Groups) แท็บบทบาท (Roles) และแท็บ Application Credentials เนื่องจากในบทนี้จะบรรยายการใช้งานระบบเบื้องต้น ดังนั้นจะยังไม่อธิบายการใช้งานแท็บกลุ่มกับแท็บ Application Credentials ในกรณีที่ผู้ใช้ไม่ใช่ผู้ดูแลระบบ แท็บ Identity จะประกอบไปด้วย แท็บย่อย Project ผู้ใช้ กลุ่ม และ Application Credentials เท่านั้น</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image19.png"><img alt="ภาพ ๑-5 แท็บย่อยของแท็บ Identity ในกรณีที่ผู้ใช้เป็นผู้ดูแลระบบ" decoding="async" loading="lazy" src="images/image19.png" style="width:123px"/></a></div><figcaption>ภาพ ๑-5 แท็บย่อยของแท็บ Identity ในกรณีที่ผู้ใช้เป็นผู้ดูแลระบบ</figcaption></figure>
+
+<p>ในภาพ ๑-6 เมื่อผู้ดูแลระบบเลือกแท็บย่อย Project (ลูกศรสีแดง) ระบบจะแสดงรายการผู้ใช้ที่มีอยู่ในปัจจุบัน หลังจากนั้นเมื่อกดปุ่ม Create Project ระบบก็จะแสดงรายการดังภาพ ๑-7</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image20.png"><img alt="ภาพ ๑-6 หน้าเว็บพจแสดงรายการของ Project ในระบบโอเพนสแตค" decoding="async" loading="lazy" src="images/image20.png" style="width:608px"/></a></div><figcaption>ภาพ ๑-6 หน้าเว็บพจแสดงรายการของ Project ในระบบโอเพนสแตค</figcaption></figure>
+
+<p>หลังจากนั้น ผู้ดูแลระบบจะใส่ชื่อ Project Project-A ซึ่งจะอยู่ใน default domain ของระบบโอเพนสแตค และกดปุ่ม Project Member ระบบจะแสดงเว็บเพจเพื่อให้ผู้ดูแลระบบเลือกสมาชิกของผู้ใช้ของ Project นี้ ดังภาพ ๑-8 ซึ่งในขั้นตอนนี้เราจะยังไม่เลือกเนื่องจากยังไม่ได้สร้างผู้ใช้สำหรับ Project นี้ (วัตถุประสงค์ของการแสดงหน้านี้คือเพื่อให้ผู้อ่านรู้จักหน้าเว็บเพจสำหรับเพิ่มผู้ใช้ใน Project ในอนาคต)</p>
+<p>สุดท้าย ผู้ดูแลระบบจะต้องกดปุ่ม Create Project ในภาพ ๑-7 เพื่อสร้าง Project-A ถัดจากนั้นระบบจะแสดงภาพรายการ Project ทั้งหมด ดังภาพ ๑-9</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image22.png"><img alt="ภาพ ๑-7 หน้าเว็บพจสร้าง Project ใหม่" decoding="async" loading="lazy" src="images/image22.png" style="width:417px"/></a></div><figcaption>ภาพ ๑-7 หน้าเว็บพจสร้าง Project ใหม่</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image23.png"><img alt="ภาพ ๑-8 หน้าเพจให้เลือกสมาชิกผู้ใช้" decoding="async" loading="lazy" src="images/image23.png" style="width:417px"/></a></div><figcaption>ภาพ ๑-8 หน้าเพจให้เลือกสมาชิกผู้ใช้</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image24.png"><img alt="ภาพ ๑-9 รายการ Project ที่เพิ่มขึ้น" decoding="async" loading="lazy" src="images/image24.png" style="width:608px"/></a></div><figcaption>ภาพ ๑-9 รายการ Project ที่เพิ่มขึ้น</figcaption></figure>
+
+<p>หลังจากสร้าง Project แล้ว ต่อไปผู้ดูแลระบบจะกำหนด quota ของทรัพยากรของ Project-A โดยกดปุ่มขยายเมนูตรงปุ่ม “Manage Member” (ลูกศรในภาพ ๑-9) และจะได้เมนูในภาพ ๑-10 และผู้ดูแลระบบจะเลือกปุ่ม “Modify Quotas” หลังจากนั้นระบบจะแสดงหน้าเว็บในภาพ ๑-11</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image25.png"><img alt="ภาพ ๑-10 ปุ่มเลือกกำหนด quota การใช้งานทรัพยากร" decoding="async" loading="lazy" src="images/image25.png" style="width:110px"/></a></div><figcaption>ภาพ ๑-10 ปุ่มเลือกกำหนด quota การใช้งานทรัพยากร</figcaption></figure>
+
+<p>ในภาพ ๑-10 ผู้ดูแลระบบจะกำหนดค่าพารามิเตอร์ (Parameters) quota ของทรัพยากรสำหรับการประมวลผล ซึ่งผู้ใช้ของ Project นี้จะไม่สามารถใช้ทรัพยากรเกินจำนวนที่ระบุใน quota ได้ รายการพารามิเตอร์ของทรัพยากรที่สำคัญ ที่ผู้ดูแลระบบจะกำหนดค่าในตัวอย่างนี้ มีดังต่อไปนี้</p>
+<ul>
+<li><p>Instance: จำนวน VM instance ที่ Project นี้จะมีได้</p></li>
+<li><p>VCPUs: จำนวนซีพียูคอร์โดยรวมของทุกวีเอ็มใน Project</p></li>
+<li><p>RAM: ขนาดหน่วยความจำโดยรวม (หน่วยเป็น MB)</p></li>
+<li><p>Key Pairs: จำนวนคู่ Public และ Private Keys ที่ผู้ใช้สามารถสร้างเพื่อใช้ล็อกอินเข้าสู่วีเอ็มใน Project</p></li>
+</ul>
+<p>สำหรับค่าอื่นๆนั้น ผู้ดูแลระบบจะยังไม่กำหนดค่าหรือใช้งานในตัวอย่างนี้ ผู้ใช้สามารถดูข้อมูลเพิ่มเติมได้จาก (<a href="https://docs.openstack.org/python-openstackclient/latest/cli/command-objects/quota.html" rel="noopener" target="_blank">https://docs.openstack.org/python-openstackclient/latest/cli/command-objects/quota.html</a>)</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image27.png"><img alt="ภาพ ๑-11 การกำหนด quota การใช้งานทรัพยากรสำหรับประมวลผล" decoding="async" loading="lazy" src="images/image27.png" style="width:417px"/></a></div><figcaption>ภาพ ๑-11 การกำหนด quota การใช้งานทรัพยากรสำหรับประมวลผล</figcaption></figure>
+
+<p>ถัดจากนั้น ผู้ดูแลระบบจะกดปุ่ม “Volume” (ดังภาพ ๑-12) เพื่อกำหนด quota ของการเก็บข้อมูลในหน่วยเก็บข้อมูลแบบบล็อก (Block Storage) ดังนี้</p>
+<ul>
+<li><p>Volumes หมายถึงจำนวน Volume ของ Block Storage ที่สร้างได้ใน Project</p></li>
+<li><p>Volume Snapshots คือจำนวนสำเนา Snapshot โดยรวมที่สร้างได้ใน Project</p></li>
+<li><p>Total Size of Volume and Snapshots คือขนาดโดยรวมของ Volume และ Snapshot (หน่วยเป็น GiB)</p></li>
+</ul>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image29.png"><img alt="ภาพ ๑-12 การกำหนด quota การใช้งานทรัพยากรสำหรับจัดเก็บข้อมูล" decoding="async" loading="lazy" src="images/image29.png" style="width:450px"/></a></div><figcaption>ภาพ ๑-12 การกำหนด quota การใช้งานทรัพยากรสำหรับจัดเก็บข้อมูล</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image30.png"><img alt="ภาพ ๑-13 การกำหนด quota การใช้งานทรัพยากรสำหรับการสื่อสาร" decoding="async" loading="lazy" src="images/image30.png" style="width:444px"/></a></div><figcaption>ภาพ ๑-13 การกำหนด quota การใช้งานทรัพยากรสำหรับการสื่อสาร</figcaption></figure>
+
+<p>เมื่อผู้ดูแลระบบกดปุ่ม “Network” (ดังภาพ ๑-13) ก็จะเข้าสู่หน้าเว็บสำหรับกำหนดค่า quota พารามิเตอร์ของทรัพยากรที่เกี่ยวข้องกับการสื่อสาร ได้แก่</p>
+<ul>
+<li><p>Networks คือจำนวนระบบเครือข่ายภายในที่สร้างขึ้นได้ใน Project</p></li>
+<li><p>Subnets คือจำนวนซับเน็ตโดยรวมของทั้ง Project</p></li>
+<li><p>Ports คือจำนวน Network Ports โดยรวมที่มีได้ใน Project</p></li>
+<li><p>Routers คือจำนวนเร้าเตอร์เสมือนโดยรวมของทั้ง Project</p></li>
+<li><p>Floating Ips คือจำนวน Floating IP โดยรวมของทั้ง Project</p></li>
+<li><p>Security Groups จำนวนกลุ่มของกฎของการรักษาความปลอดภัยที่มีได้ใน Project</p></li>
+<li><p>Security Group Rules คือจำนวนกฎสำหรับการรักษาความปลอดภัยโดยรวมของทั้ง Project</p></li>
+</ul>
+<p>ในการสร้างผู้ใช้ของ Project Project-A ผู้ดูแลระบบต้องกดแท็บย่อย Users ในภาพ ๑-6 ระบบจะแสดงเว็บเพจดังภาพ ๑-14</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image32.png"><img alt="ภาพ ๑-14 รายการผู้ใช้ทั้งหมดในระบบ" decoding="async" loading="lazy" src="images/image32.png" style="width:582px"/></a></div><figcaption>ภาพ ๑-14 รายการผู้ใช้ทั้งหมดในระบบ</figcaption></figure>
+
+<p>หลังจากนั้น ผู้ดูแลระบบจะเลือกแท็บย่อย Users ดังภาพ ๑-14 และกดปุ่ม “Create User” แล้วระบบจะแสดงหน้าเว็บดังภาพ ๑-15 และ ๑-16 ซึ่งผู้ดูแลระบบจะใส่ข้อมูล username เป็น “A-user” ป้อนพาสเวิร์ดเป็น “A-user” และกำหนดให้ผู้ใช้นี้เป็นสมาชิกของ Project Project-A และให้มีบทบาทเป็น “User” และกดปุ่ม “Create User”</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image34.png"><img alt="ภาพ ๑-15 ส่วนบนของหน้าเว็บเพจ Create User" decoding="async" loading="lazy" src="images/image34.png" style="width:565px"/></a></div><figcaption>ภาพ ๑-15 ส่วนบนของหน้าเว็บเพจ Create User</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image36.png"><img alt="ภาพ ๑-16 ส่วนล่างของหน้าเว็บเพจ Create User" decoding="async" loading="lazy" src="images/image36.png" style="width:564px"/></a></div><figcaption>ภาพ ๑-16 ส่วนล่างของหน้าเว็บเพจ Create User</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image37.png"><img alt="ภาพ ๑-17 ผู้ใช้ล็อกอินเข้าสู่ Project A ด้วยผู้ใช้ A-user" decoding="async" loading="lazy" src="images/image37.png" style="width:324px"/></a></div><figcaption>ภาพ ๑-17 ผู้ใช้ล็อกอินเข้าสู่ Project A ด้วยผู้ใช้ A-user</figcaption></figure>
+
+<h3 id="sec-1-2-2">๑.2.2 การสร้าง cirros VM instance</h3>
+<p>ในการสร้างวีเอ็มขึ้นใช้งานผู้ใช้ A-user จะล็อกอินเข้าสู่ Project-A ดังภาพ ๑-17 หลังจากนั้น ผู้ใช้จะเลือกแท็บ “Project” เลือกแท็บย่อย “Compute” และเลือกแท็บย่อย “Instances” ระบบจะแสดงหน้าเว็บแสดงรายการของวีเอ็มของ Project Project-A ซึ่งยังไม่มีวีเอ็ม ดังภาพ ๑-18</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image38.png"><img alt="ภาพ ๑-18 หน้าเว็บเพจสำหรับสร้างวีเอ็ม" decoding="async" loading="lazy" src="images/image38.png" style="width:537px"/></a></div><figcaption>ภาพ ๑-18 หน้าเว็บเพจสำหรับสร้างวีเอ็ม</figcaption></figure>
+
+<p>หลังจากผู้ใช้กดปุ่ม “Launch Instance” ในภาพ ๑-18 เพื่อสร้างวีเอ็ม ระบบจะแสดงหน้าเว็บดังภาพ ๑-19 ซึ่งผู้ใช้จะระบุชื่อวีเอ็มคือ “cirros-1” เนื่องจากเราจะสร้างวีเอ็มแบบพื้นฐานที่สุดที่ใช้เกสต์โอเอส cirros ซึ่งสคริปต์ติดตั้งได้เตรียมอิมเมจไว้ให้แล้วตั้งแต่ตอนติดตั้ง (https://github.com/cirros-dev/cirros) (หมายเหตุ ผู้ใช้สามารถตั้งชื่อวีเอ็มอย่างไรก็ได้) เมื่อกำหนดชื่อและจำนวนเสร็จแล้วให้กด “Next”</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image39.png"><img alt="ภาพ ๑-19 หน้าเว็บเพจสำหรับสร้างวีเอ็ม: กำหนดชื่อ จำนวนวีเอ็ม" decoding="async" loading="lazy" src="images/image39.png" style="width:553px"/></a></div><figcaption>ภาพ ๑-19 หน้าเว็บเพจสำหรับสร้างวีเอ็ม: กำหนดชื่อ จำนวนวีเอ็ม</figcaption></figure>
+
+<p>ระบบจะแสดงหน้าเว็บเพจดังภาพ ๑-20 ขอให้สังเกตว่า หน้าเว็บเพจจะถามผู้ใช้ว่าต้องการจะสร้าง Volume ใหม่หรือไม่ (ดู “Create New Volume”) ซึ่งระบบโอเพนสแตคจะมีทางเลือกให้ผู้ใช้ 2 ทางเลือก ได้แก่</p>
+<ol type="1">
+<li><p>ผู้ใช้สร้าง Volume ใหม่ (ภายใต้การจัดการของ Component ซินเดอร์) สำหรับเก็บ Boot Image ซึ่งหลังจากที่ผู้ใช้เลิกใช้งานวีเอ็มและลบวีเอ็มออกจากระบบแล้ว ผู้ใช้สามารถเอาข้อมูลใน Volume ไปใช้งานหรือแม้กระทั่งบูทวีเอ็มอื่นได้ในภายหลัง</p></li>
+<li><p>ผู้ใช้กำหนดให้โนวาใช้พื้นที่ใน Local Storage ของเครื่อง compute host ที่โนวารันวีเอ็มสำหรับเก็บ Boot Image ในทางเลือกนี้เมื่อผู้ใช้ลบวีเอ็ม Boot Image และข้อมูลในนั้นจะถูกลบไปด้วย</p></li>
+</ol>
+<p>ในภาพ ๑-20 ขอให้สังเกตว่า ค่าทางเลือกในช่อง “Create New Volume” จะมีค่าดีฟอลต์ (Default) เป็น“Yes” หมายความว่าโดยดีฟอลต์ระบบจะใช้พื้นที่ Volume เพื่อเก็บ Boot Image ของเกสต์โอเอส และในบรรทัดถัดไประบบจะถามว่าผู้ใช้ต้องการสร้าง Volume ขนาดเท่าไร ซึ่งผู้ใช้จะต้องประมาณขนาดให้เหมาะสมกับขนาดของเกสต์โอเอสที่ตนจะใช้งาน (ใช้ “1 GB” ในภาพ หรือเปลี่ยนเป็นค่าอื่น) และเลือกว่าจะลบ Volume เมื่อลบ (Delete) วีเอ็มออกจากระบบโอเพนสแตคหรือไม่ ซึ่งเรากำหนดให้ค่าเป็น “No” ตามค่าดีฟอลต์</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image41.png"><img alt="ภาพ ๑-20 หน้าเว็บเพจสำหรับสร้างวีเอ็ม: เลือก Block Storage Volume เป็นพื้นที่สำหรับสร้างอิมเมจ" decoding="async" loading="lazy" src="images/image41.png" style="width:523px"/></a></div><figcaption>ภาพ ๑-20 หน้าเว็บเพจสำหรับสร้างวีเอ็ม: เลือก Block Storage Volume เป็นพื้นที่สำหรับสร้างอิมเมจ</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image43.png"><img alt="ภาพ ๑-21 หน้าเว็บเพจสำหรับสร้างวีเอ็ม: เลือกดิสก์ในเครื่อง computeเป็นพื้นที่สำหรับสร้างอิมเมจ" decoding="async" loading="lazy" src="images/image43.png" style="width:551px"/></a></div><figcaption>ภาพ ๑-21 หน้าเว็บเพจสำหรับสร้างวีเอ็ม: เลือกดิสก์ในเครื่อง computeเป็นพื้นที่สำหรับสร้างอิมเมจ</figcaption></figure>
+
+<p>ในภาพ ๑-21 ถ้าผู้ใช้เลือกที่จะไม่ใช้ Volume ระบบก็จะใช้ทางเลือกที่ 2 และแสดงเว็บเพจดังภาพ (<strong>หมายเหตุ</strong> ในตัวอย่างการสร้างวีเอ็ม cirros-1 นี้ เราจะกำหนดให้วีเอ็มใช้พื้นที่ดิสก์บน compute host เพื่อเก็บ Boot Image )</p>
+<p>ในช่อง “Select Boot Source” ผู้ใช้สามารถเลือกได้ว่าจะใช้ Disk Image จากแหล่งใดแหล่งหนึ่งต่อไปนี้ (<strong>หมายเหตุ</strong> ในตัวอย่างของการสร้างวีเอ็ม cirros-1 นี้ ผู้ใช้จะเลือก image เป็น Boot Source)</p>
+<ol type="1">
+<li><p>Image หมายถึงให้โนวาอ่านข้อมูลของอิมเมจจาก image template ที่เก็บไว้ใน Repository ของ Component แกลนซ์ ของโอเพนสแตค ไปยังพื้นที่ๆจะใช้เก็บ Boot Image ของวีเอ็ม ในกรณีที่ผู้ใช้จะสร้าง Volume เพื่อเก็บ Boot Image ของวีเอ็ม โอเพนสแตคจะสร้างพื้นที่ใน Volume แล้วทำสำเนาของอิมเมจจากแกลนซ์ไปยังพื้นที่ Volume นั้น แต่ถ้าผู้ใช้ไม่สร้าง Volume และใช้พื้นที่ดิสก์ของเครื่อง compute host โอเพนสแตคจะทำสำเนาของ Disk Image จากแกลนซ์ไปยัง Local Storage ของเครื่อง compute host ที่จะรันวีเอ็ม</p></li>
+<li><p>Image snapshots หมายถึงการอ่านข้อมูลจาก Snapshot ของ Disk Image ที่เก็บอยู่ใน Repository ของแกลนซ์ แทนที่จะอ่านจาก image template ธรรมดาเหมือนในกรณีแรก โอเพนสแตคจะทำสำเนาของ Snapshot อิมเมจไปยังพื้นที่ๆผู้ใช้เลือกที่จะใช้เก็บ Boot Image ของวีเอ็มเหมือนในกรณีแรก</p></li>
+<li><p>Volume หมายถึงผู้ใช้มี Volume ที่เป็น Boot Image อยู่ใน Block Storage ที่จัดการโดย Component ซินเดอร์ของโอเพนส‍แต‍คอยู่แล้ว และจะเลือกใช้ Volume นั้นให้เป็น Boot Image ในกรณีที่ผู้ใช้เลือกทางเลือกนี้ โอเพนสแตคจะไม่สร้าง Volume ใหม่และไม่สร้างพื้นที่สำหรับสร้าง Boot Image ของวีเอ็มใหม่ และไม่ต้องทำสำเนาของเกสต์โอเอสอิมเมจแต่อย่างใด</p></li>
+<li><p>Volume Snapshots นั้นเหมือนกับกรณีเลือกใช้ Volume แต่เปลี่ยนเป็นใช้ Volume Snapshots ที่ผู้ใช้สร้างไว้ก่อนหน้าแทน</p></li>
+</ol>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image45.png"><img alt="ภาพ ๑-22 หน้าเว็บเพจสำหรับสร้างวีเอ็ม: เลือกชนิดของเกสต์โอเอส จากรายการของอิมเมจที่อยู่ในแกลนซ์" decoding="async" loading="lazy" src="images/image45.png" style="width:543px"/></a></div><figcaption>ภาพ ๑-22 หน้าเว็บเพจสำหรับสร้างวีเอ็ม: เลือกชนิดของเกสต์โอเอส จากรายการของอิมเมจที่อยู่ในแกลนซ์</figcaption></figure>
+
+<p>เนื่องจากตอนนี้เรามีเพียง Disk Image ของเกสต์โอเอส cirros อย่างเดียวเป็น Template ใน Repository ของ Component แกลนซ์ (ภาพ ๑-22) ระบบจึงแสดง cirros เป็นรายการเดียวและเราจะเลือกโอเอสนี้เป็นเกสต์โอเอสอิมเมจของวีเอ็ม หลังจากนั้นผู้ใช้กด “Next” และระบบจะแสดงเว็บเพจให้ผู้ใช้เลือก Flavor ซึ่งหมายถึง Specification หรือ Spec ของวีเอ็ม (ภาพ ๑-23) ซึ่งในขั้นตอนของการติดตั้งระบบได้มีการสร้างไว้สอง Flavor ได้แก่ 1) m1.nano คือ Spec ของวีเอ็มที่มีจำนวน ซีพียูคอร์เสมือน 1 คอร์ มีขนาดของหน่วยความจำ 64 GB และขนาดฮาร์ดดิสก์ 1 GB และ 2) m1.mini เป็น Spec ของวีเอ็มที่มีซีพียูคอร์เสมือน 1 คอร์ มีขนาดหน่วยความจำ 512 MB และขนาดของ Boot Image 1 GB</p>
+<p>ในตัวอย่างนี้เราจะเลือก Flavor m1.mini เพื่อรัน cirros-1 ถัดจากนั้นผู้ใช้จะกด “Next”</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image47.png"><img alt="ภาพ ๑-23 หน้าเว็บเพจสำหรับสร้างวีเอ็ม: เลือกชนิดของ Flavor (Flavor) หรือ Spec ของวีเอ็ม" decoding="async" loading="lazy" src="images/image47.png" style="width:457px"/></a></div><figcaption>ภาพ ๑-23 หน้าเว็บเพจสำหรับสร้างวีเอ็ม: เลือกชนิดของ Flavor (Flavor) หรือ Spec ของวีเอ็ม</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image48.png"><img alt="ภาพ ๑-24 หน้าเว็บเพจสำหรับสร้างวีเอ็ม: เลือกระบบเครือข่ายที่วีเอ็มเชื่อมต่อผ่าน NIC" decoding="async" loading="lazy" src="images/image48.png" style="width:460px"/></a></div><figcaption>ภาพ ๑-24 หน้าเว็บเพจสำหรับสร้างวีเอ็ม: เลือกระบบเครือข่ายที่วีเอ็มเชื่อมต่อผ่าน NIC</figcaption></figure>
+
+<p>ในภาพ ๑-24 ระบบแสดงเว็บเพจให้ผู้ใช้เลือกว่าจะเชื่อมต่อวีเอ็มเข้ากับระบบเครือข่ายเสมือนใด แต่เนื่องจากในระบบตั้งต้น ระบบเครือข่ายที่ทุก Project สามารถเข้าถึงได้คือระบบเครือข่ายจากผู้ให้บริการที่เชื่อมต่อระบบเครือข่ายภายนอกกับระบบเครือข่ายเสมือนภายในของโอเพนสแตค ซึ่งในปัจจุบันยังไม่มี และจะถูกสร้างขึ้นภายหลัง ดังนั้นในตัวอย่างนี้ เราจะเชื่อมต่อ cirros-1 เข้ากับระบบเครือข่ายของผู้ให้บริการหรือ provider1 ในภาพ (ในกรณีที่ไม่สามารถเชื่อมต่อกับระบบเครือข่ายของผู้ให้บริการโดยตรง ผู้ใช้จะต้องสร้างระบบเครือข่ายภายในเสมือนและเร้าตอร์เสมือนก่อน)</p>
+<p>หลังจากนั้นผู้ใช้กด “Next” และระบบจะแสดงหน้าเว็บเพจในภาพ ๑-25 ซึ่งจะแสดงกลุ่มของกฎของการรักษาความปลอดภัย (Security groups) ของ Project Project-A (แต่ละ Project มีกฎเหล่านี้ของตนเอง)​ ซึ่งก็คือกลุ่มของกฎไฟร์วอล (Firewalls) นั่นเอง ซึ่งในเบื้องต้นมีอยู่กลุ่มเดียวคือ กลุ่มรักษาความปลอดภัยดีฟอลต์​ (Default Security Groups) ผู้ใช้สามารถสร้างกลุ่มเพิ่มขึ้น หรือเพิ่มกฎในกลุ่มดีฟอลต์ ก็ได้ถ้าต้องการเปลี่ยนแปลงกฎในภายหลัง อย่างไรก็ตามในกลุ่มความปลอดภัยดีฟอลต์นี้ ระบบจะอนุญาตให้วีเอ็มเริ่มการสร้างช่องทางเชื่อมต่อเพื่อสื่อสารข้อมูลจากวีเอ็มออกสู่โลกภายนอกได้เท่านั้น</p>
+<p>ถัดจากนั้น ผู้ใช้กดปุ่ม “Launch Instance” เพื่อสร้างวีเอ็มและรันวีเอ็มในระบบโอเพนสแตค หลังจากกดปุ่ม ระบบจะแสดงหน้าจอในภาพ ๑-26 ซึ่งระบบจะแสดงว่าได้สร้างและรันวีเอ็ม cirros-1 แล้ว โดยที่วีเอ็มจะถูกกำหนดให้เชื่อมต่อกับ ระบบเครือข่ายเสมือน provider1 ผ่าน NIC ที่หนึ่งของวีเอ็มและมีค่าไอพีคือ 192.168.20.172</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image49.png"><img alt="ภาพ ๑-25 หน้าเว็บเพจสำหรับสร้างวีเอ็ม: เลือกกลุ่มของกฎรักษาความปลอดภัยให้วีเอ็ม" decoding="async" loading="lazy" src="images/image49.png" style="width:520px"/></a></div><figcaption>ภาพ ๑-25 หน้าเว็บเพจสำหรับสร้างวีเอ็ม: เลือกกลุ่มของกฎรักษาความปลอดภัยให้วีเอ็ม</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image50.png"><img alt="ภาพ ๑-26 หน้าเว็บเพจแสดงว่าได้สร้างและรันวีเอ็ม cirros แล้ว" decoding="async" loading="lazy" src="images/image50.png" style="width:617px"/></a></div><figcaption>ภาพ ๑-26 หน้าเว็บเพจแสดงว่าได้สร้างและรันวีเอ็ม cirros แล้ว</figcaption></figure>
+
+<h3 id="sec-1-2-3">๑.2.3 การใช้งาน cirros VM instance ทางคอนโซล</h3>
+<p>วิธีการพื้นฐานที่สุดในการเข้าใช้งานวีเอ็มคือการเข้าใช้งานผ่านคอนโซล ผู้ใช้ต้องกดปุ่มเมนูถัดจากปุ่ม “Create Snapshot” และจะเห็นเมนูดังภาพ ๑-27 ผู้ใช้จะเลือกตัวเลือก console ระบบจะแสดงหน้าเว็บเพจดังภาพ ๑-28 ผู้ใช้จะต้องนำเคอร์เซอร์ไปวางบนแถบสีน้ำเงินด้านบนของหน้าจอคอนโซล แล้วเลื่อนกลับเข้ามาในคอนโซล หลังจากนั้นผู้ใช้จะสามารถล็อกอินเข้าสู่เครื่อง cirros-1 โดยป้อนชื่อบัญชี เป็น “cirros” และพาสเวิร์ด “gocubsgo”</p>
+<p>ในภาพ ๑-29 เมื่อล็อกอินเข้าสู่วีเอ็มแล้ว ผู้ใช้สามารถทดสอบระบบเครือข่ายโดยสั่ง “ping www.google.com” เพื่อทดสอบว่าวีเอ็มสามารถติดต่อ DNS server ที่ไอพี 8.8.8.8 ได้และสามารถติดต่อกับอินเตอร์เน็ตได้</p>
+<p>อย่างไรก็ดี ภาพ ๑-30 แสดงการป้องกันการเข้าถึงวีเอ็มที่ไม่ได้รับอนุญาต ทำให้ผู้ใช้ไม่สามารถใช้ซอฟต์แวร์ ssh client ล็อกอินทางไกลจากระบบเครือข่ายภายนอกระบบโอเพนสแตคเข้าสู่วีเอ็ม cirros-1 ซึ่งมีค่าไอพีคือ 192.168.20.172 ได้ และไม่สามารถใช้ ping ไอพีนี้ได้ด้วย ทั้งนี้เป็นเพราะไฟร์วอลของระบบโอเพนสแตคป้องการการเข้าถึงไว้ หากผู้ใช้ต้องการให้วีเอ็มของตนเข้าถึงได้จากระบบเครือข่ายภายนอก ผู้ใช้จะต้องปรับเปลี่ยนกฎในกลุ่มกฎรักษาความปลอดภัยที่จะได้กล่าวถึงต่อไป</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image51.png"><img alt="ภาพ ๑-27 เมนูแสดงรายการใช้งานวีเอ็ม" decoding="async" loading="lazy" src="images/image51.png" style="width:133px"/></a></div><figcaption>ภาพ ๑-27 เมนูแสดงรายการใช้งานวีเอ็ม</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image52.png"><img alt="ภาพ ๑-28 เว็บเพจแสดงหน้าคอนโซลของวีเอ็ม" decoding="async" loading="lazy" src="images/image52.png" style="width:624px"/></a></div><figcaption>ภาพ ๑-28 เว็บเพจแสดงหน้าคอนโซลของวีเอ็ม</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image53.png"><img alt="ภาพ ๑-29 การล็อกอินเข้าสู่วีเอ็ม cirros-1" decoding="async" loading="lazy" src="images/image53.png" style="width:498px"/></a></div><figcaption>ภาพ ๑-29 การล็อกอินเข้าสู่วีเอ็ม cirros-1</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image54.png"><img alt="ภาพ ๑-30 การล็อกอินเข้าสู่วีเอ็ม cirros-1 จากภายนอกระบบโอเพนสแตค ไม่สามารถทำได้" decoding="async" loading="lazy" src="images/image54.png" style="width:391px"/></a></div><figcaption>ภาพ ๑-30 การล็อกอินเข้าสู่วีเอ็ม cirros-1 จากภายนอกระบบโอเพนสแตค ไม่สามารถทำได้</figcaption></figure>
+
+<h3 id="sec-1-2-4">๑.2.4 การเปลี่ยนแปลงกฎไฟร์วอลโดยเปลี่ยนแปลงค่าในกลุ่มกฎรักษาความปลอดภัย</h3>
+<p>ในระบบโอเพนสแตค กลุ่มของกฎรักษาความปลอดภัย (security groups) เป็นเสมือนปราการป้องกันการเข้าถึงวีเอ็มของโอเพนสแตคที่บังคับให้ทุกวีเอ็มใช้ข้อกำหนดค่าในกลุ่มกฎรักษาความปลอดภัยแบบดีฟอลต์ (default security group) เป็นค่าตั้งต้นโดยอัตโนมัติ</p>
+<p>เนื่องจากกลุ่มดีฟอลต์อนุญาตให้วีเอ็มเริ่มต้นการสื่อสารสู่ภายนอกได้เท่านั้น เราจึงไม่สามารถล็อกอินทางไกล (remote login) เข้าถึงวีเอ็มได้ดังภาพที่ ๑-30 ผู้ใช้สามารถแก้ปัญหานี้ได้สองวิธี วิธีแรก ผู้ใช้สามารถสร้างกลุ่มของกฎรักษาความปลอดภัยขึ้นใหม่ แล้วเพิ่มกฎในกลุ่มใหม่เพื่ออนุญาตให้</p>
+<ol type="1">
+<li><p>ผู้ใช้สามารถล็อกอินทางไกลจากคอมพิวเตอร์อื่นผ่านระบบเครือข่ายได้ด้วย SSH Protocol หรือเปิดให้มีการสื่อสารผ่านพอร์ต 22 ได้นั่นเอง</p></li>
+<li><p>ผู้ใช้สามารถส่งข้อความแบบ ICMP จากคอมพิวเตอร์อื่นผ่านระบบเครือข่ายเข้าสู่วีเอ็มได้ หรือเปิดรับข้อความที่มีเลขที่โพรโตคอลเท่ากับ 1 นั้นเอง (<a href="https://datatracker.ietf.org/doc/html/rfc792" rel="noopener" target="_blank">https://datatracker.ietf.org/doc/html/rfc792</a>)</p></li>
+</ol>
+<p>หรือ ผู้ใช้อาจทำวิธีที่สองคือ เพิ่มกฎทั้งสองข้างต้นใน กลุ่มดีฟอลต์ ซึ่งวิธีการที่สองจะสร้างผลกระทบกับทุกวีเอ็มใน Project และสามารถทำได้หลังจากเรียนรู้วิธีการที่หนึ่งแล้ว ดังนั้นจะแสดงวิธีการที่หนึ่งเท่านั้น</p>
+<p>ในการเพิ่มกลุ่มของกฎ ผู้ใช้ต้องกดแท็บ Network แล้วกดแท็บย่อย Security Group แล้วกดปุ่ม Create Security Group ดังภาพ ๑-31</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image55.png"><img alt="ภาพ ๑-31 การเพิ่มกลุ่มกฎรักษาความปลอดภัย" decoding="async" loading="lazy" src="images/image55.png" style="width:483px"/></a></div><figcaption>ภาพ ๑-31 การเพิ่มกลุ่มกฎรักษาความปลอดภัย</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image56.png"><img alt="ภาพ ๑-32 การเพิ่มกลุ่มกฎรักษาความปลอดภัย SSH-ICMP" decoding="async" loading="lazy" src="images/image56.png" style="width:452px"/></a></div><figcaption>ภาพ ๑-32 การเพิ่มกลุ่มกฎรักษาความปลอดภัย SSH-ICMP</figcaption></figure>
+
+<p>หลังจากนั้นใส่ชื่อกลุ่มใหม่ว่า SSH-ICMP และกดปุ่ม Create Security Group ระบบจะแสดงหน้าเว็บเพจในภาพ ๑-32 ซึ่งแสดงกฎตั้งต้นของกลุ่มรักษาความปลอดภัยที่เหมือนกับกฎดีฟอลต์ของระบบ ในภาพ ๑-33 เมื่อกดปุ่ม Add Rules ระบบจะแสดงหน้าเว็บในภาพ ๑-34 ซึ่งผู้ใช้จะกดเมนูในช่อง Rule และเลือก ALL-ICMP แล้วหลังจากนั้นให้ทำแบบเดียวกันเพื่อเพิ่มกฎอีกกฎหนึ่งและเลือก SSH จากเมนูในภาพ ๑-34 ในการเลือกแต่ละครั้งผู้ใช้จะเห็นหน้าเว็บหลังเลือกดังภาพ ๑-35 ซึ่งทุกครั้งที่เลือกผู้ใช้ต้องกด Add</p>
+<p>สุดท้ายเมื่อเพิ่มกฎเสร็จแล้ว ระบบจะแสดงหน้าสรุปกฎทั้งหมดในกลุ่ม SSH-ICMP ดังภาพ ๑-36</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image57.png"><img alt="ภาพ ๑-33 ก่อนการเพิ่มกฎในกลุ่มกฎรักษาความปลอดภัย SSH-ICMP" decoding="async" loading="lazy" src="images/image57.png" style="width:452px"/></a></div><figcaption>ภาพ ๑-33 ก่อนการเพิ่มกฎในกลุ่มกฎรักษาความปลอดภัย SSH-ICMP</figcaption></figure>
+
+<figure class="fig multi"><div class="fig-row"><a class="zoom" href="images/image58.png"><img alt="ภาพ ๑-34 เมนูสำหรับการเพิ่มกฎในกลุ่มกฎรักษาความปลอดภัย SSH-ICMP" decoding="async" loading="lazy" src="images/image58.png" style="width:507px"/></a><a class="zoom" href="images/image59.png"><img alt="ภาพ ๑-34 เมนูสำหรับการเพิ่มกฎในกลุ่มกฎรักษาความปลอดภัย SSH-ICMP" decoding="async" loading="lazy" src="images/image59.png" style="width:507px"/></a></div><figcaption>ภาพ ๑-34 เมนูสำหรับการเพิ่มกฎในกลุ่มกฎรักษาความปลอดภัย SSH-ICMP</figcaption></figure>
+
+<figure class="fig multi"><div class="fig-row"><a class="zoom" href="images/image60.png"><img alt="ภาพ ๑-35 การเพิ่มกฎ ICMP และ SSH ในกลุ่มกฎรักษาความปลอดภัย SSH-ICMP" decoding="async" loading="lazy" src="images/image60.png" style="width:539px"/></a><a class="zoom" href="images/image63.png"><img alt="ภาพ ๑-35 การเพิ่มกฎ ICMP และ SSH ในกลุ่มกฎรักษาความปลอดภัย SSH-ICMP" decoding="async" loading="lazy" src="images/image63.png" style="width:539px"/></a></div><figcaption>ภาพ ๑-35 การเพิ่มกฎ ICMP และ SSH ในกลุ่มกฎรักษาความปลอดภัย SSH-ICMP</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image64.png"><img alt="ภาพ ๑-36 แสดงรายการของกฎในกลุ่มกฎรักษาความปลอดภัย SSH-ICMP" decoding="async" loading="lazy" src="images/image64.png" style="width:380px"/></a></div><figcaption>ภาพ ๑-36 แสดงรายการของกฎในกลุ่มกฎรักษาความปลอดภัย SSH-ICMP</figcaption></figure>
+
+<h3 id="sec-1-2-5">๑.2.5 การเพิ่มกลุ่มกฎรักษาความปลอดภัยให้วีเอ็ม</h3>
+<p>หลังจากที่มีกลุ่ม SSH-ICMP แล้ว ผู้ใช้สามารถเพิ่มกฎนี้ให้กับวีเอ็ม cirros-1 ได้ โดยผู้ใช้ต้องเลือกแท็บ Compute และแท็บย่อย Instance ระบบจะแสดงเว็บเพจดังภาพ ๑-37 ซึ่งผู้ใช้จะเลือกเมนูถัดจากปุ่ม Create Snapshot แล้วจึงเลือก Edit Security Groups และระบบจะแสดงเว็บเพจในภาพ ๑-38 (บน) ผู้ใช้จะต้องกดปุ่ม “+” ตรงตัวเลือก SSH-ICMP เพื่อเพิ่มกลุ่มของกฎนี้ให้เป็นกฎไฟร์วอลของวีเอ็ม หลังจากนั้นระบบจะแสดงภาพ ๑-38 (ล่าง)</p>
+<p>ในภาพ ๑-39 ผู้ใช้จะสามารถ ping และล็อกอินทางไกลด้วย SSH Protocol เครื่องวีเอ็ม cirros-1 จากระบบเครือข่ายภายนอกระบบโอเพนสแตคได้</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image67.png"><img alt="ภาพ ๑-37 เมนูเพื่อเปลี่ยนแปลงกฎรักษาความปลอดภัยของวีเอ็ม" decoding="async" loading="lazy" src="images/image67.png" style="width:488px"/></a></div><figcaption>ภาพ ๑-37 เมนูเพื่อเปลี่ยนแปลงกฎรักษาความปลอดภัยของวีเอ็ม</figcaption></figure>
+
+<figure class="fig multi"><div class="fig-row"><a class="zoom" href="images/image68.png"><img alt="ภาพ ๑-38 เว็บเพจก่อนและหลังเพิ่มกฎรักษาความปลอดภัยของวีเอ็ม" decoding="async" loading="lazy" src="images/image68.png" style="width:347px"/></a><a class="zoom" href="images/image69.png"><img alt="ภาพ ๑-38 เว็บเพจก่อนและหลังเพิ่มกฎรักษาความปลอดภัยของวีเอ็ม" decoding="async" loading="lazy" src="images/image69.png" style="width:347px"/></a></div><figcaption>ภาพ ๑-38 เว็บเพจก่อนและหลังเพิ่มกฎรักษาความปลอดภัยของวีเอ็ม</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image70.png"><img alt="ภาพ ๑-39 หลังจากเพิ่มกฎรักษาความปลอดภัยของวีเอ็ม ผู้ใช้สามารถล็อกอินทางไกลและ ping วีเอ็มได้" decoding="async" loading="lazy" src="images/image70.png" style="width:437px"/></a></div><figcaption>ภาพ ๑-39 หลังจากเพิ่มกฎรักษาความปลอดภัยของวีเอ็ม ผู้ใช้สามารถล็อกอินทางไกลและ ping วีเอ็มได้</figcaption></figure>
+
+<h3 id="sec-1-2-6">๑.2.6 การเพิ่ม Template ของเกสต์โอเอสอิมเมจใน Component แกลนซ์</h3>
+<p>ในอันดับถัดไป ผู้ดูแลระบบจะเพิ่ม Template ของเกสต์โอเอสอิมเมจเข้าสู่ Component แกลนซ์ ของโอเพนสแตค เกสต์โอเอสอิมเมจที่จะเพิ่มในที่นี้คือ เกสต์โอเอส Ubuntu 20.04 เผยแพร่ที่เว็บไซต์ <a href="https://cloud-images.ubuntu.com/" rel="noopener" target="_blank">https://cloud-images.ubuntu.com/</a> โดยที่ผู้ดูแลระบบจะดาวน์โหลด Disk Image ที่ต้องการมาเก็บบไว้ใน Local คอมพิวเตอร์แล้ว upload (Upload) เข้าสู่ระบบโอเพนสแตคโดยใช้ OpenStack Dashboard</p>
+<div class="code"><div class="code-head"><span class="code-label">On Local Computer of System Administrator</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$
+$ wget https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img
+…
+$ ls -l focal-server-cloudimg-amd64.img
+-rw-rw-r-- 1 …. ….  557252608 Jun 11 06:11 focal-server-cloudimg-amd64.img
+$</code></pre></div>
+<p>หลังจากนั้น ผู้ดูแลระบบจะล็อกอินเข้าเป็นผู้ใช้ Admin และเลือกแท็บ Compute และแท็บย่อย Images ระบบจะแสดงหน้าเว็บเพจแสดงรายการเกสต์โอเอสอิมเมจที่มีอยู่ใน Repository ของ Component แกลนซ์ ดังภาพ ๑-40 ผู้ดูแลระบบจะกดปุ่ม Create Image และระบบจะแสดงหน้าเว็บในภาพ ๑-41 ซึ่งผู้ดูแลระบบจะต้องกรอกข้อมูลดังนี้</p>
+<ol type="1">
+<li><p>Image name : ชื่ออิมเมจในแกลนซ์ ในตัวอย่างนี้คือ ubuntu-focal-server</p></li>
+<li><p>File : ไฟล์อิมเมจบน Local คอมพิวเตอร์ที่จะ upload ขึ้นสู่แกลนซ์</p></li>
+<li><p>Format : กำหนดชนิดของอิมเมจ ในตัวอย่างกำหนดให้ใช้ QCOW2 ชนิดของอิมเมจจะต้องตรงกับชนิดของอิมเมจในไฟล์ที่จะ upload จริง</p></li>
+<li><p>Minimum Disk : กำหนดขนาดของพื้นที่ดิสก์สำหรับเก็บอิมเมจขั้นต่ำที่ต้องมีใน Flavor ที่ใช้รันวีเอ็ม</p></li>
+<li><p>Minimum Ram : กำหนดขนาดของหน่วยความจำขั้นต่ำที่ต้องมีใน Flavor ที่ใช้รันวีเอ็ม</p></li>
+<li><p>Visibility : พารามิเตอร์นี้มีทางเลือกสี่แบบได้แก่ 1) public คือกำหนดให้ผู้ใช้ทุกคนสามารถใช้อิมเมจได้ 2) private คือผู้ใช้ทุกคนที่อยู่ใน Project เดียวกันจะเห็นอิมเมจนี้ 3) shared คือผู้ใช้ที่อยู่ในกลุ่มของ Project ที่ผู้ดูแลระบบกำหนดให้ใช้อิมเมจนี้ได้ และ 4) community คือผู้ใช้จะไม่เห็นอิมเมจนี้ตามปกติ แต่จะสามารถใช้งานอิมเมจได้ถ้ารู้ค่า UUID</p></li>
+<li><p>Protected : ถ้ากำหนดค่าพารามิเตอร์นี้เป็น “Yes” ผู้ใช้จะไม่สามารถลบอิมเมจนี้ออกจากแกลนซ์ได้ (ต้องเป็นผู้ดูแลระบบเท่านั้น)</p></li>
+</ol>
+<p>หลังจากนั้นเมื่อผู้ใช้กดปุ่ม Create Image ระบบจะใช้เวลา upload อิมเมจสักพักและเมื่อเสร็จแล้วจะแสดงหน้าเว็บดังภาพ ๑-42 ในตัวอย่างนี้ ผู้ดูแลระบบได้ upload อิมเมจของเกสต์โอเอสใหม่คือ ubuntu-focal-server ซึ่งผู้ใช้ทุกคนสามารถใช้รันวีเอ็มได้และจะต้องใช้พื้นที่หน่วยเก็บข้อมูลอย่างน้อยขนาด 5 GB และแรมขนาดอย่างน้อย 512 MB ในการรันวีเอ็ม</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image73.png"><img alt="ภาพ ๑-40 เว็บเพจแสดงรายการเกสต์โอเอสอิมเมจในแกลนซ์ก่อน upload อิมเมจใหม่" decoding="async" loading="lazy" src="images/image73.png" style="width:476px"/></a></div><figcaption>ภาพ ๑-40 เว็บเพจแสดงรายการเกสต์โอเอสอิมเมจในแกลนซ์ก่อน upload อิมเมจใหม่</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image74.png"><img alt="ภาพ ๑-41 เว็บเพจ upload เกสต์โอเอสอิมเมจเข้าสู่แกลนซ์" decoding="async" loading="lazy" src="images/image74.png" style="width:485px"/></a></div><figcaption>ภาพ ๑-41 เว็บเพจ upload เกสต์โอเอสอิมเมจเข้าสู่แกลนซ์</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image75.png"><img alt="ภาพ ๑-42 เว็บเพจแสดงรายการเกสต์โอเอสอิมเมจในแกลนซ์" decoding="async" loading="lazy" src="images/image75.png" style="width:487px"/></a></div><figcaption>ภาพ ๑-42 เว็บเพจแสดงรายการเกสต์โอเอสอิมเมจในแกลนซ์</figcaption></figure>
+
+<h3 id="sec-1-2-7">๑.2.7 การเพิ่ม Flavor</h3>
+<p>จากข้อมูลเฉพาะของอิมเมจที่เพิ่มเข้าสู่ระบบในตอนก่อน ผู้ใช้จะยังไม่สามารถรันอิมเมจใหม่นี้ได้เพราะว่า Flavor หรือ Spec ของวีเอ็มที่ผู้ดูแลระบบกำหนดค่าไว้ในปัจจุบัน ไม่มี Flavor ใดที่มีค่าขนาดของพื้นที่สำหรับเก็บอิมเมจมากกว่าหรือเท่ากับ 5 GB ตามความต้องการขั้นต่ำในการรันอิมเมจที่เพิ่งกำหนดไปเลย</p>
+<p>ด้วยเหตุนี้ ผู้ดูแลระบบจึงจำเป็นต้องเพิ่ม Flavor ใหม่ โดยล็อกอินเข้าเป็นผู้ใช้ Admin และเลือกแท็บ Admin ตามด้วยแท็บย่อย Compute แล้วเลือกแท็บย่อย Flavors ระบบจะแสดงหน้าเว็บเพจแสดงรายการ Flavor ที่มีอยู่ดังภาพ ๑-43 ผู้ดูแลระบบจะกดปุ่ม Create Flavor เพื่อสร้าง Flavor ใหม่ ซึ่งระบบจะแสดงเว็บเพจดังภาพ ๑-44 ซึ่งจะมีปุ่มด้านบนสองปุ่มคือ Flavor Information และ Flavor Access ในส่วนของ Flavor Information ผู้ดูแลระบบจะกรอกข้อมูล Flavor ใหม่ดังนี้ 1) กำหนดค่า Name หรือชื่อ Flavor คือ m1.small.1 และ 2) กำหนดให้ค่า VCPUs คือ 2 คอร์ และ 3) กำหนดให้ขนาดหน่วยความจำสำหรับ Flavor นี้เป็น 1024 MB และ 4) ขนาดของพื้นที่หน่วยเก็บข้อมูลสำหรับเก็บ Disk Image ของเกสต์โอเอสเป็น 8 GB</p>
+<p>สำหรับในส่วน Flavor Access ระบบโอเพนสแตคให้ผู้ดูแลระบบเลือกได้ว่าจะให้ผู้ใช้ของ Project ใดใช้ Flavor ใหม่นี้ได้บ้าง ซึ่งถ้าผู้ดูแลระบบไม่เลือก Project ใดจะหมายความว่าผู้ใช้ของทุก Project สามารถใช้ Flavor นี้ได้ หลังจากนั้นระบบจะแสดงรายการ Flavor ชุดใหม่ดังภาพที่ ๑-45</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image76.png"><img alt="ภาพ ๑-43 เว็บเพจแสดงรายการ Flavor ที่มีอยู่" decoding="async" loading="lazy" src="images/image76.png" style="width:495px"/></a></div><figcaption>ภาพ ๑-43 เว็บเพจแสดงรายการ Flavor ที่มีอยู่</figcaption></figure>
+
+<figure class="fig multi"><div class="fig-row"><a class="zoom" href="images/image77.png"><img alt="ภาพ ๑-44 เว็บเพจแสดงการเพิ่ม Flavor" decoding="async" loading="lazy" src="images/image77.png" style="width:558px"/></a><a class="zoom" href="images/image78.png"><img alt="ภาพ ๑-44 เว็บเพจแสดงการเพิ่ม Flavor" decoding="async" loading="lazy" src="images/image78.png" style="width:558px"/></a></div><figcaption>ภาพ ๑-44 เว็บเพจแสดงการเพิ่ม Flavor</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image79.png"><img alt="ภาพ ๑-45 เว็บเพจแสดงรายการ Flavor ชุดใหม่" decoding="async" loading="lazy" src="images/image79.png" style="width:466px"/></a></div><figcaption>ภาพ ๑-45 เว็บเพจแสดงรายการ Flavor ชุดใหม่</figcaption></figure>
+
+<h3 id="sec-1-2-8">๑.2.8 การรันวีเอ็มโดยใช้เกสต์โอเอสอิมเมจของ Ubuntu</h3>
+<p>หลังจากที่เตรียมอิมเมจและ Flavor เรียบร้อยแล้ว ผู้ใช้จะรันวีเอ็มโดยล็อกอินเข้าสู่ Project-A ด้วยบัญชีผู้ใช้ A-user และพาสเวิร์ด A-user และเลือกกดแท็บ Compute และ Instance และกดปุ่ม Launch Instance ซึ่งระบบจะแสดงหน้าเว็บในภาพที่ ๑-46 ผู้ใช้ใส่ชื่อวีเอ็มเป็น focal-1 แล้วจึงกดปุ่ม Next เพื่อไปยังหน้าเว็บเพจดังภาพ ๑-47 ที่จะให้ผู้ใช้เลือกว่าจะใช้อิมเมจของเกสต์โอเอสจากแหล่งที่มาใด (Boot Source) ผู้ใช้เลือก Image ซึ่งหมายความว่าจะให้โอเพนสแตคอ่านอิมเมจจาก Repository ของแกลนซ์และทำสำเนาไว้ที่พื้นที่เก็บอิมเมจที่วีเอ็มจะใช้รัน ในช่อง Create New Volume ผู้ใช้เลือก No หมายความว่าผู้ใช้จะให้โอเพนสแตคใช้พื้นที่ในหน่วยเก็บข้อมูล Local ของเครื่อง compute host (Local storage of compute node) ที่โอเพนสแตคเลือกที่จะใช้รันวีเอ็มเป็นที่เก็บอิมเมจของเกสต์โอเอส</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image82.png"><img alt="ภาพ ๑-46 เว็บเพจกำหนดชื่อของวีเอ็ม" decoding="async" loading="lazy" src="images/image82.png" style="width:468px"/></a></div><figcaption>ภาพ ๑-46 เว็บเพจกำหนดชื่อของวีเอ็ม</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image83.png"><img alt="ภาพ ๑-47 เว็บเพจเลือกที่มาของอิมเมจ ชนิดของพื้นที่เก็บและชนิดของเกสต์โอเอส" decoding="async" loading="lazy" src="images/image83.png" style="width:469px"/></a></div><figcaption>ภาพ ๑-47 เว็บเพจเลือกที่มาของอิมเมจ ชนิดของพื้นที่เก็บและชนิดของเกสต์โอเอส</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image84.png"><img alt="ภาพ ๑-48 เว็บเพจแสดงการเลือก Flavor ของวีเอ็ม" decoding="async" loading="lazy" src="images/image84.png" style="width:475px"/></a></div><figcaption>ภาพ ๑-48 เว็บเพจแสดงการเลือก Flavor ของวีเอ็ม</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image85.png"><img alt="ภาพ ๑-48 เว็บเพจแสดงการเลือกระบบเครือข่ายของวีเอ็ม" decoding="async" loading="lazy" src="images/image85.png" style="width:487px"/></a></div><figcaption>ภาพ ๑-48 เว็บเพจแสดงการเลือกระบบเครือข่ายของวีเอ็ม</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image86.png"><img alt="ภาพ ๑-49 เว็บเพจสำหรับกำหนดค่า network port ซึ่งผู้ใช้จะไม่ใส่ข้อมูลใด" decoding="async" loading="lazy" src="images/image86.png" style="width:475px"/></a></div><figcaption>ภาพ ๑-49 เว็บเพจสำหรับกำหนดค่า network port ซึ่งผู้ใช้จะไม่ใส่ข้อมูลใด</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image87.png"><img alt="ภาพ ๑-50 เว็บเพจสำหรับเลือกกลุ่มกฎรักษาความปลอดภัยซึ่งผู้ใช้จะเลือกทั้ง default และ SSH-ICMP" decoding="async" loading="lazy" src="images/image87.png" style="width:486px"/></a></div><figcaption>ภาพ ๑-50 เว็บเพจสำหรับเลือกกลุ่มกฎรักษาความปลอดภัยซึ่งผู้ใช้จะเลือกทั้ง default และ SSH-ICMP</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image88.png"><img alt="ภาพ ๑-51 เว็บเพจสำหรับกำหนดค่า Key Pair สำหรับวีเอ็ม ซึ่งผู้ใช้จะยังไม่กำหนดค่าใด" decoding="async" loading="lazy" src="images/image88.png" style="width:470px"/></a></div><figcaption>ภาพ ๑-51 เว็บเพจสำหรับกำหนดค่า Key Pair สำหรับวีเอ็ม ซึ่งผู้ใช้จะยังไม่กำหนดค่าใด</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image89.png"><img alt="ภาพ ๑-52 เว็บเพจแสดงการกำหนดค่าพาสเวิร์ดของวีเอ็ม" decoding="async" loading="lazy" src="images/image89.png" style="width:470px"/></a></div><figcaption>ภาพ ๑-52 เว็บเพจแสดงการกำหนดค่าพาสเวิร์ดของวีเอ็ม</figcaption></figure>
+
+<p>หลังจากนั้น ในภาพ ๑-48 ผู้ใช้จะเลือก Flavor m1.small.1 สำหรับวีเอ็ม และกด Next ระบบจะแสดงหน้าเว็บในภาพ ๑-48 ซึ่งระบบจะเลือก Provider1 เป็นระบบเครือข่ายของวีเอ็มเนื่องจากในขณะนี้มีระบบเครือข่ายที่ผู้ใช้ใน Project นี้เลือกใช้ได้อยู่เครือข่ายเดียว หลังจากนั้นเมื่อผู้ใช้กด Next จะเข้าสู่หน้าเว็บให้เลือก Network Ports ซึ่งจะยังไม่ใช้ในตัวอย่างนี้ และผู้ใช้จะกด Next ข้ามไป ในภาพ ๑-50 จะเป็นเว็บเพจให้ผู้ใช้กำหนดค่ากลุ่มของกฎรักษาความปลอดภัยหรือกฎไฟร์วอลสำหรับวีเอ็ม ซึ่งผู้ใช้จะเลือก default และ SSH-ICMP แล้วกด Next ในภาพ ๑-51 ผู้ใช้จะยังไม่ระบุ Key Pair ที่จะใช้สำหรับเข้าถึงวีเอ็ม</p>
+<p>ภาพ ๑-52 แสดงเว็บเพจที่ผู้ใช้จะกำหนดค่าพาสเวิร์ดสำหรับล็อกอินเข้าสู่วีเอ็มนี้โดยใช้เครื่องมือ cloud-init ในเว็บเพจนี้ผู้ใช้จะต้องเขียนสคริปต์ในช่อง Customization Script (Modified) ดังนี้</p>
+<div class="code"><div class="code-head"><span class="code-label">ไฟล์ / ข้อความ</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>#cloud-config
+password: vasabilab
+chpasswd: { expire: False }
+ssh_pwauth: True</code></pre></div>
+<p>และกดเลือก (เครื่องหมายถูก) ที่กล่อง Configuration Drive</p>
+<p>สคริปต์ข้างต้นจะได้รับการรันเมื่อวีเอ็มเริ่มต้นการประมวลผลและจะทำให้ผู้ใช้สามารถล็อกอินเข้าใช้งานวีเอ็มด้วยชื่อล็อกอิน ubuntu และพาสเวิร์ด vasabilab</p>
+<p>หลังจากนั้นผู้ใช้กดปุ่ม Launch Instance ระบบจะสร้างวีเอ็มและแสดงเว็บเพจในภาพ ๑-53</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image90.png"><img alt="ภาพ ๑-53 เว็บเพจแสดงรายการวีเอ็มใน Project Project-A และการเข้า console ของวีเอ็ม" decoding="async" loading="lazy" src="images/image90.png" style="width:495px"/></a></div><figcaption>ภาพ ๑-53 เว็บเพจแสดงรายการวีเอ็มใน Project Project-A และการเข้า console ของวีเอ็ม</figcaption></figure>
+
+<p>ในภาพ ๑-53 ผู้ใช้จะเห็นวีเอ็มใหม่ชื่อ focal-1 ถูกสร้างขึ้นและมีสถานะ Active ผู้ใช้สามารถล็อกอินเข้าใช้วีเอ็มได้สองวิธี วิธีแรกคือการเข้าใช้งานทางคอนโซล (console) อีกวิธีหนึ่งคือการล็อกอินทางไกลด้วย SSH Protocol ในภาพแสดงการเข้าใช้งานด้วยวิธีแรกซึ่งผู้ใช้จะต้องกดปุ่มขยายเมนูถัดจากปุ่ม Create Snapshot และเลือก Console เพื่อเข้าสู่คอนโซลของวีเอ็มดังภาพ ๑-54 ในการใช้งานคอนโซลผู้ใช้ต้องป้อนข้อมูลทางคีย์บอร์ดเท่านั้นและไม่สามารถคัตและเพสต์ (Cut and Paste) ข้อมูลจาก Local คอมพิวเตอร์เข้าสู่คอนโซลเทอร์มินอลได้ ในระบบโอเพนสแตค ก่อนที่จะป้อนข้อมูลทางคอนโซลได้ผู้ใช้ต้องนำเคอร์เซอร์ไปวางและกดเลือกบนแถบสีฟ้าด้านบนของคอนโซลก่อนแล้วจึงเลื่อนเคอร์เซอร์เข้ามาในพื้นที่คอนโซลเพื่อป้อนข้อมูล เบื้องต้นในภาพผู้ใช้จะป้อนชื่อล็อกอิน ubuntu และพาสเวิร์ด vasabilab แล้วจึงล็อกอินเข้าสู่ Command Line เชลล์ของ Ubuntu</p>
+<p>อีกวิธีหนึ่งที่จะล็อกอินเข้าสู่วีเอ็มได้คือการล็อกอินทางไกลด้วย SSHProtocol ดังภาพ ๑-55 เนื่องจากวีเอ็ม focal-1 ใช้ระบบเครือข่ายภายนอกที่ระบบโอเพนสแตคใช้บริการโดยตรง ดังนั้นผู้ใช้จึงสามารถอ้างอิงค่าไอพี 192.168.20.165 ได้เลย</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image91.png"><img alt="ภาพ ๑-54 การล็อกอินเข้าใช้งานวีเอ็มด้วยคอนโซล" decoding="async" loading="lazy" src="images/image91.png" style="width:624px"/></a></div><figcaption>ภาพ ๑-54 การล็อกอินเข้าใช้งานวีเอ็มด้วยคอนโซล</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image92.png"><img alt="ภาพ ๑-55 การล็อกอินทางไกลเข้าสู่วีเอ็ม" decoding="async" loading="lazy" src="images/image92.png" style="width:495px"/></a></div><figcaption>ภาพ ๑-55 การล็อกอินทางไกลเข้าสู่วีเอ็ม</figcaption></figure>
+
+<h3 id="sec-1-2-9">๑.2.9 การสร้างคู่คีย์สำหรับล็อกอินเข้าสู่วีเอ็มโดยไม่ต้องใส่พาสเวิร์ด</h3>
+<p>เพื่อความสะดวกในการสั่งงานวีเอ็ม ผู้ใช้สามารถสร้างคู่คีย์ (Key Pairs) และใช้ในการล็อกอินวีเอ็มได้ ในการสร้างคู่คีย์ ผู้ใช้ต้องเลือกแท็บ Compute และเลือกแท็บย่อย Key Pairs และระบบจะแสดงเว็บเพจในหน้า ๑-56 ซึ่งผู้ใช้สามารถกดปุ่ม Create Key Pair เพื่อสร้างคู่คีย์ หรือกดปุ่ม Import Public Key ในกรณีที่ผู้ใช้มีคู่คีย์อยู่แล้วใน Local คอมพิวเตอร์ และต้องการนำเข้า Public Key เพื่อใช้ในการล็อกอินทางไกล (remote login) หรือสั่งงานวีเอ็มทางไกล (remote execution) หรือกดปุ่ม Delete Key Pair ถ้าผู้ใช้ต้องการลบคู่คีย์ที่มีอยู่ในระบบ</p>
+<p>ในการสร้างคู่คีย์ ผู้ใช้กดปุ่ม Create Key Pair ในภาพ ๑-56 แล้วระบบจะแสดงเว็บเพจในภาพ ๑-57 ผู้ใช้จะต้องใส่ชื่อคู่คีย์ซึ่งในตัวอย่างจะเป็น A-user-key และเลือกชนิดของคู่คีย์ในช่อง Key Types ซึ่งผู้ใช้จะต้องเลือกระหว่าง SSH Key และ X.509 certificate ในตัวอย่างนี้เราจะเลือก SSH Key หลังจากนั้นเมื่อกด Create Key Pair ระบบจะแสดงเว็บเพจในภาพ ๑-58 และในขณะเดียวกันระบบจะดาวน์โหลดไฟล์ A-user-key.pem มาที่ directory สำหรับเก็บข้อมูล Download ของเบราว์เซอร์ของผู้ใช้ ไฟล์ A-user-key.pem เป็นไพรเวทคีย์​ (private key) ที่ผู้ใช้สามารถนำไปใช้ได้โดยตรงถ้าผู้ใช้ต้องการล็อกอินเข้าสู่วีเอ็มจาก Local คอมพิวเตอร์ที่เป็นเครื่องลินุกซ์ แต่ถ้าผู้ใช้จะล็อกอินเข้าใช้ด้วยซอฟต์แวร์ putty ผู้ใช้จะต้องทำตามขั้นตอนที่ (<a href="https://www.mirantis.com/blog/openstack-security-tip-create-a-keypair-for-accessing-vms/" rel="noopener" target="_blank">https://www.mirantis.com/blog/openstack-security-tip-create-a-keypair-for-accessing-vms/</a>)</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image93.png"><img alt="ภาพ ๑-56 เว็บเพจแสดงรายการคู่คีย์" decoding="async" loading="lazy" src="images/image93.png" style="width:473px"/></a></div><figcaption>ภาพ ๑-56 เว็บเพจแสดงรายการคู่คีย์</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image94.png"><img alt="ภาพ ๑-57 เว็บเพจแสดงการสร้างคู่คีย์" decoding="async" loading="lazy" src="images/image94.png" style="width:462px"/></a></div><figcaption>ภาพ ๑-57 เว็บเพจแสดงการสร้างคู่คีย์</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image95.png"><img alt="ภาพ ๑-58 เว็บเพจแสดงการสร้างคู่คีย์ A-user-key เสร็จเรียบร้อยพร้อมทั้งดาวน์โหลดไพรเวทคีย์" decoding="async" loading="lazy" src="images/image95.png" style="width:462px"/></a></div><figcaption>ภาพ ๑-58 เว็บเพจแสดงการสร้างคู่คีย์ A-user-key เสร็จเรียบร้อยพร้อมทั้งดาวน์โหลดไพรเวทคีย์</figcaption></figure>
+
+<h3 id="sec-1-2-10">๑.2.10 การสร้างวีเอ็มและกำหนดค่าคู่คีย์ให้กับวีเอ็ม</h3>
+<p>ในการสร้างวีเอ็มที่สามารถใช้คู่คีย์ได้ ผู้ใช้จะสร้างวีเอ็มใหม่ชื่อ focal-2 ซึ่งมีขั้นตอนในการสร้างเหมือนกับเมื่อผู้ใช้สร้างวีเอ็ม focal-1 ในตอนที่ 7.2.1.8 แต่มีขั้นตอนที่แตกต่างคือในขั้นตอนใช้งานคู่คีย์ในภาพ ๑-59 ผู้ใช้จะต้องเลือก A-user-key เป็นคู่คีย์ (หมายเหตุ ผู้ใช้ยังคงต้องกำหนดค่าใน Customization Scripts ในขั้นตอน Configuration ในภาพ ๑-60 เนื่องจากผู้ใช้ยังต้องใช้ป้อนพาสเวิร์ด เมื่อล็อกอินด้วยคอนโซล หลังจากกดปุ่ม Launch Instance ระบบจะแสดงเว็บเพจในภาพ ๑-61)</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image96.png"><img alt="ภาพ ๑-59 เว็บเพจแสดงการเลือกใช้ A-user-key สำหรับวีเอ็ม focal-2" decoding="async" loading="lazy" src="images/image96.png" style="width:482px"/></a></div><figcaption>ภาพ ๑-59 เว็บเพจแสดงการเลือกใช้ A-user-key สำหรับวีเอ็ม focal-2</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image97.png"><img alt="ภาพ ๑-60 เว็บเพจแสดงขั้นตอนการกำหนดพาสเวิร์ดสำหรับวีเอ็ม focal-2" decoding="async" loading="lazy" src="images/image97.png" style="width:481px"/></a></div><figcaption>ภาพ ๑-60 เว็บเพจแสดงขั้นตอนการกำหนดพาสเวิร์ดสำหรับวีเอ็ม focal-2</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image98.png"><img alt="ภาพ ๑-61 เว็บเพจแสดงรายการวีเอ็มใน Project Project-1 หลังจากสร้างวีเอ็ม focal-2" decoding="async" loading="lazy" src="images/image98.png" style="width:495px"/></a></div><figcaption>ภาพ ๑-61 เว็บเพจแสดงรายการวีเอ็มใน Project Project-1 หลังจากสร้างวีเอ็ม focal-2</figcaption></figure>
+
+<p>หลังจากนั้น บน Local คอมพิวเตอร์ ผู้ใช้สามารถใช้คำสั่งข้างล่างเพื่อล็อกอินทางไกลเข้าสู่วีเอ็ม focal-2 โดยไม่ต้องใส่พาสเวิร์ด ดังภาพ ๑-62</p>
+<div class="code"><div class="code-head"><span class="code-label">On local computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ ssh  -i  ./A-user-key.pem  ubuntu@192.168.20.162
+…
+focal-2 $</code></pre></div>
+<p>แต่อย่างไรก็ตาม ถ้าผู้ใช้จะเข้าใช้งานวีเอ็มทางคอนโซล (ดังภาพ ๑-63) ผู้ใช้จะต้องใช้พาสเวิร์ด ตามค่าที่กำหนดในภาพ ๑-60</p>
+<h3 id="sec-1-2-11">๑.2.11 การลบวีเอ็ม</h3>
+<p>เพื่อให้ง่ายต่อการอธิบายในลำดับถัดไป การลบวีเอ็มที่ผู้ใช้ไม่ได้ใช้ เราจะลบวีเอ็ม cirros-1 และ focal-1 ออกจากระบบโอเพนสแตค ในภาพ ๑-61 ผู้ใช้จะต้องเช็คกล่องสี่เหลี่ยมที่อยู่หน้าชื่อ cirros-1 และ focal-1 หลังจากนั้นกดปุ่ม Delete Instances</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image99.png"><img alt="ภาพ ๑-62 หน้าจอแสดงการล็อกอินทางไกลด้วยคู่คีย์" decoding="async" loading="lazy" src="images/image99.png" style="width:496px"/></a></div><figcaption>ภาพ ๑-62 หน้าจอแสดงการล็อกอินทางไกลด้วยคู่คีย์</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image100.png"><img alt="ภาพ ๑-63 เว็บเพจแสดงการล็อกอินทางคอนโซล ผู้ใช้ต้องใช้พาสเวิร์ดเพื่อล็อกอิน" decoding="async" loading="lazy" src="images/image100.png" style="width:500px"/></a></div><figcaption>ภาพ ๑-63 เว็บเพจแสดงการล็อกอินทางคอนโซล ผู้ใช้ต้องใช้พาสเวิร์ดเพื่อล็อกอิน</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image102.png"><img alt="ภาพ ๑-64 เว็บเพจแสดงระบบเครือข่ายเบื้องต้นที่มีเพียงระบบเครือข่ายภายนอก" decoding="async" loading="lazy" src="images/image102.png" style="width:410px"/></a></div><figcaption>ภาพ ๑-64 เว็บเพจแสดงระบบเครือข่ายเบื้องต้นที่มีเพียงระบบเครือข่ายภายนอก</figcaption></figure>
+
+<h3 id="sec-1-2-12">๑.2.12 การสร้างระบบเครือข่ายเสมือนภายใน Project</h3>
+<p>ในกรณีที่ผู้ใช้ต้องการสร้างระบบเครือข่ายภายในเพื่อให้วีเอ็มจำนวนหนึ่งสื่อสารกันผ่านระบบเครือข่ายนี้ และอนุญาตให้วีเอ็มเหล่านั้นสื่อสารกับคอมพิวเตอร์ภายนอกเครือข่ายภายในนี้ได้ด้วย ผู้ใช้จะต้องสร้างระบบเครือข่ายเสมือนภายในและสร้างเร้าเตอร์เสมือนสำหรับระบบเครือข่ายนั้น ในตอนนี้ จะบรรยายขั้นตอนในการสร้างระบบเครือข่ายเสมือน เร้าเตอร์เสมือน และวีเอ็มบนระบบเครือข่ายเสมือนนั้น</p>
+<p>เบื้องต้น ผู้ใช้สามารถดู Topology ของระบบเครือข่ายได้โดยเลือกแท็บ Network และเลือกแท็บย่อย Network Topology ระบบจะแสดงเพจดังภาพ ๑-64 ซึ่งแสดงว่ามีระบบเครือข่ายภายนอกที่โอเพนสแตคเชื่อมต่อด้วยเพื่อสื่อสารกับโลกภายนอกชื่อ provider1 และมีค่าซับเน็ตคือ 192.168.20.0/24 เครือข่ายนี้ถูกสร้างขึ้นเมื่อผู้ติดตั้งโอเพนสแตคใช้สคริปต์ exe-stage36-USER-initial-network.sh (สามารถดูรายละเอียดคำสั่งได้บน github) นอกจากแสดงภาพระบบเครือข่ายแล้วหน้าเว็บเพจ Network Topology ยังแสดงว่ามีวีเอ็ม (focal-2) เชื่อมต่อกับระบบเครือข่ายนี้ด้วย</p>
+<p>ในการสร้างระบบเครือข่ายเสมือนภายในใหม่ ผู้ใช้ต้องกดแท็บ Network และแท็บย่อย Networks ระบบจะแสดงเว็บเพจดังภาพ ๑-65 หลังจากนั้น ผู้ใช้จะต้องกดปุ่ม Create Network ระบบจะแสดงเว็บเพจดังภาพ ๑-66 ซึ่งผู้ใช้จะกำหนดชื่อระบบเครือข่ายนี้คือ A-net-1 ในเว็บเพจนี้ระบบจะเลือกช่อง Enable Admin State และ Create Subnet เป็นค่าดีฟอลต์ เมื่อผู้ใช้กดปุ่ม Next ระบบจะแสดงเว็บเพจในภาพ ๑-67 ซึ่งผู้ใช้จะกำหนดชื่อซับเน็ตของระบบเครือข่ายนี้คือ A-net-1-subnet และให้ซับเน็ตมีค่า Network Address เป็น 10.50.11.0/24 ระบบโอเพนสแตคจะกำหนดให้ค่าดีฟอลต์ของไอพีของเกตเวย์ (gateway) ของระบบเครือข่ายเสมือนนี้เป็น 10.50.11.1 ถ้าต้องการให้เป็นค่าไอพีอื่นในซับเน็ตก็สามารถระบุค่าในช่อง Gateway IP ได้ (ถ้าไม่ระบุระบบจะใช้ค่าดีฟอลต์) ในกรณีที่ผู้ใช้ไม่ต้องการให้ระบบเครือข่ายเสมือนมีเกตเวย์ ผู้ใช้ต้องใส่เครื่องหมายถูกหน้ากล่องในช่อง Disable Gateway เมื่อเสร็จแล้วให้กด Next ​</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image103.png"><img alt="ภาพ ๑-65 เว็บเพจแสดงรายการของระบบเครือข่ายเสมือนภายใน Project" decoding="async" loading="lazy" src="images/image103.png" style="width:495px"/></a></div><figcaption>ภาพ ๑-65 เว็บเพจแสดงรายการของระบบเครือข่ายเสมือนภายใน Project</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image104.png"><img alt="ภาพ ๑-66 เว็บเพจแสดงการระบุชื่อเครือข่ายเสมือน" decoding="async" loading="lazy" src="images/image104.png" style="width:495px"/></a></div><figcaption>ภาพ ๑-66 เว็บเพจแสดงการระบุชื่อเครือข่ายเสมือน</figcaption></figure>
+
+<p>ระบบจะแสดงหน้าเว็บเพจในภาพ ๑-68 เพื่อให้ผู้ใช้กำหนดรายละเอียดของซับเน็ต ซึ่งระบบจะเลือกให้ระบบเครือข่ายเสมือนนี้ใช้ DHCP Protocol เป็นค่าดีฟอลต์ ถ้าผู้ใช้ไม่ต้องการใช้ DHCP ก็ต้องยกเลิกการเช็คค่าในกล่อง Enable DHCP ในกล่องถัดไป ระบบจะให้ผู้ใช้กำหนดค่า Allocation Pool ว่าผู้ใช้ต้องการให้ระบบแจกค่าไอพีในช่วงค่าไหนให้แก่วีเอ็ม ถ้าไม่ระบุโอเพนสแตคจะแจกค่าไอพีจากค่าไอพีที่ใช้ได้ในซับเน็ต ในช่อง DNS Name Servers ผู้ใช้สามารถกำหนดรายการของ DNS servers ที่ผู้ใช้จะใช้ ในตัวอย่างนี้เราใช้ 8.8.8.8 สำหรับช่อง Host Routes นั้นเราจะไม่กล่าวถึงในตัวอย่างนี้ เมื่อเสร็จแล้ว ผู้ใช้จะกดปุ่ม Create และระบบจะแสดงเว็บเพจในภาพ ๑-69 และเมื่อผู้ใช้กดดูภาพ Topology ของระบบเครือข่ายใน Project ระบบจะแสดงภาพ Topology ในภาพ ๑-70</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image105.png"><img alt="ภาพ ๑-67 เว็บเพจแสดงการระบุค่าซับเน็ตของระบบเครือข่ายเสมือน" decoding="async" loading="lazy" src="images/image105.png" style="width:452px"/></a></div><figcaption>ภาพ ๑-67 เว็บเพจแสดงการระบุค่าซับเน็ตของระบบเครือข่ายเสมือน</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image106.png"><img alt="ภาพ ๑-68 เว็บเพจแสดงการระบุค่ารายละเอียดของซับเน็ตของระบบเครือข่ายเสมือน" decoding="async" loading="lazy" src="images/image106.png" style="width:438px"/></a></div><figcaption>ภาพ ๑-68 เว็บเพจแสดงการระบุค่ารายละเอียดของซับเน็ตของระบบเครือข่ายเสมือน</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image107.png"><img alt="ภาพ ๑-69 เว็บเพจแสดงรายการของระบบเครือข่ายเสมือน" decoding="async" loading="lazy" src="images/image107.png" style="width:495px"/></a></div><figcaption>ภาพ ๑-69 เว็บเพจแสดงรายการของระบบเครือข่ายเสมือน</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image108.png"><img alt="ภาพ ๑-70 เว็บเพจแสดง Topology ของระบบเครือข่ายเสมือนใน Project Project-A" decoding="async" loading="lazy" src="images/image108.png" style="width:275px"/></a></div><figcaption>ภาพ ๑-70 เว็บเพจแสดง Topology ของระบบเครือข่ายเสมือนใน Project Project-A</figcaption></figure>
+
+<h3 id="sec-1-2-13">๑.2.13 การสร้างเร้าเตอร์สำหรับเชื่อมต่อระบบเครือข่ายเสมือน</h3>
+<p>จาก Topology ในภาพ ๑-70 ผู้ใช้จะเห็นว่าระบบเครือข่ายเสมือนที่สร้างขึ้นยังไม่ได้รับการเชื่อมต่อกับระบบเครือข่ายภายนอกด้วยเร้าเตอร์ ดังนั้นถ้าเชื่อมต่อวีเอ็มเข้ากับระบบเครือข่ายนี้ วีเอ็มภายในระบบเครือข่ายเสมือนจะสามารถสื่อสารกันได้ แต่จะไม่สามารถสื่อสารกับคอมพิวเตอร์ที่อยู่ภายนอกระบบเครือข่ายได้</p>
+<p>ในการสร้างเร้าเตอร์ ผู้ใช้จะต้องเลือกแท็บ Network และเลือกแท็บย่อย Routers ระบบจะแสดงเว็บเพจดังภาพ ๑-71 ผู้ใช้ต้องกดปุ่ม Create Router เพื่อสร้างเร้าเตอร์เสมือนซึ่งระบบจะแสดงเว็บเพจในภาพ ๑-72 ซึ่งผู้ใช้กำหนดชื่อเร้าเตอร์คือ A-router-1 และเลือก Provider1 ในช่อง External Network เพื่อกำหนดให้ระบบเครือข่าย Provider1 เป็นระบบเครือข่ายภายนอกของเร้าเตอร์นี้ หลังจากนั้น ผู้ใช้จะกดปุ่ม Create Router และระบบจะแสดงเว็บเพจในหน้า ๑-73 แสดงรายการของเร้าเตอร์ใน Project</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image109.png"><img alt="ภาพ ๑-71 เว็บเพจแสดงรายการเร้าเตอร์เสมือนใน Project" decoding="async" loading="lazy" src="images/image109.png" style="width:482px"/></a></div><figcaption>ภาพ ๑-71 เว็บเพจแสดงรายการเร้าเตอร์เสมือนใน Project</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image110.png"><img alt="ภาพ ๑-72 เว็บเพจแสดงการสร้างเร้าเตอร์เสมือน" decoding="async" loading="lazy" src="images/image110.png" style="width:482px"/></a></div><figcaption>ภาพ ๑-72 เว็บเพจแสดงการสร้างเร้าเตอร์เสมือน</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image111.png"><img alt="ภาพ ๑-73 เว็บเพจเมื่อสร้างเร้าเตอร์เสมือนเสร็จ" decoding="async" loading="lazy" src="images/image111.png" style="width:482px"/></a></div><figcaption>ภาพ ๑-73 เว็บเพจเมื่อสร้างเร้าเตอร์เสมือนเสร็จ</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image112.png"><img alt="ภาพ ๑-74 Topology เมื่อสร้างเร้าเตอร์เสมือนเสร็จ" decoding="async" loading="lazy" src="images/image112.png" style="width:245px"/></a></div><figcaption>ภาพ ๑-74 Topology เมื่อสร้างเร้าเตอร์เสมือนเสร็จ</figcaption></figure>
+
+<p>เมื่อผู้ใช้เรียกดูภาพ Topology ของระบบเครือข่ายในภาพ ๑-74 จะเห็นว่ามีเร้าเตอร์เสมือนถูกสร้างขึ้นและเชื่อมต่อเข้ากับระบบเครือข่ายภายนอก แต่ยังไม่ได้เชื่อมต่อกับระบบเครือข่ายเสมือนภายใน ดังนั้น ในอันดับถัดไป ผู้ใช้จะต้องเลือกแท็บ Network แท็บย่อย Routers ซึ่งระบบจะแสดงเว็บเพจดังภาพ ๑-73 และผู้ใช้จะต้องกดบนชื่อ “A-router-1” หลังจากนั้น ระบบจะแสดงหน้าเว็บเพจในภาพ ๑-75 ซึ่งจะแสดงรายละเอียดของเร้าเตอร์</p>
+<p>ในการเชื่อมต่อเร้าเตอร์เข้ากับระบบเครือข่ายเสมือนภายใน ผู้ใช้ต้องกดแท็บ Interface ในภาพ ๑-75 และระบบจะแสดงเว็บเพจในหน้า ๑-76 ผู้ใช้ต้องกดปุ่ม Add Interface และระบบจะแสดงเว็บเพจในภาพ ๑-77 ซึ่งผู้ใช้จะเลือกซับเน็ตที่จะเชื่อมต่อกับเร้าเตอร์ A-router-1 ในช่อง Subnet ในภาพ ๑-77 ผู้ใช้เลือก A-net-1-subnet แล้วกดปุ่ม submit หลังจากนั้น ระบบจะแสดงเว็บเพจในภาพ ๑-78 เพื่อแสดงว่าการเชื่อมต่อเสร็จเรียบร้อยแล้ว เมื่อผู้ใช้เรียกดู Topology ของระบบเครือข่าย ระบบจะแสดงภาพดังภาพ ๑-79</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image113.png"><img alt="ภาพ ๑-75 เว็บเพจแสดงรายละเอียดของเร้าเตอร์เสมือน" decoding="async" loading="lazy" src="images/image113.png" style="width:489px"/></a></div><figcaption>ภาพ ๑-75 เว็บเพจแสดงรายละเอียดของเร้าเตอร์เสมือน</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image114.png"><img alt="ภาพ ๑-76 เว็บเพจจุดเริ่มต้นการเพิ่มอินเตอร์เฟสให้เร้าเตอร์เสมือน" decoding="async" loading="lazy" src="images/image114.png" style="width:396px"/></a></div><figcaption>ภาพ ๑-76 เว็บเพจจุดเริ่มต้นการเพิ่มอินเตอร์เฟสให้เร้าเตอร์เสมือน</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image115.png"><img alt="ภาพ ๑-77 เว็บเพจแสดงการเลือกซับเน็ตที่จะให้เชื่อมต่อกับเร้าเตอร์เสมือน" decoding="async" loading="lazy" src="images/image115.png" style="width:475px"/></a></div><figcaption>ภาพ ๑-77 เว็บเพจแสดงการเลือกซับเน็ตที่จะให้เชื่อมต่อกับเร้าเตอร์เสมือน</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image116.png"><img alt="ภาพ ๑-78 เว็บเพจหลังจากเลือกซับเน็ตที่จะให้เชื่อมต่อกับเร้าเตอร์เสมือนแล้ว" decoding="async" loading="lazy" src="images/image116.png" style="width:477px"/></a></div><figcaption>ภาพ ๑-78 เว็บเพจหลังจากเลือกซับเน็ตที่จะให้เชื่อมต่อกับเร้าเตอร์เสมือนแล้ว</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image117.png"><img alt="ภาพ ๑-79 Topology ของเร้าเตอร์เสมือนและระบบเครือข่ายเสมือนเมื่อเชื่อมต่อกันแล้ว" decoding="async" loading="lazy" src="images/image117.png" style="width:200px"/></a></div><figcaption>ภาพ ๑-79 Topology ของเร้าเตอร์เสมือนและระบบเครือข่ายเสมือนเมื่อเชื่อมต่อกันแล้ว</figcaption></figure>
+
+<h3 id="sec-1-2-14">๑.2.14 การสร้างวีเอ็มเชื่อมต่อระบบเครือข่ายเสมือน</h3>
+<p>ในอันดับถัดไป ผู้ใช้จะสร้างวีเอ็มที่มีเกสต์โอเอสเป็น Ubuntu เหมือนกับที่เคยสร้างก่อนหน้าแต่จะเชื่อมต่อวีเอ็มเข้ากับระบบเครือข่ายเสมือนภายใน A-net-1 แทนที่จะเชื่อมต่อกับระบบเครือข่าย Provider1 โดยที่ผู้ใช้จะตั้งชื่อวีเอ็มใหม่นี้ว่า focal-3 ซึ่งในการสร้างวีเอ็มนี้ ผู้ใช้จะทำขั้นตอนทุกอย่างเหมือนกับที่ได้บรรยายในตอน 7.2.1.10 แต่เปลี่ยนการเลือกระบบเครือข่ายเป็นดังภาพ ๑-80 แทน</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image118.png"><img alt="ภาพ ๑-80 การเลือกระบบเครือข่ายเสมือนในการสร้างวีเอ็ม focal-3" decoding="async" loading="lazy" src="images/image118.png" style="width:438px"/></a></div><figcaption>ภาพ ๑-80 การเลือกระบบเครือข่ายเสมือนในการสร้างวีเอ็ม focal-3</figcaption></figure>
+
+<p>หลังจากนั้น ระบบจะแสดงเว็บเพจในภาพ ๑-81 ซึ่งจะเห็นได้ว่าวีเอ็ม focal-3 ได้รับกำหนดค่า <strong>Fixed IP (Fixed IP) เป็น 10.50.11.163</strong> ซึ่งเป็นค่าไอพีภายในซับเน็ต A-net-1-subnet เมื่อเรียกดูภาพ Topology จะได้ Topology ดังภาพ ๑-82 ซึ่งจะเห็นว่า focal-3 นั้นอยู่ภายในระบบเครือข่าย A-net-1 ผู้ใช้สามารถใช้คอนโซลล็อกอินเข้าสู่ focal-3 ได้ดังภาพ ๑-83 และจะเห็นว่าผู้ใช้สามารถสื่อสารกับอินเทอร์เน็ตได้ (ping <a href="http://www.google.com" rel="noopener" target="_blank">www.google.com</a> ได้) ทั้งนี้เป็นเพราะข้อความจากวีเอ็มจะถูกส่งผ่านเร้าเตอร์เสมือนและผ่านกระบวนการ SNAT และข้อความจะถูกส่งต่อออกสู่ระบบเครือข่ายภายนอก Provider1 และถูกส่งต่อออกสู่อินเทอร์เน็ตในที่สุด</p>
+<p>อย่างไรก็ตาม ผู้ใช้จะไม่สามารถสื่อสารกับวีเอ็ม focal-3 จากระบบเครือข่ายภายนอกได้ ดังภาพที่ ๑-84 ซึ่งผู้ใช้พยายาม ping เครื่อง focal-3 จาก Local คอมพิวเตอร์ที่เชื่อมต่อกับระบบเครือข่าย Provider1</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image119.png"><img alt="ภาพ ๑-81 เว็บเพจแสดงรายการวีเอ็มใน Project" decoding="async" loading="lazy" src="images/image119.png" style="width:450px"/></a></div><figcaption>ภาพ ๑-81 เว็บเพจแสดงรายการวีเอ็มใน Project</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image120.png"><img alt="ภาพ ๑-82 เว็บเพจแสดง Topology ของระบบเครือข่ายภายในพร้อมทั้งวีเอ็ม focal-3" decoding="async" loading="lazy" src="images/image120.png" style="width:483px"/></a></div><figcaption>ภาพ ๑-82 เว็บเพจแสดง Topology ของระบบเครือข่ายภายในพร้อมทั้งวีเอ็ม focal-3</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image121.png"><img alt="ภาพ ๑-83 เว็บเพจคอนโซลของวีเอ็ม focal-3 ที่สามารถติดต่อกับระบบเครือข่ายภายนอกได้" decoding="async" loading="lazy" src="images/image121.png" style="width:471px"/></a></div><figcaption>ภาพ ๑-83 เว็บเพจคอนโซลของวีเอ็ม focal-3 ที่สามารถติดต่อกับระบบเครือข่ายภายนอกได้</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image122.png"><img alt="ภาพ ๑-84 ภาพหน้าจอแสดงว่า ผู้ใช้ไม่สามารถใช้ ping ติดต่อกับวีเอ็ม focal-3 จากระบบเครือข่ายภายนอกได้" decoding="async" loading="lazy" src="images/image122.png" style="width:428px"/></a></div><figcaption>ภาพ ๑-84 ภาพหน้าจอแสดงว่า ผู้ใช้ไม่สามารถใช้ ping ติดต่อกับวีเอ็ม focal-3 จากระบบเครือข่ายภายนอกได้</figcaption></figure>
+
+<h3 id="sec-1-2-15">๑.2.15 การจัดสรร Floating IP ให้วีเอ็ม</h3>
+<p><strong>Floating IP (Floating IP)</strong> คือค่าไอพีของระบบเครือข่ายภายนอกที่โอเพนสแตคอนุญาตให้ผู้ใช้นำไปสร้างความเกี่ยวข้อง (associate) เข้ากับ <strong>Fixed IP (Fixed IP)</strong> ของวีเอ็มที่เชื่อมต่อกับระบบเครือข่ายเสมือนภายใน (เช่น A-net-1 เป็นต้น) ที่มีเร้าเตอร์เชื่อมต่อกับระบบเครือข่ายภายนอกที่มีค่าซับเน็ตเป็นของ Floating IP นั้น ยกตัวอย่างเช่น ไอพีในซับเน็ต 192.168.20.0/24 ของระบบเครือข่ายภายนอก Provider1 สามารถถูกนำไปใช้เป็น Floating IP ของวีเอ็มที่เชื่อมต่อกับระบบเครือข่ายภายใน A-net-1 เนื่องจากทั้งสองระบบเครือข่ายมีเร้าเตอร์เชื่อมต่อกัน สำหรับที่มาของ Floating IP ของแต่ละ Project นั้น ผู้ดูแลระบบจะเป็นผู้กำหนด quota ว่าแต่ละ Project จะสามารถใช้ไอพีได้กี่ไอพี</p>
+<p>เมื่อต้องการใช้ Floating IP ผู้ใช้จะต้องขอจัดสรร (allocate) จากพูล (pool) ของระบบ โดยเลือกกดแท็บ Network และแท็บย่อย Floating IPs ระบบจะแสดงเว็บเพจดังภาพ ๑-85 หลังจากนั้นผู้ใช้จะต้องกดปุ่ม Allocate IP to Project ซึ่งระบบจะแสดงเว็บเพจในภาพ ๑-86</p>
+<p>ผู้ใช้จะต้องเลือกในช่อง Pool ว่าจะจัดสรร Floating IP จากระบบเครือข่ายภายนอกใด ซึ่งในที่นี้มีอยู่เครือข่ายเดียวคือ provider1 ขอให้สังเกตว่า quota ของ Floating IP ของ Project Project-A คือ 8 ไอพี ท้ายที่สุด ผู้ใช้จะกดปุ่ม Allocate IP ซึ่งระบบจะจัดสรรไอพีให้และแสดงรายการไอพีในเว็บเพจในภาพ ๑-87 ในเว็บเพจนั้น ผู้ใช้จะต้องเลือกค่า Floating IP ที่ต้องการและกดปุ่ม Associate ในบรรทัดเดียวกันกับค่าไอพีนั้น ระบบจะแสดงเว็บเพจในภาพ ๑-88</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image123.png"><img alt="ภาพ ๑-85 เว็บเพจจัดสรร Floating IP" decoding="async" loading="lazy" src="images/image123.png" style="width:467px"/></a></div><figcaption>ภาพ ๑-85 เว็บเพจจัดสรร Floating IP</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image125.png"><img alt="ภาพ ๑-86 เว็บเพจเลือกระบบเครือข่ายภายนอก Floating IP" decoding="async" loading="lazy" src="images/image125.png" style="width:468px"/></a></div><figcaption>ภาพ ๑-86 เว็บเพจเลือกระบบเครือข่ายภายนอก Floating IP</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image126.png"><img alt="ภาพ ๑-87 เว็บเพจแสดงรายการ Floating IP ที่จัดสรรให้ Project" decoding="async" loading="lazy" src="images/image126.png" style="width:495px"/></a></div><figcaption>ภาพ ๑-87 เว็บเพจแสดงรายการ Floating IP ที่จัดสรรให้ Project</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image127.png"><img alt="ภาพ ๑-88 เว็บเพจแสดงการสร้างความเกี่ยวข้องระหว่าง Floating IP และ Fixed IP" decoding="async" loading="lazy" src="images/image127.png" style="width:416px"/></a></div><figcaption>ภาพ ๑-88 เว็บเพจแสดงการสร้างความเกี่ยวข้องระหว่าง Floating IP และ Fixed IP</figcaption></figure>
+
+<p>ในอันดับถัดไป ผู้ใช้จะต้องเลือกว่าจะให้ไอพี 192.168.20.196 มีความเกี่ยวข้องกับ Fixed IP ใด ซึ่ง Component นิวตรอนของโอเพนสแตคกำหนดให้ทุกการเชื่อมต่อระหว่างวีเอ็มกับระบบเครือข่ายเป็น network port ผู้ใช้จะต้องเลือกจากลิสต์ของ Fixed IP ในเมนูว่าจะสร้างความเกี่ยวข้องกับไอพีใด ซึ่งในภาพจะได้เป็นค่าไอพี 10.50.11.163 ของวีเอ็ม focal-3 ถัดจากนั้น ผู้ใช้กด Associate แล้วระบบจะแสดงเว็บเพจสรุปในภาพ ๑-89 หลังจากนั้น เมื่อผู้ใช้เลือกแท็บ Compute และแท็บย่อย Instances ระบบจะแสดงข้อมูลเกี่ยวกับ Floating IP เพิ่มเติมในรายการของวีเอ็มในบรรทัดที่แสดงข้อมูลของ focal-3 ดังภาพ ๑-90</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image128.png"><img alt="ภาพ ๑-89 เว็บเพจแสดงรายการ Floating IP พร้อมทั้งข้อมูลความเกี่ยวข้องกับ Fixed IP" decoding="async" loading="lazy" src="images/image128.png" style="width:541px"/></a></div><figcaption>ภาพ ๑-89 เว็บเพจแสดงรายการ Floating IP พร้อมทั้งข้อมูลความเกี่ยวข้องกับ Fixed IP</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image129.png"><img alt="ภาพ ๑-90 เว็บเพจแสดงข้อมูลไอพีของวีเอ็ม" decoding="async" loading="lazy" src="images/image129.png" style="width:580px"/></a></div><figcaption>ภาพ ๑-90 เว็บเพจแสดงข้อมูลไอพีของวีเอ็ม</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image130.png"><img alt="ภาพ ๑-91 หน้าจอแสดงการล็อกอินทางไกลสู่วีเอ็มโดยใช้ Floating IP" decoding="async" loading="lazy" src="images/image130.png" style="width:416px"/></a></div><figcaption>ภาพ ๑-91 หน้าจอแสดงการล็อกอินทางไกลสู่วีเอ็มโดยใช้ Floating IP</figcaption></figure>
+
+<p>ในภาพ ๑-91 ผู้ใช้สามารถล็อกอินทางไกลจาก Local คอมพิวเตอร์ของผู้ใช้เข้าสู่วีเอ็ม focal-3 โดยใช้ ssh protocol ผ่าน Floating IP เมื่อล็อกอินแล้วจะเห็นว่าเกสต์โอเอสกำหนดให้ Fixed IP เป็นไอพีของเน็ตเวิร์คอินเตอร์เฟสของวีเอ็ม Floating IP เป็นไอพีที่ระบบโอเพนสแตคทำ NAT ให้กับวีเอ็มเท่านั้น</p>
+<h3 id="sec-1-2-16">๑.2.16 การ Pause, Suspend, Shelve และ Shut off เครื่องวีเอ็ม</h3>
+<p>ในภาพ ๑-92 เมื่อผู้ใช้ต้องการหยุดการประมวลผลของวีเอ็ม และกดปุ่มขยายเมนูถัดจากปุ่ม Create Snapshot ผู้ใช้จะเห็นว่ามีทางเลือกหลายทางเลือก โดยจะกล่าวถึงทางเลือกในการหยุดวีเอ็มต่อไปนี้</p>
+<ol type="1">
+<li><p>Pause Instance คือการหยุดการประมวลผลของวีเอ็มแต่สถานะการประมวลผลและหน่วยความจำของวีเอ็มยังอยู่ในหน่วยความจำของเครื่อง compute host หลังจาก Pause Instance ผู้ใช้สามารถใช้ปุ่ม Unpause Instance เพื่อสั่งให้วีเอ็มประมวลผลต่อจากการประมวลผลคำสั่งสุดท้ายก่อนการ Pause</p></li>
+<li><p>Suspend Instance คือการหยุดการประมวลผลของวีเอ็มและเขียนข้อมูลในหน่วยความจำลงสู่หน่วยเก็บข้อมูลหลังจากนั้นข้อมูลในหน่วยความจำจะถูกลบไป ผู้ใช้สามารถสั่งให้วีเอ็มกลับมาประมวลผลคำสั่งต่อจากคำสั่งสุดท้ายก่อนการ Suspend ด้วยคำสั่ง Resume Instance ซึ่งไฮเปอร์ไวเซอร์จะอ่านข้อมูลหน่วยความจำของวีเอ็มจากหน่วยเก็บข้อมูลกลับสู่หน่วยความจำก่อนสั่งให้วีเอ็มประมวลผลต่อไป (<a href="https://wiki.openstack.org/wiki/Kvm-Pause-Suspend" rel="noopener" target="_blank">https://wiki.openstack.org/wiki/Kvm-Pause-Suspend</a>)</p></li>
+<li><p>Shelve Instance คือการ shutdown เกสต์โอเอสของวีเอ็มและทำ Snapshot (snapshot) ของ Disk Image และ Volume ของวีเอ็ม หลังจากทำ Snapshot แล้วข้อมูลในหน่วยเก็บข้อมูลที่วีเอ็มใช้ตอนรันอยู่อาจถูกลบทิ้ง หรือ คงไว้ที่เดิม หรือลบทิ้งหลังจากระยะเวลาหนึ่งขึ้นอยู่กับการกำหนดค่าใน Component โนวา ผู้ใช้สามารถใช้คำสั่ง Unshelve Instance เพื่อนำข้อมูลจาก Snapshot ที่เก็บไว้กลับมาใช้ และบูทวีเอ็มใหม่จากข้อมูลนั้น</p></li>
+</ol>
+<p>(<a href="https://docs.openstack.org/mitaka/user-guide/cli_stop_and_start_an_instance.html" rel="noopener" target="_blank">https://docs.openstack.org/mitaka/user-guide/cli_stop_and_start_an_instance.html</a>)</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image131.png"><img alt="ภาพ ๑-92 เว็บเพจแสดงทางเลือกในการหยุดการประมวลผลของวีเอ็ม" decoding="async" loading="lazy" src="images/image131.png" style="width:499px"/></a></div><figcaption>ภาพ ๑-92 เว็บเพจแสดงทางเลือกในการหยุดการประมวลผลของวีเอ็ม</figcaption></figure>
+
+<ol start="4" type="1">
+<li><p>Shut off Instance คือการ shutdown เกสต์โอเอสของวีเอ็มและจะคงเกสต์โอเอสอิมเมจใว้ในหน่วยเก็บข้อมูลที่วีเอ็มใช้แต่เดิม และ (ถ้ามี) จะลบ Volume ชั่วคราว (ephemeral volume) ออก ผู้ใช้สามารถใช้คำสั่ง Start Instance เพื่อบูทวีเอ็มจากอิมเมจในหน่วยเก็บข้อมูลเดิมของวีเอ็มได้ (<a href="https://www.quora.com/What-is-the-difference-between-shelving-an-instance-and-shutting-down-in-openstack" rel="noopener" target="_blank">https://www.quora.com/What-is-the-difference-between-shelving-an-instance-and-shutting-down-in-openstack</a>)</p></li>
+</ol>
+<blockquote>
+<p>ในภาพ ๑-92 ผู้ใช้จะเลือก Shut Off Instance แล้วหลังจากนั้นระบบจะแสดงเว็บเพจดังภาพ ๑-93</p>
+</blockquote>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image133.png"><img alt="ภาพ ๑-93 เว็บเพจแสดงสถานะของวีเอ็มที่ถูก Shut Off" decoding="async" loading="lazy" src="images/image133.png" style="width:462px"/></a></div><figcaption>ภาพ ๑-93 เว็บเพจแสดงสถานะของวีเอ็มที่ถูก Shut Off</figcaption></figure>
+
+
+<h3 id="sec-1-2-17">๑.2.17 การรันวีเอ็มบนหน่วยเก็บข้อมูล Volume</h3>
+<p>การรันวีเอ็มบน Volume Storage เป็นการสั่งให้ Component โนวา เก็บข้อมูลอิมเมจของเกสต์โอเอสไว้ที่หน่วยเก็บข้อมูล Volume (Volume Storage) ของ Component ซินเดอร์ แล้วจึงรันวีเอ็ม ซึ่งแตกต่างจากแบบที่ไม่ใช้หน่วยเก็บข้อมูล Volume ซึ่งจะเก็บอิมเมจของเกสต์โอเอสไว้บนหน่วยเก็บข้อมูล Local ของเครื่องที่โนวารันวีเอ็ม</p>
+<p>การรันวีเอ็มบน Volume มีข้อดีดังนี้</p>
+<ol type="1">
+<li><p>ผู้ใช้สามารถเลือกที่จะไม่ลบ Volume ที่เก็บเกสต์โอเอสอิมเมจหลังจาก Destroy วีเอ็มแล้ว ทำให้ข้อมูลที่เก็บอยู่ในเกสต์โอเอสอิมเมจไม่สูญหาย ผู้ใช้อาจนำ Volume นั้นกลับมารันวีเอ็มอีกครั้งหนึ่ง หรือนำไปเป็น Volume ข้อมูลให้กับวีเอ็มอื่นก็ได้</p></li>
+<li><p>ผู้ใช้สามารถใช้ Component ซินเดอร์แบ็คอัพ (cinder backup) เพื่อใช้แบ็คอัพข้อมูลของวีเอ็มในหน่วยเก็บข้อมูลแบบออบเจ็กต์ เช่น Component สวิฟต์ (https://github.com/openstack/swift) ของโอเพนสแตค เป็นต้น</p></li>
+</ol>
+<p>ในการรันวีเอ็มแบบใช้ Volume ผู้ใช้จะเริ่มต้นรันวีเอ็มเหมือนที่บรรยายในตอนที่ 7.2.1.14 แต่ในครั้งนี้ผู้ใช้จะให้ชื่อวีเอ็มว่า focal-vol ดังภาพ ๑-94 หลังจากนั้น ในภาพ ๑-95 เมื่อผู้ใช้ระบุค่าที่มาของเกสต์โอเอสอิมเมจ ผู้ใช้จะกำหนดค่าในช่อง Select Boot Source ให้เป็น Image ซึ่งหมายความว่าผู้ใช้จะอ้างอิงข้อมูล Disk Image ของวีเอ็มจาก image template ใน Repository ของ Component แกลนซ์ของโอเพนสแตค</p>
+<p>ในภาพ ๑-95 ผู้ใช้ต้องเลือก Yes ในช่อง Create New Volume เพื่อให้ Component โนวาของโอเพนสแตค ใช้หน่วยเก็บข้อมูล Volume เพื่อเก็บอิมเมจของเกสต์โอเอส ในช่อง Volume Size ผู้ใช้ต้องระบุขนาดของ Volume ด้วย ซึ่งในตัวอย่างนี้กำหนดให้เป็น 10 GB และสุดท้าย ผู้ใช้จะเลือก No ในช่อง Delete Volume on Instance Delete เพื่อที่จะเก็บหน่วยเก็บข้อมูล Volume ของวีเอ็มนี้ไว้ถาวร ไม่ลบทิ้งเมื่อผู้ใช้ลบวีเอ็ม ถัดจากนั้นผู้ใช้จะเลือก ubuntu-focal-server เป็นเกสต์โอเอสอิมเมจ ในภาพ ๑-95 และที่เหลือจะทำเหมือนตอน 7.2.1.14 และระบบจะแสดงเว็บเพจดังภาพ ๑-96 หลังจากกดปุ่ม Launch Instance</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image134.png"><img alt="ภาพ ๑-94 เว็บเพจกำหนดชื่อวีเอ็มที่รันบน Volume" decoding="async" loading="lazy" src="images/image134.png" style="width:485px"/></a></div><figcaption>ภาพ ๑-94 เว็บเพจกำหนดชื่อวีเอ็มที่รันบน Volume</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image135.png"><img alt="ภาพ ๑-95 เว็บเพจแสดงการเลือก Boot Source และกำหนดค่าหน่วยเก็บข้อมูล Volume" decoding="async" loading="lazy" src="images/image135.png" style="width:486px"/></a></div><figcaption>ภาพ ๑-95 เว็บเพจแสดงการเลือก Boot Source และกำหนดค่าหน่วยเก็บข้อมูล Volume</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image136.png"><img alt="ภาพ ๑-96 เว็บเพจแสดงรายการวีเอ็มหลังจากรันวีเอ็ม focal-vol" decoding="async" loading="lazy" src="images/image136.png" style="width:486px"/></a></div><figcaption>ภาพ ๑-96 เว็บเพจแสดงรายการวีเอ็มหลังจากรันวีเอ็ม focal-vol</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image137.png"><img alt="ภาพ ๑-97 เว็บเพจแสดงหน่วยเก็บข้อมูล Volume ที่เก็บอิมเมจของวีเอ็ม focal-vol" decoding="async" loading="lazy" src="images/image137.png" style="width:486px"/></a></div><figcaption>ภาพ ๑-97 เว็บเพจแสดงหน่วยเก็บข้อมูล Volume ที่เก็บอิมเมจของวีเอ็ม focal-vol</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image138.png"><img alt="ภาพ ๑-98 เว็บเพจแสดงรายการ Floating IP" decoding="async" loading="lazy" src="images/image138.png" style="width:495px"/></a></div><figcaption>ภาพ ๑-98 เว็บเพจแสดงรายการ Floating IP</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image139.png"><img alt="ภาพ ๑-99 เว็บเพจแสดงรายการวีเอ็ม focal-vol หลังเกี่ยวข้องกับ Floating IP" decoding="async" loading="lazy" src="images/image139.png" style="width:504px"/></a></div><figcaption>ภาพ ๑-99 เว็บเพจแสดงรายการวีเอ็ม focal-vol หลังเกี่ยวข้องกับ Floating IP</figcaption></figure>
+
+<p>หลังจากที่ผู้ใช้รันวีเอ็มแล้ว ผู้ใช้สามารถดูรายละเอียดของ Volume ที่วีเอ็มใช้ได้ โดยเลือกแท็บ Volumes และแท็บย่อย Volumes ระบบจะแสดงรายการ Volume ดังภาพ ๑-97 ซึ่งจะเห็นว่ามี Volume ขนาด 10 GB ถูกสร้างขึ้นและถูกกำหนดให้เป็นอุปกรณ์ /dev/vda บนเครื่อง focal-vol</p>
+<p>ถัดจากนั้น ผู้ใช้จะสร้าง Floating IP 192.168.20.176 ดังภาพ ๑-98 และนำไอพีนั้นไปสร้างความเกี่ยวข้องกับ Fixed IP 10.50.11.220 ดังภาพที่ ๑-99</p>
+<p>หลังจากนั้น ผู้ใช้จะล็อกอินทางไกลจาก Local คอมพิวเตอร์เข้าสู่เครื่องวีเอ็ม focal-vol ดังภาพ ๑-100 และเมื่อใช้คำสั่ง df -h ดังภาพ ๑-101 จะเห็นว่า directory รูท (root) “/” ของไฟล์ซิสเต็มของวีเอ็มนั้นอยู่ใน partition /dev/vda1 ของอุปกรณ์ /dev/vda</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image140.png"><img alt="ภาพ ๑-100 หน้าจอแสดงการล็อกอินทางไกลของผู้ใช้สู่เครื่องวีเอ็ม focal-vol" decoding="async" loading="lazy" src="images/image140.png" style="width:496px"/></a></div><figcaption>ภาพ ๑-100 หน้าจอแสดงการล็อกอินทางไกลของผู้ใช้สู่เครื่องวีเอ็ม focal-vol</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image141.png"><img alt="ภาพ ๑-101 หน้าจอแสดงรายงานการใช้งานหน่วยเก็บข้อมูลของ focal-vol" decoding="async" loading="lazy" src="images/image141.png" style="width:338px"/></a></div><figcaption>ภาพ ๑-101 หน้าจอแสดงรายงานการใช้งานหน่วยเก็บข้อมูลของ focal-vol</figcaption></figure>
+
+<h3 id="sec-1-2-18">๑.2.18 การสร้าง Volume ข้อมูลและเชื่อมต่อ Volume ข้อมูลเข้ากับวีเอ็มแบบ Hot Plug</h3>
+<p>ในการใช้งานวีเอ็ม ผู้ใช้อาจต้องการสร้างเพิ่มอุปกรณ์เก็บข้อมูลเนื่องจากมีความต้องการที่จะเก็บข้อมูลมากขึ้นกว่าขนาดของอุปกรณ์ที่มีอยู่ ระบบโอเพนสแตคอนุญาตให้ผู้ใช้สร้างหน่วยเก็บข้อมูล Volume เพิ่มได้และผู้ใช้สามารถเชื่อมต่ออุปกรณ์ใหม่ได้ในขณะที่เครื่องวีเอ็มรันโดยไม่จำเป็นต้องปิดเครื่อง (shut off) หรือรีบูท (reboot) เครื่องใหม่ เราเรียกความสามารถเช่นนี้ว่า Hot Plug</p>
+<p>ในการสร้าง Volume ผู้ใช้ต้องเลือกแท็บ Volumes และแท็บย่อย Volumes และระบบจะแสดงเว็บเพจดังภาพ ๑-97 ผู้ใช้ต้องกดปุ่ม Create Volume ระบบจะแสดงเว็บเพจดังภาพ ๑-102 ในภาพ ผู้ใช้ใส่ชื่อ Volume Name เป็น data1 และกำหนดขนาดของหน่วยเก็บข้อมูล Volume เท่ากับ 1 GB ผู้ใช้จะสังเกตว่าระบบจะแสดงข้อมูล quota ในด้านขวาของเว็บเพจ และสุดท้ายผู้ใช้กดปุ่ม Create Volume</p>
+<p>หลังจากนั้นระบบจะแสดงเว็บเพจแสดงรายการ Volume ที่มีอยู่ใน Project ในภาพ ๑-103 ซึ่งผู้ใช้จะกดปุ่มขยายเมนูที่อยู่ถัดจากปุ่ม Edit Volume ในบรรทัดเดียวแสดงข้อมูลของ Volume data1 เมื่อเมนูขยายดังภาพแล้วให้เลือก Manage Attachments และระบบจะแสดงเว็บเพจดังภาพ ๑-104 ในเว็บเพจนั้น ผู้ใช้จะเลือกวีเอ็มที่จะนำ Volume ไปเชื่อมต่อแบบ Hot Plug ในช่อง Attach to Instance คือ focal-vol แล้วกดปุ่ม Attach Volume และระบบจะแสดงเว็บเพจในภาพ ๑-105 ในที่สุด ขอให้สังเกตว่าสถานะของ Volume เปลี่ยนจาก Available เป็น in-use</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image143.png"><img alt="ภาพ ๑-102 เว็บเพจแสดงการสร้าง Volume ใหม่" decoding="async" loading="lazy" src="images/image143.png" style="width:402px"/></a></div><figcaption>ภาพ ๑-102 เว็บเพจแสดงการสร้าง Volume ใหม่</figcaption></figure>
+
+<figure class="fig multi"><div class="fig-row"><a class="zoom" href="images/image144.png"><img alt="ภาพ ๑-103 เว็บเพจแสดงรายการ Volume ใน Project และเมนูจัดการ Volume" decoding="async" loading="lazy" src="images/image144.png" style="width:505px"/></a><a class="zoom" href="images/image145.png"><img alt="ภาพ ๑-103 เว็บเพจแสดงรายการ Volume ใน Project และเมนูจัดการ Volume" decoding="async" loading="lazy" src="images/image145.png" style="width:505px"/></a></div><figcaption>ภาพ ๑-103 เว็บเพจแสดงรายการ Volume ใน Project และเมนูจัดการ Volume</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image146.png"><img alt="ภาพ ๑-104 เว็บเพจแสดงการเชื่อมต่อ Volume เข้ากับวีเอ็ม" decoding="async" loading="lazy" src="images/image146.png" style="width:409px"/></a></div><figcaption>ภาพ ๑-104 เว็บเพจแสดงการเชื่อมต่อ Volume เข้ากับวีเอ็ม</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image149.png"><img alt="ภาพ ๑-105 เว็บเพจแสดงรายการและสถานะการใช้งานของ Volume ใน Project" decoding="async" loading="lazy" src="images/image149.png" style="width:484px"/></a></div><figcaption>ภาพ ๑-105 เว็บเพจแสดงรายการและสถานะการใช้งานของ Volume ใน Project</figcaption></figure>
+
+<p>ในการใช้งาน Volume ในเกสต์โอเอส ผู้ใช้จะต้องล็อกอินเข้าสู่วีเอ็ม focal-vol แล้วใช้คำสั่ง lsblk ของลินุกซ์แสดงรายการอุปกรณ์หน่วยเก็บข้อมูลแบบบล็อก ( Block Storage ) ในเกสต์โอเอส ผู้ใช้จะเห็นว่ามีอุปกรณ์ดิสก์ชื่อ vdb เพิ่มขึ้นมาในระบบดังภาพ ๑-106</p>
+<p>ในอันดับถัดไปผู้ใช้จะต้องใช้คำสั่ง fdisk ดังภาพ ๑-107 เพื่อสร้างดิสก์พาร์ทิชั่น (disk partition) /dev/vdb1 ซึ่งผู้ใช้จะป้อนข้อมูล “n” หมายถึงจะสร้างพาร์ทิชั่นใหม่บนอุปกรณ์ /dev/vdb และกด “p” เมื่อซอฟต์แวร์ให้เลือกระหว่าง p และ e และในตัวอย่างนี้ เมื่อซอฟต์แวร์ให้กำหนดค่า partition number และ first sector และ last sector ให้ผู้ใช้กด enter คือใช้ค่าดีฟอลต์ สุดท้ายให้ผู้ใช้กด “w” ดังภาพเพื่อบันทึกข้อกำหนดในอุปกรณ์</p>
+<p>เมื่อผู้ใช้ใช้คำสั่ง lsblk และ lsblk -f บน Command Line เกสต์โอเอสจะแสดงหน้าจอที่มีข้อมูลของดิสก์พาร์ทิชั่น /dev/vdb1 ดังภาพ ๑-108 ถัดจากนั้น ในภาพ ๑-109 ผู้ใช้จะใช้คำสั่ง mkfs.ext4 เพื่อฟอร์แมต (format) ดิสก์พาร์ทิชั่น /dev/vdb1 ให้ใช้ ext4 ฟอร์แมท และใช้คำสั่ง lsblk -f เพื่อรายงานสถานะดิสก์ฟอร์แมต</p>
+<p>สุดท้ายในภาพ ๑-110 ผู้ใช้จะสร้าง directory /data1 ในไฟล์ซิสเต็ม และใช้คำสั่ง mount เพื่อทำให้พาร์ทิชั่น /dev/vdb1 กลายเป็นส่วนหนึ่งของไฟล์ซิสเต็มที่สามารถเข้าถึงได้ทาง /data1</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image150.png"><img alt="ภาพ ๑-106 หน้าจอแสดงรายการหน่วยเก็บข้อมูลแบบบล็อก" decoding="async" loading="lazy" src="images/image150.png" style="width:316px"/></a></div><figcaption>ภาพ ๑-106 หน้าจอแสดงรายการหน่วยเก็บข้อมูลแบบบล็อก</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image151.png"><img alt="ภาพ ๑-107 หน้าจอแสดงการสร้าง partition /dev/vdb1" decoding="async" loading="lazy" src="images/image151.png" style="width:471px"/></a></div><figcaption>ภาพ ๑-107 หน้าจอแสดงการสร้าง partition /dev/vdb1</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image152.png"><img alt="ภาพ ๑-108 หน้าจอแสดงข้อมูลดิสก์พาร์ทิชั่นใหม่ /dev/vdb1" decoding="async" loading="lazy" src="images/image152.png" style="width:490px"/></a></div><figcaption>ภาพ ๑-108 หน้าจอแสดงข้อมูลดิสก์พาร์ทิชั่นใหม่ /dev/vdb1</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image153.png"><img alt="ภาพ ๑-109 หน้าจอแสดงการฟอร์แมตพาร์ทิชั่นและแสดงสถานะของดิสก์พาร์ทิชั่น" decoding="async" loading="lazy" src="images/image153.png" style="width:495px"/></a></div><figcaption>ภาพ ๑-109 หน้าจอแสดงการฟอร์แมตพาร์ทิชั่นและแสดงสถานะของดิสก์พาร์ทิชั่น</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image154.png"><img alt="ภาพ ๑-110 หน้าจอแสดงการเม้าท์ดิสก์พาร์ทิชั่นให้เป็นส่วนหนึ่งของไฟล์ซิสเต็มของเกสต์โอเอส" decoding="async" loading="lazy" src="images/image154.png" style="width:341px"/></a></div><figcaption>ภาพ ๑-110 หน้าจอแสดงการเม้าท์ดิสก์พาร์ทิชั่นให้เป็นส่วนหนึ่งของไฟล์ซิสเต็มของเกสต์โอเอส</figcaption></figure>
+
+<h3 id="sec-1-2-19">๑.2.19 การสร้างระบบเครือข่ายเสมือนใหม่และเชื่อมต่อเข้ากับวีเอ็มแบบ Hot Plug</h3>
+<p>หลังจากที่ใช้งานวีเอ็มไปสักพัก ผู้ใช้อาจต้องการเพิ่มระบบเครือข่ายเสมือนและเชื่อมต่อระบบเครือข่ายนั้นเข้ากับวีเอ็มแบบ Hot Plug (hot plug) คือไม่ต้องปิดหรือรีบูทวีเอ็มเพื่อที่จะใช้งานระบบเครือข่ายนั้น</p>
+<p>ในอันดับแรก ผู้ใช้ต้องสร้างระบบเครือข่ายภายในดังกล่าวก่อน โดยกดแท็บ Network และแท็บย่อย Networks เหมือนที่ได้บรรยายในตอน 7.2.1.14 แล้วกดปุ่ม Create Network ระบบจะแสดงเว็บเพจดังภาพ ๑-111 ซึ่งผู้ใช้จะตั้งชื่อระบบเครือข่ายเสมือนใหม่นี้ว่า internal1 และกดปุ่ม Next</p>
+<p>ระบบจะแสดงเว็บเพจดังภาพ ๑-112 ซึ่งผู้ใช้จะกำหนดค่า Subnet Name เป็น internal1-subnet และกำหนดค่า Network Address ให้เป็น 192.168.200.0/24 และเนื่องจากผู้ใช้จะใช้ระบบเครือข่ายนี้เพื่อการเชื่อมต่อภายในระหว่างวีเอ็มเท่านั้น ดังนั้นผู้ใช้จะไม่ใช้ระบบเครือข่ายนี้เชื่อมต่อกับเร้าเตอร์และจะเลือกเช็คถูกตรงกล่อง Disable Gateway ในภาพนี้ ถัดจากนั้นเมื่อผู้ใช้กดปุ่ม Next</p>
+<p>ระบบจะแสดงเว็บเพจดังภาพ ๑-113 ซึ่งผู้ใช้จะยกเลิกการเช็คเครื่องหมายถูกในกล่อง Enable DHCP เนื่องจากผู้ใช้จะกำหนดค่าไอพีแอดเดรสในเกสต์โอเอสด้วยตนเอง (<strong>หมายเหตุ</strong> ถึงแม้ว่าผู้ใช้จะไม่ใช้ DHCP ระบบโอเพนสแตคยังคงกำหนดค่าไอพีสำหรับการเชื่อมต่อระหว่างวีเอ็มกับระบบเครือข่ายนี้ให้ เพียงแต่จะไม่ใช้ DHCP protocol เข้าไปกำหนดค่าไอพีในเกสต์โอเอสให้เท่านั้น สุดท้ายเมื่อกดปุ่ม Create ระบบเครือข่ายเสมือน internal1 จะถูกสร้างขึ้น และโอเพนสแตคจะแสดงรายการระบบเครือข่ายเสมือนดังภาพ ๑-114)</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image155.png"><img alt="ภาพ ๑-111 เว็บเพจแสดงการสร้างและกำหนดชื่อระบบเครือข่ายเสมือนใหม่" decoding="async" loading="lazy" src="images/image155.png" style="width:417px"/></a></div><figcaption>ภาพ ๑-111 เว็บเพจแสดงการสร้างและกำหนดชื่อระบบเครือข่ายเสมือนใหม่</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image156.png"><img alt="ภาพ ๑-112 เว็บเพจแสดงการกำหนดค่าซับเน็ตของระบบเครือข่าย internal1" decoding="async" loading="lazy" src="images/image156.png" style="width:416px"/></a></div><figcaption>ภาพ ๑-112 เว็บเพจแสดงการกำหนดค่าซับเน็ตของระบบเครือข่าย internal1</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image157.png"><img alt="ภาพ ๑-113 เว็บเพจแสดงการกำหนดค่ารายละเอียดของซับเน็ตของระบบเครือข่าย internal1" decoding="async" loading="lazy" src="images/image157.png" style="width:347px"/></a></div><figcaption>ภาพ ๑-113 เว็บเพจแสดงการกำหนดค่ารายละเอียดของซับเน็ตของระบบเครือข่าย internal1</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image158.png"><img alt="ภาพ ๑-114 เว็บเพจแสดงรายการของระบบเครือข่ายเสมือนใน Project" decoding="async" loading="lazy" src="images/image158.png" style="width:453px"/></a></div><figcaption>ภาพ ๑-114 เว็บเพจแสดงรายการของระบบเครือข่ายเสมือนใน Project</figcaption></figure>
+
+<p>ในอันดับถัดไป ผู้ใช้จะเลือกแท็บ Compute และแท็บย่อย Instance และระบบจะแสดงรายการวีเอ็มดังภาพ ๑-115 ผู้ใช้จะขยายเมนูถัดจากปุ่ม Create Snapshot และเลือก Attach Interface ซึ่งระบบจะแสดงเว็บเพจดังภาพ ๑-116 ที่ผู้ใช้จะกำหนดค่าระบบเครือข่าย internal1 ในช่อง Network แล้วกดปุ่ม Attach Interface</p>
+<p>ผู้ใช้สามารถตรวจสอบสถานการณ์เชื่อมต่อได้โดยเรียกดูภาพ Topology ของระบบเครือข่ายและวีเอ็มใน Project ระบบจะแสดงภาพ Topology ดังภาพ ๑-117 นอกจากนั้น เมื่อผู้ใช้เลือกกดแท็บ Compute และแท็บย่อย Instances ระบบจะแสดงรายการวีเอ็มดังภาพ ๑-118 ซึ่งจะเห็นว่ามีข้อมูลไอพีของระบบเครือข่าย internal1 ปรากฏขึ้นที่บรรทัดข้อมูลของวีเอ็ม focal-vol</p>
+<p>เพื่อให้เกสต์โอเอสสามารถใช้งานระบบเครือข่าย internal1 ได้ ผู้ใช้จะล็อกอินเข้าสู่เครื่อง focal-vol และออกคำสั่งบน Command Line ดังภาพที่ ๑-119 ในภาพ ผู้ใช้จะใช้คำสั่งต่อไปนี้</p>
+<ol type="1">
+<li><p>คำสั่ง “ip link” จะแสดงรายละเอียดของเน็ตเวิร์คอินเตอร์เฟสที่มีอยู่ในระบบ ซึ่งจะเห็นว่ามีนิค (NIC) ens8 เป็นนิคใหม่ที่เพิ่งเชื่อมต่อเข้ามา</p></li>
+<li><p>คำสั่ง “sudo ip link set dev ens8 up” จะเปลื่ยนสถานะของนิค ens8 เป็น UP คือพร้อมให้บริการ</p></li>
+<li><p>คำสั่ง “sudo ip addr add 192.168.200.172/24 dev ens8” จะกำหนดค่าไอพีของ ens8 ให้เป็น 192.168.200.172 (หมายเหตุ ผู้ใช้จะต้องกำหนดค่าไอพีในเน็ตเวิร์คสแตคของเกสต์โอเอสให้ตรงกับที่โอเพนสแตคกำหนดให้ เนื่องจากค่าไอพีและแมคแอดเดรสของนิคจะถูกนำไปใช้ในการจัดการเน็ตเวิร์คของ Component นิวตรอน)</p></li>
+</ol>
+<p>หลังจากรันคำสั่งข้างต้นแล้วผู้ใช้สามารถใช้คำสั่ง “ip addr” เพื่อรายงานสถานะของนิคของเกสต์โอเอสดังภาพ ๑-120</p>
+<p>เพื่อทดสอบว่าระบบเครือข่าย internal1 ใช้งานได้ ผู้ใช้จะใช้วิธีเดียวกันกับที่ศึกษามาในตอนนี้ เชื่อมต่อแบบ Hot Plug ระบบเครือข่าย internal1 เข้ากับวีเอ็ม focal-2 ซึ่งหลังจากเชื่อมต่อแล้ว Component นิวตรอนของโอเพนสแตคจะกำหนดให้ network port ที่ internal1 เชื่อมต่อกับ focal-2 มีค่าไอพีเป็น 192.168.200.24 ดังภาพ ๑-121 ภาพที่ ๑-122 แสดง Topology ที่แสดงการเชื่อมต่อระหว่าง focal-vol และ focal-2 ด้วยระบบเครือข่ายเสมือน internal1</p>
+<p>ก่อนที่จะสามารถใช้งานระบบเครือข่ายได้ ผู้ใช้ต้องล็อกอินเข้าสู่วีเอ็ม focal-2 ดังภาพ ๑-123 และกำหนดค่าไอพีให้นิค ens7 ให้เป็น 192.168.200.24 และเปลี่ยนสถานะให้เป็น UP ดังภาพ ๑-124 แล้วหลังจากนั้น ผู้ใช้จะสามารถ ping ไอพี 192.168.200.172 ได้ ดังภาพ ๑-125</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image159.png"><img alt="ภาพ ๑-115 เว็บเพจแสดงการเชื่อมต่อระบบเครือข่ายเข้ากับวีเอ็มแบบ Hot Plug" decoding="async" loading="lazy" src="images/image159.png" style="width:568px"/></a></div><figcaption>ภาพ ๑-115 เว็บเพจแสดงการเชื่อมต่อระบบเครือข่ายเข้ากับวีเอ็มแบบ Hot Plug</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image160.png"><img alt="ภาพ ๑-116 เว็บเพจแสดงการเลือกระบบเครือข่ายเพื่อเชื่อมต่อกับวีเอ็ม" decoding="async" loading="lazy" src="images/image160.png" style="width:449px"/></a></div><figcaption>ภาพ ๑-116 เว็บเพจแสดงการเลือกระบบเครือข่ายเพื่อเชื่อมต่อกับวีเอ็ม</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image161.png"><img alt="ภาพ ๑-117 เว็บเพจแสดง Topology หลังจากต่อเชื่อมระบบเครือข่ายเข้ากับวีเอ็มแล้ว" decoding="async" loading="lazy" src="images/image161.png" style="width:180px"/></a></div><figcaption>ภาพ ๑-117 เว็บเพจแสดง Topology หลังจากต่อเชื่อมระบบเครือข่ายเข้ากับวีเอ็มแล้ว</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image162.png"><img alt="ภาพ ๑-118 เว็บเพจแสดงรายการวีเอ็มหลังจากที่เชื่อมต่อระบบเครือข่าย internal1" decoding="async" loading="lazy" src="images/image162.png" style="width:522px"/></a></div><figcaption>ภาพ ๑-118 เว็บเพจแสดงรายการวีเอ็มหลังจากที่เชื่อมต่อระบบเครือข่าย internal1</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image163.png"><img alt="ภาพ ๑-119 หน้าจอแสดงการใช้คำสั่งเพื่อกำหนดค่าไอพีให้กับ ens8" decoding="async" loading="lazy" src="images/image163.png" style="width:532px"/></a></div><figcaption>ภาพ ๑-119 หน้าจอแสดงการใช้คำสั่งเพื่อกำหนดค่าไอพีให้กับ ens8</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image164.png"><img alt="ภาพ ๑-120 หน้าจอแสดงค่าไอพีของนิคของเครื่อง focal-vol" decoding="async" loading="lazy" src="images/image164.png" style="width:452px"/></a></div><figcaption>ภาพ ๑-120 หน้าจอแสดงค่าไอพีของนิคของเครื่อง focal-vol</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image165.png"><img alt="ภาพ ๑-121 เว็บเพจแสดงรายการวีเอ็มพร้อมทั้งข้อมูลการเชื่อมต่อระบบเครือข่ายเสมือน" decoding="async" loading="lazy" src="images/image165.png" style="width:553px"/></a></div><figcaption>ภาพ ๑-121 เว็บเพจแสดงรายการวีเอ็มพร้อมทั้งข้อมูลการเชื่อมต่อระบบเครือข่ายเสมือน</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image166.png"><img alt="ภาพ ๑-122 เว็บเพจแสดง Topology ที่วีเอ็ม focal-vol และ focal-2 เชื่อมต่อกับระบบเครือข่าย internal1" decoding="async" loading="lazy" src="images/image166.png" style="width:181px"/></a></div><figcaption>ภาพ ๑-122 เว็บเพจแสดง Topology ที่วีเอ็ม focal-vol และ focal-2 เชื่อมต่อกับระบบเครือข่าย internal1</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image167.png"><img alt="ภาพ ๑-123 หน้าจอแสดงการล็อกอินเข้าสู่วีเอ็ม focal-2" decoding="async" loading="lazy" src="images/image167.png" style="width:469px"/></a></div><figcaption>ภาพ ๑-123 หน้าจอแสดงการล็อกอินเข้าสู่วีเอ็ม focal-2</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image168.png"><img alt="ภาพ ๑-124 หน้าจอแสดงการกำหนดค่าไอพีให้นิค ens7 ของวีเอ็ม focal-2" decoding="async" loading="lazy" src="images/image168.png" style="width:567px"/></a></div><figcaption>ภาพ ๑-124 หน้าจอแสดงการกำหนดค่าไอพีให้นิค ens7 ของวีเอ็ม focal-2</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image170.png"><img alt="ภาพ ๑-125 หน้าจอแสดงการ ping จากวีเอ็ม focal-2 ไปยัง focal-vol" decoding="async" loading="lazy" src="images/image170.png" style="width:347px"/></a></div><figcaption>ภาพ ๑-125 หน้าจอแสดงการ ping จากวีเอ็ม focal-2 ไปยัง focal-vol</figcaption></figure>
+
+<h3 id="sec-1-2-20">๑.2.20 การปรับเปลี่ยน quota ของ Project</h3>
+<p>ถึงจุดนี้ ถ้าผู้ใช้เข้าเช็คที่ Overview ของ Project Project-A ดังภาพ ๑-126 ผู้ใช้จะเห็นว่า จำนวน network port ใน Project นั้นใช้หมดแล้ว ซึ่งจะส่งผลให้ผู้ใช้ไม่สามารถใช้ระบบเครือข่ายได้อีก ซึ่งจะส่งผลกระทบให้ผู้ใช้ไม่สามารถสร้างวีเอ็มเพิ่มได้ด้วย (ถึงแม้ว่าจะมี quota อื่นเพียงพอก็ตาม) หากผู้ใช้ต้องการขยาย quota ผู้ใช้จะต้องแจ้งผู้ดูแลระบบให้ปรับ quota ให้</p>
+<p>หลังจากได้รับคำร้องขอแล้ว ผู้ดูแลระบบจะเลือกแท็บ identity และเลือกแท็บย่อย Projects ระบบจะแสดงเว็บเพจดังภาพ ๑-127 ผู้ใช้จะขยายเมนูถัดจากปุ่ม Manage Members และขยายเมนู แล้วเลือก Modify Quotas แล้วระบบจะแสดงเว็บเพจดังภาพ ๑-128 และกดปุ่ม Network แล้วหลังจากนั้น ผู้ใช้จะเปลี่ยนค่าในช่อง Ports ให้เป็น 200 และกดปุ่ม Save เพื่อบันทึก quota ใหม่</p>
+<p>ในภาพ ๑-129 เมื่อผู้ใช้ล็อกอินเข้าสู่ OpenStack Dashboard แล้วจะเห็นเว็บเพจ Overview ว่ามี quota network port เพิ่มขึ้น</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image171.png"><img alt="ภาพ ๑-126 เว็บเพจแสดงปริมาณการใช้งานทรัพยากรใน Project Project-A โดยสรุป" decoding="async" loading="lazy" src="images/image171.png" style="width:382px"/></a></div><figcaption>ภาพ ๑-126 เว็บเพจแสดงปริมาณการใช้งานทรัพยากรใน Project Project-A โดยสรุป</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image172.png"><img alt="ภาพ ๑-127 เว็บเพจแสดงรายละเอียดของ Project ในโอเพนสแตค" decoding="async" loading="lazy" src="images/image172.png" style="width:564px"/></a></div><figcaption>ภาพ ๑-127 เว็บเพจแสดงรายละเอียดของ Project ในโอเพนสแตค</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image173.png"><img alt="ภาพ ๑-128 เว็บเพจแสดงช่องให้ปรับเปลี่ยน quota ของทรัพยากรของ Project" decoding="async" loading="lazy" src="images/image173.png" style="width:394px"/></a></div><figcaption>ภาพ ๑-128 เว็บเพจแสดงช่องให้ปรับเปลี่ยน quota ของทรัพยากรของ Project</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image174.png"><img alt="ภาพ ๑-129 เว็บเพจแสดง Overview ของการใช้งานทรัพยากรของ Project Project-A" decoding="async" loading="lazy" src="images/image174.png" style="width:413px"/></a></div><figcaption>ภาพ ๑-129 เว็บเพจแสดง Overview ของการใช้งานทรัพยากรของ Project Project-A</figcaption></figure>
+
+<h3 id="sec-1-2-21">๑.2.21 การรันวีเอ็มจากเกสต์โอเอสอิมเมจใน Volume เก่า</h3>
+<p>ในอันดับถัดไป สมมุติว่าผู้ใช้ไม่ต้องการใช้งานวีเอ็ม focal-vol แล้ว และตัดสินใจลบวีเอ็มออกจากระบบ แต่เนื่องจากหน่วยเก็บข้อมูลที่เราใช้เก็บอิมเมจของเกสต์โอเอสเป็นหน่วยเก็บข้อมูล Volume ที่จะไม่ถูกลบเมื่อมีการลบวีเอ็ม</p>
+<p>ในภาพ ๑-130 ผู้ใช้ลบวีเอ็ม (Delete Instance) focal-vol ออกจาก Project หลังจากนั้น ผู้ใช้สามารถเรียกดูรายการหน่วยเก็บข้อมูล Volume ได้โดยเลือกแท็บ Volumes และแท็บย่อย Volumes ระบบจะแสดงรายการ Volume ดังภาพ ๑-131 ซึ่งจะมีสอง Volume และมีสถานะ Available ขอให้สังเกตว่า Volume ขนาด 10 GB เป็น Volume ที่เก็บข้อมูลดิสอิมเมจของเกสต์โอเอส</p>
+<p>สมมุติว่า ผู้ใช้ต้องการสร้างวีเอ็มใหม่และใช้ Volume ขนาด 10 GB ดังกล่าวเป็นเกสต์โอเอสอิมเมจอีกครั้งหนึ่ง ผู้ใช้ก็สามารถทำได้โดยเลือกแท็บ Compute และแท็บย่อย Instance แล้วกดปุ่ม Launch Instance อย่างที่เคยปฏิบัติในตอนที่ 7.2.1.14 ระบบจะแสดงเว็บเพจเพื่อให้ใส่รายละเอียดของวีเอ็มซึ่งผู้ใช้จะตั้งชื่อวีเอ็มใหม่นี้ว่า reuse-focal ดังภาพ ๑-132 หลังจากกด Next ในหน้า Source ในภาพ ๑-133 ในช่อง Select Boot Source ผู้ใช้จะเลือก Volume (แทนที่จะเป็น image ซึ่งเป็นค่าดีฟอลต์) หลังจากนั้น เว็บเพจของหน้า Source จะเปลี่ยนไปเป็นเว็บเพจดังภาพ ๑-134 ในเว็บเพจเดียวกันผู้ใช้จะต้องเลือกว่าจะใช้หน่วยเก็บข้อมูล Volume ใดเป็นอิมเมจของเกสต์โอเอส ซึ่งโอเพนสแตคจะแสดงรายการให้เลือกใต้หัวข้อ Available ซึ่งผู้ใช้จะเลือก Volume ขนาด 10 GB และระบบจะแสดงเว็บเพจในภาพ ๑-135</p>
+<p>ผู้ใช้จะกำหนดค่าอื่นๆเหมือนในตอน 7.2.1.14 ยกเว้นเมื่อถึงขั้นตอนในภาพ ๑-136 ที่ผู้ใช้จะเลือกให้นิคที่หนึ่งของวีเอ็มเชื่อมต่อกับระบบเครือข่ายเสมือน A-net-1 และนิคที่สองเชื่อมต่อกับ internal1 และหลังจากนั้นผู้ใช้จะทำเหมือนตอน 7.2.1.14 จนกระทั่งกดปุ่ม Launch Instance และระบบจะแสดงเว็บเพจดังภาพ ๑-137 ซึ่งจะปรากฏรายการข้อมูลของวีเอ็ม reuse-focal ขึ้น</p>
+<p>ขอให้สังเกตว่า Component นิวตรอนของโอเพนสแตคจะกำหนดค่าไอพีใหม่ให้กับวีเอ็ม reuse-focal ในทุกการเชื่อมต่อกับระบบเครือข่ายเสมือน ในภาพ ๑-137 ค่าไอพีที่กำหนดให้ reuse-focal จะต่างจากที่เคยกำหนดค่าให้ focal-vol ในอดีต ในภาพ ๑-138 ผู้ใช้จะกำหนดให้ Fixed IP 10.50.11.250 ของนิคที่หนึ่งของวีเอ็มมีความเกี่ยวข้อง (associate) กับ Floating IP 192.168.20.176</p>
+<p>ก่อนที่ผู้ใช้จะล็อกอินทางไกลไปยังวีเอ็มโดยใช้ Floating IP ดังกล่าว ผู้ใช้จะต้องลบข้อมูลตัวตนเก่าของคอมพิวเตอร์ที่ใช้ค่าไอพี 192.168.20.176 เดิม (เครื่อง focal-vol) ออกจากบันทึกของ Local คอมพิวเตอร์ก่อน ดังภาพที่ ๑-139 แล้วผู้ใช้จึงจะสามารถล็อกอินทางไกลเข้าใช้งานวีเอ็ม reuse-focal ด้วยไอพี 192.168.20.176 ได้ดังภาพ ๑-140</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image175.png"><img alt="ภาพ ๑-130 เว็บเพจแสดงรายการวีเอ็มใน Project Project-A ที่เพิ่งลบ focal-vol ออกไป" decoding="async" loading="lazy" src="images/image175.png" style="width:505px"/></a></div><figcaption>ภาพ ๑-130 เว็บเพจแสดงรายการวีเอ็มใน Project Project-A ที่เพิ่งลบ focal-vol ออกไป</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image176.png"><img alt="ภาพ ๑-131 เว็บเพจแสดงรายการหน่วยเก็บข้อมูล Volume ใน Project" decoding="async" loading="lazy" src="images/image176.png" style="width:506px"/></a></div><figcaption>ภาพ ๑-131 เว็บเพจแสดงรายการหน่วยเก็บข้อมูล Volume ใน Project</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image177.png"><img alt="ภาพ ๑-132 เว็บเพจแสดงการสร้างวีเอ็มและตั้งชื่อวีเอ็มใหม่" decoding="async" loading="lazy" src="images/image177.png" style="width:506px"/></a></div><figcaption>ภาพ ๑-132 เว็บเพจแสดงการสร้างวีเอ็มและตั้งชื่อวีเอ็มใหม่</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image178.png"><img alt="ภาพ ๑-133 เว็บเพจแสดงการกำหนด Boot Source ให้เป็น Volume" decoding="async" loading="lazy" src="images/image178.png" style="width:482px"/></a></div><figcaption>ภาพ ๑-133 เว็บเพจแสดงการกำหนด Boot Source ให้เป็น Volume</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image179.png"><img alt="ภาพ ๑-134 เว็บเพจหลังจากผู้ใช้เลือก Volume ในช่อง Select Boot Source" decoding="async" loading="lazy" src="images/image179.png" style="width:490px"/></a></div><figcaption>ภาพ ๑-134 เว็บเพจหลังจากผู้ใช้เลือก Volume ในช่อง Select Boot Source</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image180.png"><img alt="ภาพ ๑-135 เว็บเพจหลังจากผู้ใช้เลือก Volume ที่จะนำมาเป็น Disk Image ของวีเอ็ม reuse-focal" decoding="async" loading="lazy" src="images/image180.png" style="width:493px"/></a></div><figcaption>ภาพ ๑-135 เว็บเพจหลังจากผู้ใช้เลือก Volume ที่จะนำมาเป็น Disk Image ของวีเอ็ม reuse-focal</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image181.png"><img alt="ภาพ ๑-136 เว็บเพจแสดงการเชื่อมต่อระบบเครือข่ายสองเครือข่ายของวีเอ็ม" decoding="async" loading="lazy" src="images/image181.png" style="width:454px"/></a></div><figcaption>ภาพ ๑-136 เว็บเพจแสดงการเชื่อมต่อระบบเครือข่ายสองเครือข่ายของวีเอ็ม</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image182.png"><img alt="ภาพ ๑-137 เว็บเพจแสดงรายการวีเอ็มใน Project" decoding="async" loading="lazy" src="images/image182.png" style="width:479px"/></a></div><figcaption>ภาพ ๑-137 เว็บเพจแสดงรายการวีเอ็มใน Project</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image183.png"><img alt="ภาพ ๑-138 เว็บเพจแสดงการสร้างความเกี่ยวข้องกับ Floating IP ของวีเอ็ม" decoding="async" loading="lazy" src="images/image183.png" style="width:473px"/></a></div><figcaption>ภาพ ๑-138 เว็บเพจแสดงการสร้างความเกี่ยวข้องกับ Floating IP ของวีเอ็ม</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image184.png"><img alt="ภาพ ๑-139 หน้าจอแสดงการลบข้อมูลเฉพาะของเครื่องวีเอ็มที่เคยใช้ไอพี 192.168.20.176 ออกจาก Local" decoding="async" loading="lazy" src="images/image184.png" style="width:428px"/></a></div><figcaption>ภาพ ๑-139 หน้าจอแสดงการลบข้อมูลเฉพาะของเครื่องวีเอ็มที่เคยใช้ไอพี 192.168.20.176 ออกจาก Local</figcaption></figure>
+
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image185.png"><img alt="ภาพ ๑-140 หน้าจอแสดงการล็อกอินทางไกลเข้าสู่ reuse-focal ผ่าน Floating IP 192.168.20.176" decoding="async" loading="lazy" src="images/image185.png" style="width:533px"/></a></div><figcaption>ภาพ ๑-140 หน้าจอแสดงการล็อกอินทางไกลเข้าสู่ reuse-focal ผ่าน Floating IP 192.168.20.176</figcaption></figure>
+
+<h2 id="sec-1-3">๑.3 การใช้งานด้วย Command Line Interfaces</h2>
+<p>คำสั่งแบบ Command Line Interfaces คือคำสั่งที่ผู้ใช้สามารถสั่งงานให้โอเพนสแตคปฏิบัติงานในฟังก์ชันต่างๆได้จาก Command Line ของ Local คอมพิวเตอร์ของผู้ใช้หรือจากวีเอ็ม โดยที่ Local คอมพิวเตอร์หรือวีเอ็มนั้นต้องสามารถติดต่อสื่อสารกับเครื่องคอนโทรลเลอร์โฮสต์และเอนด์พอยต์ของ OpenStack Service บนเครื่องคอนโทรลเลอร์ได้ (ผู้ใช้อาจใช้วีเอ็มของเครื่องโอเพนสแตคเพื่อออกคำสั่ง Command Line ของโอเพนสแตคก็ได้) ในคำบรรยายต่อไปนี้เราจะเรียก Local คอมพิวเตอร์หรือวีเอ็มดังกล่าวว่า Client คอมพิวเตอร์ (Client computer)</p>
+<p>ผู้ใช้สามารถใช้คำสั่ง Command Line ในสถานการณ์ต่อไปนี้</p>
+<ol type="1">
+<li><p>ผู้ติดตั้งระบบโอเพนสแตคใช้คำสั่ง Command Line ในระหว่างติดตั้ง ยกตัวอย่างเช่นการสร้างเซอร์วิส Project สำหรับ OpenStack Service และการสร้างเอ็นด์พ้อยของ Component เหล่านั้น</p></li>
+<li><p>ผู้ดูแลระบบมักจะใช้คำสั่ง Command Line สร้างสคริปต์สำหรับการสั่งงานเป็นชุด (batch) หรืองานที่ซับซ้อน</p></li>
+<li><p>แอปพลิเคชันสามารถเรียกใช้คำสั่ง Command Line เมื่อมีความจำเป็นต้องใช้งานฟังก์ชันของโอเพนสแตคเพื่อสนับสนุนการประมวลผลของแอปพลิเคชัน เช่นเพิ่มวีเอ็ม หรือ Volume โดยอัตโนมัติ เป็นต้น</p></li>
+</ol>
+<blockquote>
+<p>ในอันดับถัดไป จะบรรยายการใช้ Command Line Interfaces ในสถานการณ์ต่อไปนี้</p>
+</blockquote>
+<h3 id="sec-1-3-1">๑.3.1 การสร้าง Client คอมพิวเตอร์และเตรียมพร้อมสำหรับรันคำสั่ง Command Line</h3>
+<p>ในอันดับแรก สมมุติว่าผู้ใช้ระบบโอเพนสแตคหรือผู้ดูแลระบบต้องการออกคำสั่งระบบโอเพนสแตคด้วย Command Line เครื่อง Client คอมพิวเตอร์ของผู้ใช้ต้องสามารถเข้าถึงเว็บไซต์ http://&lt;virtual IP address&gt;/horizon และสามารถ login เข้าถึงหน้า API Access ใน Project ของผู้ใช้ในโอเพนสแตคได้</p>
+<p>ในตัวอย่างต่อไปนี้ เราสมมุติว่าผู้ใช้สร้างวีเอ็มเครื่องหนึ่งในโอเพนสแตคชื่อ client1 ในภาพ ๑-141 ซึ่งจะใช้เป็นเครื่อง Ubuntu Linux สำหรับติดตั้งซอฟต์แวร์ Command Line Interface ของโอเพนสแตคเพื่อใช้ออกคำสั่ง Command Line ในบทนี้ สมมุติว่าเครื่อง client1 มี Floating IP address คือ 192.168.20.165 ผู้ใช้จะล็อกอินทางไกลจาก Local คอมพิวเตอร์ (เช่นโน๊ตบุ๊คของผู้ใช้) โดยใช้ซอฟต์แวร์ ssh และใช้คีย์​ KasiditOPS.pem</p>
+<div class="code"><div class="code-head"><span class="code-label">On a local computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ ssh  -i  ./KasiditOPS.pem   ubuntu@192.168.20.165</code></pre></div>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image187.png"><img alt="ภาพ ๑-141 เว็บเพจแสดงการสร้างวีเอ็มเป็น Client คอมพิวเตอร์" decoding="async" loading="lazy" src="images/image187.png" style="width:484px"/></a></div><figcaption>ภาพ ๑-141 เว็บเพจแสดงการสร้างวีเอ็มเป็น Client คอมพิวเตอร์</figcaption></figure>
+
+
+<h3 id="sec-1-3-2">๑.3.2 การสร้างและใช้งานสคริปต์สำหรับพิสูจน์ตัวตนของผู้ใช้ด้วย Command Line</h3>
+<p>หัวข้อนี้บรรยายวิธีการพิสูจน์ตัวตนของผู้ใช้ สองวิธี ดังนี้</p>
+<ol type="1">
+<li><p><strong>ผู้ใช้สร้างสคริปต์สำหรับพิสูจน์ตัวตน</strong></p></li>
+</ol>
+<p>ในกรณีของผู้ดูแลระบบ สมมุติว่าผู้ดูแลระบบมีบัญชีผู้ใช้คือ admin และพาสเวิร์ดคือ adminpassword ผู้ดูแลระบบสามารถสร้างไฟล์ myadmin-openrc.sh ด้วยตนเองดังนี้</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ vi  myadmin-openrc.sh
+$ cat myadmin-openrc.sh
+export OS_PROJECT_DOMAIN_NAME=default
+export OS_USER_DOMAIN_NAME=default
+export OS_PROJECT_NAME=admin
+export OS_USERNAME=admin
+export OS_PASSWORD=adminpassword
+export OS_AUTH_URL=http://controller:5000/v3
+export OS_IDENTITY_API_VERSION=3
+export OS_IMAGE_API_VERSION=2
+$</code></pre></div>
+<p>หลังจากนั้นให้ติดตั้ง OpenStack CLI interface ออกคำสั่ง source ./myadmin-openrc.sh สคริปต์ และเรียกใช้คำสั่ง เช่น openstack service list ข้างล่างเพื่อเช็คความถูกต้อง</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$
+$ sudo apt update
+$ sudo apt install -y python3-openstackclient
+$
+$ source ./myadmin-openrc.sh
+$ openstack service list
++----------------------------------+-----------+-----------+
+| ID                               | Name      | Type      |
++----------------------------------+-----------+-----------+
+| 238a8cd0569f413b809001df2872e200 | placement | placement |
+| 4fba1093c7d54cbb908a71e44239b214 | cinderv2  | volumev2  |
+| 551185e74a7748708365b8997410d1a8 | nova      | compute   |
+| 644c7a88463d488bae719f024465508b | keystone  | identity  |
+| ad5647196165433abeee295c97d60a42 | neutron   | network   |
+| b609b51419ad43bcbb41cf2b657ab128 | glance    | image     |
+| c3ef9fc395bd43f29d4f5d1ac5e38af5 | cinderv3  | volumev3  |
++----------------------------------+-----------+-----------+
+$</code></pre></div>
+<p>ในกรณีของผู้ใช้ธรรมดา เช่น A-user ผู้ใช้สามารถสร้างสคริปต์ด้วยตนเองได้เช่นไฟล์ myuser-openrc.sh ติดตั้ง OpenStack CLI interface ออกคำสั่ง source ไฟล์สคริปต์ แล้วออกคำสั่ง เช่น openstack server list เพื่อตรวจสอบความถูกต้อง คำสั่งดังกล่าวจะแสดงผลรายการวีเอ็มของ Project Project-A ซึ่ง A-user เป็นผู้ใช้</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ vi myuser-openrc.sh
+$ cat myuser-openrc.sh
+export OS_PROJECT_DOMAIN_NAME=default
+export OS_USER_DOMAIN_NAME=default
+export OS_PROJECT_NAME=Project-A
+export OS_USERNAME=A-user
+export OS_PASSWORD=A-user
+export OS_AUTH_URL=http://controller:5000/v3
+export OS_IDENTITY_API_VERSION=3
+export OS_IMAGE_API_VERSION=2
+$
+$ sudo apt update
+$ sudo apt install -y python3-openstackclient
+$
+$ openstack server list
+…</code></pre></div>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image189.png"><img alt="ภาพ ๑-142 เว็บเพจแสดงการดาวน์โหลดสคริปต์​ OpenStack RC file" decoding="async" loading="lazy" src="images/image189.png" style="width:481px"/></a></div><figcaption>ภาพ ๑-142 เว็บเพจแสดงการดาวน์โหลดสคริปต์​ OpenStack RC file</figcaption></figure>
+
+<ol start="2" type="1">
+<li><p><strong>ผู้ใช้ดาวน์โหลดไฟล์สคริปต์สำหรับพิสูจน์ตัวตนจาก OpenStack Dashboard</strong></p></li>
+</ol>
+<p>วิธีการนี้มีความปลอดภัยมากกว่าแบบแรกเพราะไม่มีการเขียนพาสเวิร์ดไว้ในสคริปต์ แต่ผู้ใช้จะต้องป้อนพาสเวิร์ดเมื่อใช้คำสั่ง source กับสคริปต์นั้น นอกจากนั้นถ้าผู้ใช้ใช้สคริปต์ที่ดาวน์โหลดมาบน Command Line เชลล์ใดแล้ว ผู้ใช้จะไม่สามารถใช้สคริปต์ที่สร้างขึ้นเองในเชลล์นั้นได้อีก</p>
+<p>ในตอนนี้ จะยกตัวอย่างกรณีที่ผู้ใช้คือผู้ดูแลระบบเพียงอย่างเดียว เพราะผู้ใช้ทุกคนจะใช้วิธีเดียวกัน หลังจากล็อกอินเข้าสู่บัญชีของผู้ดูแลระบบแล้ว ผู้ดูแลระบบจะเลือกแท็บ Project และ API Access แล้วระบบจะแสดงเว็บเพจดังภาพ ๑-142 ผู้ดูแลระบบต้องกดปุ่ม Download OpenStack RC File แล้วปุ่มจะแสดงเมนูดังภาพ ผู้ดูแลระบบต้องเลือก OpenStack RC File หลังจากนั้น OpenStack Dashboard จะดาวน์โหลดไฟล์ admin-openrc.sh มาที่ directory Download ของเบราว์เซอร์ (ในกรณีที่ผู้ใช้เป็น user ธรรมดาก็สามารถดาวน์โหลดไฟล์ xxx-openrc.sh โดยที่ xxx เป็นชื่อ project จาก API Access เว็บเพจของ project นั้นด้วยวิธีเดียวกัน)</p>
+<p>ในอันดับถัดไป ผู้ดูแลระบบจะต้องถ่ายโอนสำเนาของไฟล์ admin-openrc.sh จากเครื่องที่รันเบราว์เซอร์ไปยังเครื่อง Client หลังจากนั้น ผู้ดูแลระบบจะล็อกอินทางไกลเข้าสู่เครื่อง Client ติดตั้ง OpenStack CLI interface และใช้คำสั่ง source ./admin-openrc.sh</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$
+$ sudo apt update
+$ sudo apt install -y python3-openstackclient
+$
+$ source ./admin-openrc.sh
+Please enter your OpenStack Password for project admin as user admin:
+&lt;ใส่พาสเวิร์ด “adminpassword” &gt;
+$</code></pre></div>
+<p>ผู้ใช้สามารถใช้คำสั่งเพื่อทดสอบระบบ เช่นแสดงรายการวีเอ็มใน Project เป็นต้น (ในกรณีนี้จะเห็น Client วีเอ็ม)</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack server list
++----------------------+---------+--------+--------------------------+---------------------+------------+
+| ID                   | Name    | Status | Networks                 | Image               | Flavor     |
++----------------------+---------+--------+--------------------------+---------------------+------------+
+| 8a50691e-cf02-46a5-……| client1 | ACTIVE | provider1=192.168.20.165 | ubuntu-focal-server | m1.small.1 |
++----------------------+---------+--------+--------------------------+---------------------+------------+
+$</code></pre></div>
+<p>ต่อไปนี้จะบรรยายตัวอย่างการใช้งานคำสั่งโอเพนสแตค Command Line เพื่อปฏิบัติงานขั้นพื้นฐานเท่านั้น ผู้ใช้สามารถศึกษาการใช้งานในรายละเอียดด้วยตนเองได้ที่</p>
+<ol type="1">
+<li><p>เว็บไซต์ <a href="https://docs.openstack.org/python-openstackclient/latest/cli/index.html" rel="noopener" target="_blank">https://docs.openstack.org/python-openstackclient/latest/cli/index.html</a> หรือ</p></li>
+<li><p>หนังสือ OpenStack Cook Book เช่น (Jackson, 2018) เป็นต้น</p></li>
+</ol>
+<h3 id="sec-1-3-3">๑.3.3 การสร้าง Project ผู้ใช้ และบทบาท</h3>
+<p>หัวข้อนี้เป็นหัวข้อสำหรับผู้ดูแลระบบเท่านั้น สำหรับผู้ใช้ธรรมดาให้ข้ามไปหัวข้อ “การล็อกอินเข้าใช้งานและสร้างคู่คีย์” ในหัวข้อนี้ ผู้ดูแลระบบจะสร้าง Project ชื่อ Project-B และสร้างผู้ใช้ใหม่ชื่อ B-user ซึ่งจะกำหนดให้มีพาสเวิร์ดคือ B-user เหมือนกัน</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack project create --domain default --description "Project B" Project-B
++-------------+----------------------------------+
+| Field       | Value                            |
++-------------+----------------------------------+
+| description | Project B                        |
+| domain_id   | default                          |
+| enabled     | True                             |
+| id          | 27e97117aa73416997aef7de86ccbe0e |
+| is_domain   | False                            |
+| name        | Project-B                        |
+| options     | {}                               |
+| parent_id   | default                          |
+| tags        | []                               |
++-------------+----------------------------------+
+$ openstack user create --domain default --password B-user B-user
++---------------------+----------------------------------+
+| Field               | Value                            |
++---------------------+----------------------------------+
+| domain_id           | default                          |
+| enabled             | True                             |
+| id                  | aa21d4a4a4f744a390b1a1c3a4d01c5e |
+| name                | B-user                           |
+| options             | {}                               |
+| password_expires_at | None                             |
++---------------------+----------------------------------+
+$</code></pre></div>
+<p>ถัดไป ผู้ดูแลระบบจะแสดงรายการบทบาททั้งหมดในระบบ</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack role list
++----------------------------------+--------+
+| ID                               | Name   |
++----------------------------------+--------+
+| 0d65f16120dc4d75a66f6654c468de80 | reader |
+| 30e1d8f4305b45579cdddeeac364828c | admin  |
+| 46565ae3d6e240c09dc90ed73ae880c6 | member |
+| 4da42c8fd29e4f119a80917daa4eba4f | user   |
++----------------------------------+--------+
+$</code></pre></div>
+<p>ผู้ดูแลระบบ กำหนดให้ B-user เป็นสมาชิกของ Project-B และมีบทบาทเป็น user และเช็คสถานะการกำหนดค่า จะเห็นว่า B-user ถูกกำหนดให้เป็นสมาชิกของ Project 27e97117aa73416997aef7de86ccbe0e ซึ่งหมายถึง Project-B (อ่านเพิ่มที่ <a href="https://docs.openstack.org/keystone/latest/admin/cli-manage-projects-users-and-roles.html" rel="noopener" target="_blank">https://docs.openstack.org/keystone/latest/admin/cli-manage-projects-users-and-roles.html</a>)</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack role add --project Project-B --user B-user user
+$ openstack role assignment list --user B-user
+
++------+---------------------+-------+----------------------------------+--------+--------+-----------+
+| Role | User                | Group | Project                          | Domain | System | Inherited |
++------+---------------------+-------+----------------------------------+--------+--------+-----------+
+| 4d…….| aa21d4a4a4f744a3..  |       | 27e97117aa73416997aef7de86ccbe0e |        |        | False     |
++------+---------------------+-------+----------------------------------+--------+--------+-----------+
+$</code></pre></div>
+<p>ผู้ดูแลระบบสามารถสร้างและลบบทบาท ดังนี้</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack role create TestRole
++-------------+----------------------------------+
+| Field       | Value                            |
++-------------+----------------------------------+
+| description | None                             |
+| domain_id   | None                             |
+| id          | 401d0b07cf214afd897bda1392360d13 |
+| name        | TestRole                         |
+| options     | {}                               |
++-------------+----------------------------------+
+$ openstack role delete TestRole
+$</code></pre></div>
+<p>ผู้ดูแลระบบสามารถแสดงรายการ Project ทั้งหมดในระบบ ดังนี้</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack project list
++----------------------------------+-------------+
+| ID                               | Name        |
++----------------------------------+-------------+
+| 2159381d70ba483bb82928029bf68d15 | Project-A   |
+| 27e97117aa73416997aef7de86ccbe0e | Project-B   |
+| 2e32c517342346b3935720eae6318434 | admin       |
+| 6e6bb9abfdc048f18e0b19335161e948 | service     |
+| d540a81fe9bb45b2b9fef6036c242915 | demoproject |
++----------------------------------+-------------+
+$</code></pre></div>
+<p>ผู้ดูแลระบบสามารถเรียกดู quota ของแต่ละ Project แต่ต้องกำหนดว่าจะดู quota compute volume หรือ network โดยใช้คำสั่ง (ในตัวอย่างนี้จะดู quota compute) ดังนี้</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack quota list --compute --project Project-B
+
++-----------------------+-------+-----------+----------------+-----------------------------+------------
+| Project ID             | Cores | Fixed IPs | Injected Files | Injected File Content Bytes | Injected File
++-----------------------+-------+-----------+----------------+-----------------------------+------------
+| 2159381d70ba483bb8... |    16 |        -1 |              5 |                       10240 |
++-----------------------+-------+-----------+----------------+-----------------------------+------------
+...
+-------------+-----------+-----------+----------------+------+---------------+----------------------+
+  Path Bytes | Instances | Key Pairs | Metadata Items |  Ram | Server Groups | Server Group Members |
+-------------+-----------+-----------+----------------+------+---------------+----------------------+
+         255 |        10 |         5 |            128 | 8192 |            10 |                   10 |
+-------------+-----------+-----------+----------------+------+---------------+----------------------+
+$</code></pre></div>
+<p>ผู้ดูแลระบบสามารถกำหนดค่าพารามิเตอร์ของ quota ของ Project ได้ ยกตัวอย่างเช่นเปลี่ยนจำนวน Cores เป็น 10 และจำนวน VM instance เป็น 8 เป็นต้น ดังนี้</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack quota set --cores 10 --instances 8 Project-B
+$ openstack quota show Project-B
+
++-----------------------+-----------------------------------------------------------
+| Field                 | Value                                                                                                                                                                                      |
++-----------------------+-----------------------------------------------------------
+..
+| cores                 | 10                                                                                                                                                                                         |
+| fixed-ips             | -1                                                                                                                                                                                         |
+| floating-ips          | 50
+..                                                                                                                                                                                    |
+| instances             | 8                                                                                                                                                                                          |
+| key-pairs             | 100
+..
++-----------------------+-----------------------------------------------------------</code></pre></div>
+<h3 id="sec-1-3-4">๑.3.4 การ upload อิมเมจและสร้าง Flavor</h3>
+<p>หัวข้อนี้เป็นหัวข้อสำหรับผู้ดูแลระบบเท่านั้น สำหรับผู้ใช้ธรรมดาให้ข้ามไปหัวข้อ “การล็อกอินเข้าใช้งานและสร้างคู่คีย์” ในหัวข้อนี้ สมมุติว่าผู้ดูแลระบบต้องการเพิ่มดิสก์ image template เข้าสู่ Repository ของ Component แกลนซ์ เพื่อให้ผู้ใช้นำไปสร้างวีเอ็มต่อไป ผู้ดูแลระบบจะดาวน์โหลดอิมเมจจากเว็บไซต์แหล่งกำเนิดของอิมเมจเช่นที่ <a href="https://cloud-images.ubuntu.com" rel="noopener" target="_blank">https://cloud-images.ubuntu.com</a> มาเก็บที่เครื่อง Client แล้วจึงใช้คำสั่งของโอเพนสแตคเพื่อ upload เข้าสู่ Component แกลนซ์ โดยตั้งชื่อ image template นี้ว่า ubuntu-21.04-server และกำหนดให้เป็น public ให้ผู้ใช้ทุกคนใช้ได้</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ wget https://cloud-images.ubuntu.com/hirsute/current/hirsute-server-cloudimg-amd64.img
+…
+hirsute-server-cloudimg-amd64.i 100%[=============================&gt;] 551.25M  7.01MB/s in 74s
+
+2021-06-26 03:03:22 (7.43 MB/s) - ‘hirsute-server-cloudimg-amd64.img’ saved [578027520/578027520]
+$
+$ openstack image create "ubuntu-21.04-server"  \
+             --file ./hirsute-server-cloudimg-amd64.img \
+             --disk-format qcow2 --container-format bare \
+             --public
+
++------------------+----------------------------------------------------------------
+| Field            | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
++------------------+----------------------------------------------------------------
+| checksum         | a3b777b3029021bc901955d1dc8c2a04                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| container_format | bare                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| created_at       | 2021-06-26T03:13:10Z                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| disk_format      | qcow2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+..
+| name             | ubuntu-20.10-server                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| owner            | 2e32c517342346b3935720eae6318434                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+..
+| size             | 578027520                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| status           | active                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| updated_at       | 2021-06-26T03:13:13Z                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| virtual_size     | 2361393152                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| visibility       | public                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
++------------------+----------------------------------------------------------------</code></pre></div>
+<p>ผู้ดูแลระบบสามารถแสดงรายการอิมเมจ ดังนี้</p>
+<div class="code"><div class="code-head"><span class="code-label">Terminal</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack image list
++--------------------------------------+---------------------+--------+
+| ID                                   | Name                | Status |
++--------------------------------------+---------------------+--------+
+| 4aca7c9b-ce07-45fa-8505-a07a9f56ffb4 | cirros              | active |
+| 2b0e37e0-6d9a-499a-9f7f-fdd605f16056 | ubuntu-21.04-server | active |
+| 30e10a77-b7d4-4f11-86e9-6a08976aca00 | ubuntu-focal-server | active |
++--------------------------------------+---------------------+--------+
+$</code></pre></div>
+<p>ในกรณีที่ ผู้ดูแลระบบต้องการกำหนด Specification ของวีเอ็มเพิ่ม ผู้ดูแลระบบสามารถเรียกดูรายการ Flavor ที่มีอยู่ และเพิ่ม Flavor ใหม่ดังนี้</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack flavor list
+
++----------------------+------------+------+------+-----------+-------+-----------+
+| ID                   | Name       |  RAM | Disk | Ephemeral | VCPUs | Is Public |
++----------------------+------------+------+------+-----------+-------+-----------+
+| 0                    | m1.nano    |   64 |    1 |         0 |     1 | True      |
+| 1                    | m1.mini    |  512 |    1 |         0 |     1 | True      |
+| 311c5ab8-4a31-4...   | m1.small.1 | 1024 |    8 |         0 |     2 | True      |
++----------------------+------------+------+------+-----------+-------+-----------+
+
+$ openstack flavor create --vcpus 2 --ram 2048 --disk 20 m1.small.2 –public
+
++----------------------------+--------------------------------------+
+| Field                      | Value                                |
++----------------------------+--------------------------------------+
+| OS-FLV-DISABLED:disabled   | False                                |
+| OS-FLV-EXT-DATA:ephemeral  | 0                                    |
+| disk                       | 20                                   |
+| id                         | bf186b28-acbc-47c9-967f-be68c3e5bdb7 |
+| name                       | m1.small.2                           |
+| os-flavor-access:is_public | True                                 |
+| properties                 |                                      |
+| ram                        | 2048                                 |
+| rxtx_factor                | 1.0                                  |
+| swap                       |                                      |
+| vcpus                      | 2                                    |
++----------------------------+--------------------------------------+</code></pre></div>
+<h3 id="sec-1-3-5">๑.3.5 การล็อกอินเข้าใช้งานและสร้างคู่คีย์</h3>
+<p>ในการใช้งาน Command Line ในฐานะของ B-user ผู้ใช้ต้องล็อกอินเป็น B-user ด้วย Dashboard และดาวน์โหลดไฟล์ OpenStack RC ดังที่ได้แสดงก่อนหน้า</p>
+<p>สมมุติว่า ผู้ใช้ได้ทำดังกล่าวแล้วและได้ถ่ายโอนไฟล์ Project-B-openrc.sh ไปที่เครื่อง Client แล้ว ผู้ใช้จะต้องติดตั้ง OpenStack CLI Interface และใช้คำสั่ง source เพื่อสร้าง Session สำหรับสั่งงานโอเพนสแตคภายใต้ผู้ใช้ B-user (ซึ่งผู้ใช้จะใส่รหัสผ่านคือ B-user ในตัวอย่างนี้)</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$
+$ sudo apt update
+$ sudo apt install -y python3-openstackclient
+$
+$ source ./Project-B-openrc.sh
+Please enter your OpenStack Password for project Project-B as user B-user:
+&lt;ป้อน B-user&gt;</code></pre></div>
+<p>ถ้าต้องการ ผู้ใช้สามารถคำสั่ง OpenStack CLI สร้างคู่คีย์ เช่น ชื่อ B-key และเก็บไพรเวทคีย์ไว้ในไฟล์ B-key.pem ผู้ใช้จะต้องเปลี่ยน permission flag ให้เป็น 0600 (เพราะค่าดีฟอลต์ permission นั้นเปิดเกินไปและ SSH Protocol จะไม่อนุญาตให้ใช้) ดังนี้</p>
+<div class="code"><div class="code-head"><span class="code-label">Terminal</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack keypair create B-key &gt; B-key.pem
+$ openstack keypair list
+
++-------+-------------------------------------------------+
+| Name  | Fingerprint                                     |
++-------+-------------------------------------------------+
+| B-key | 83:16:87:ec:42:75:5d:36:ba:dc:b0:75:3a:78:fa:bb |
++-------+-------------------------------------------------+
+
+$ chmod 600 B-key.pem</code></pre></div>
+<p>หรือ ผู้ใช้สามารถสร้างคู่คีย์เองชื่อ myid_rsa และ myid_rsa.pub และ upload คีย์สาธารณะ myid_rsa.pub สู่ระบบโอเพนสแตคก็ได้ ดังนี้</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ ssh-keygen -t rsa
+
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/ubuntu/.ssh/id_rsa): /home/ubuntu/myid_rsa
+Enter passphrase (empty for no passphrase): &lt;ป้อน vasabilab&gt;
+Enter same passphrase again:
+Your identification has been saved in /home/ubuntu/myid_rsa
+Your public key has been saved in /home/ubuntu/myid_rsa.pub
+The key fingerprint is:
+SHA256:UHpM2qFQJP1kghhrvjKwtu9jDbBGoJ3mWDI9kIUIfeo ubuntu@client1
+The key's randomart image is:
++---[RSA 3072]----+
+|+=ooo=o +        |
+|* o.oooOo.       |
+|o+o+  ==+        |
+|+=O    o.        |
+|oO+.    S        |
+|o+Eo             |
+|=.. o            |
+|.o.o .           |
+| .+o.            |
++----[SHA256]-----+
+$
+$ openstack keypair create --public-key ./myid_rsa.pub mykey
+
++-------------+-------------------------------------------------+
+| Field       | Value                                           |
++-------------+-------------------------------------------------+
+| fingerprint | 7f:b1:d8:60:91:f1:a7:d2:dd:c5:29:c4:a4:ef:c7:8d |
+| name        | mykey                                           |
+| user_id     | aa21d4a4a4f744a390b1a1c3a4d01c5e                |
++-------------+-------------------------------------------------+
+$
+$ openstack keypair list
+
++-------+-------------------------------------------------+
+| Name  | Fingerprint                                     |
++-------+-------------------------------------------------+
+| B-key | 83:16:87:ec:42:75:5d:36:ba:dc:b0:75:3a:78:fa:bb |
+| mykey | 7f:b1:d8:60:91:f1:a7:d2:dd:c5:29:c4:a4:ef:c7:8d |
++-------+-------------------------------------------------+
+$</code></pre></div>
+<h3 id="sec-1-3-6">๑.3.6 การสร้างระบบเครือข่ายภายในและซับเน็ต</h3>
+<p>ในอันดับถัดไป ผู้ใช้จะสร้างระบบเครือข่ายภายใน เร้าเตอร์ และเชื่อมต่อเร้าเตอร์ กับระบบเครือข่ายภายในและเครือข่ายภายนอก</p>
+<p>ผู้ใช้สร้างระบบเครือข่ายเสมือนชื่อ B-net-1 ดังนี้</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack network create B-net-1
+..
+$ openstack network list
++------------------------------+-----------+--------------------------------------+
+| ID                           | Name      | Subnets                              |
++------------------------------+-----------+--------------------------------------+
+| acfadb67-b51a-47b8-8149-...  | provider1 | 6e6e3b57-3e88-495a-9201-e279a765e2eb |
+| d8e4b5c3-2f37-4c2a-8fb3-...  | B-net-1   | ffa940ed-d90e-45e0-ad25-7ca3f9e99c9b |
++------------------------------+-----------+--------------------------------------+</code></pre></div>
+<p>หลังจากนั้น สร้างซับเน็ตชื่อ B-net-1-subnet สำหรับเครือข่าย B-net-1 กำหนดให้ซับเน็ตแอดเดรสเป็น 192.10.112.0/24 ดังนี้</p>
+<div class="code"><div class="code-head"><span class="code-label">Terminal</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack subnet create --subnet-range 192.10.112.0/24 \
+            --network B-net-1 --dns-nameserver 8.8.8.8 B-net-1-subnet
+$ openstack subnet list
+
++----------------------+----------------+------------------------+-----------------+
+| ID                   | Name           | Network                | Subnet          |
++----------------------+----------------+------------------------+-----------------+
+| 6e6e3b57-3e88-495... | provider1-v4   | acfadb67-b51a-47...    | 192.168.20.0/24 |
+| ffa940ed-d90e-45e... | B-net-1-subnet | d8e4b5c3-2f37-4c...    | 192.10.112.0/24 |
++----------------------+----------------+------------------------+-----------------+</code></pre></div>
+
+<h3 id="sec-1-3-7">๑.3.7 การสร้างเร้าเตอร์และเชื่อมต่อเร้าเตอร์กับระบบเครือข่าย</h3>
+<p>ในอันดับถัดไป ผู้ใช้จะสร้างเร้าเตอร์ชื่อ B-router-1</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack router create B-router-1
+..
+$ openstack router list
+
++----------------------+------------+--------+-------+----------------------------+
+| ID                   | Name       | Status | State | Project                    |
++----------------------+------------+--------+-------+----------------------------+
+| 99292fc5-be9e-4...   | B-router-1 | ACTIVE | UP    | 27e97117aa73416997aef...   |
++----------------------+------------+--------+-------+----------------------------+</code></pre></div>
+<p>และเชื่อมต่อเร้าเตอร์นั้น เข้ากับระบบเครือข่ายเสมือนภายนอก Provider1 และระบบเครือข่ายเสมือน B-net-1</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack router set B-router-1 --external-gateway provider1
+$ openstack router add subnet B-router-1 B-net-1-subnet</code></pre></div>
+<p>ผู้ใช้สามารถเช็คการเชื่อมต่อโดยใช้คำสั่ง openstack router show ดังนี้</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack router show B-router-1 | grep gateway
+
+| external_gateway_info   | {"network_id": "acfadb67-b51a-47b8-8149-afb2d879e36b", "external_fixed_ips": [{"subnet_id": "6e6e3b57-3e88-495a-9201-e279a765e2eb", "ip_address": "192.168.20.183"}], "enable_snat": true} |
+
+$ openstack router show B-router-1 | grep interface
+
+| interfaces_info         | [{"port_id": "6fba3960-8b56-4a1c-ab52-4242c7ff5b9c", "ip_address": "192.10.112.1", "subnet_id": "ffa940ed-d90e-45e0-ad25-7ca3f9e99c9b"}]                                                   |</code></pre></div>
+<p>หรือล็อกอินเข้าสู่ Dashboard และเรียกดู Topology ของระบบเครือข่าย ดังภาพ ๑-143</p>
+<figure class="fig"><div class="fig-row"><a class="zoom" href="images/image190.png"><img alt="ภาพ ๑-143 เว็บเพจแสดง Topology ของระบบเครือข่ายของ Project Project-B" decoding="async" loading="lazy" src="images/image190.png" style="width:135px"/></a></div><figcaption>ภาพ ๑-143 เว็บเพจแสดง Topology ของระบบเครือข่ายของ Project Project-B</figcaption></figure>
+
+<h3 id="sec-1-3-8">๑.3.8 การสร้างกลุ่มกฎรักษาความปลอดภัย ICMP-SSH-HTTP-HTTPS</h3>
+<p>ผู้ใช้จะสร้างกลุ่มกฎรักษาความปลอดภัยที่อนุญาตให้คอมพิวเตอร์ภายนอกสามารถติดต่อกับวีเอ็มด้วยโพรโตคอล ICMP, SSH, HTTP และ HTTPS ดังนี้</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack security group create icmp-ssh-http-https
+..
+$ openstack security group rule create --proto icmp icmp-ssh-http-https
+..
+$ openstack security group rule create --proto tcp --dst-port 22 \
+       icmp-ssh-http-https
+..
+$ openstack security group rule create --proto tcp --dst-port 80 \
+       icmp-ssh-http-https
+..
+$ openstack security group rule create --proto tcp --dst-port 443 \
+       icmp-ssh-http-https
+..
+$</code></pre></div>
+<p>และเรียกดูรายการของกฎในกลุ่ม icmp-ssh-http-https ดังนี้</p>
+<div class="code"><div class="code-head"><span class="code-label">Terminal</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack security group rule list icmp-ssh-http-https
+
++----------------------+-------------+-----------+-----------+------------+-----------------------+
+| ID                   | IP Protocol | Ethertype | IP Range  | Port Range | Remote Security Group |
++----------------------+-------------+-----------+-----------+------------+-----------------------+
+| 03e157e9-ad2e-...    | None        | IPv6      | ::/0      |            | None                  |
+| 0e24d688-3093-...    | tcp         | IPv4      | 0.0.0.0/0 | 80:80      | None                  |
+| 630aa2b8-6863-...    | tcp         | IPv4      | 0.0.0.0/0 | 443:443    | None                  |
+| a144edf2-dc61-...    | tcp         | IPv4      | 0.0.0.0/0 | 22:22      | None                  |
+| b1079864-1e74-...    | None        | IPv4      | 0.0.0.0/0 |            | None                  |
+| bd50eb98-f5ef-...    | icmp        | IPv4      | 0.0.0.0/0 |            | None                  |
++----------------------+-------------+-----------+-----------+------------+-----------------------+</code></pre></div>
+<h3 id="sec-1-3-9">๑.3.9 การรันวีเอ็ม</h3>
+<p>ก่อนที่จะสร้างวีเอ็มและรันวีเอ็ม ผู้ใช้จะสร้างไฟล์สำหรับให้คำสั่งสร้างวีเอ็มใช้คือไฟล์ config.file ซึ่งมีรหัสพาสเวิร์ดที่ผู้ใช้จะใช้เมื่อล็อกอินเข้าสู่วีเอ็ม ในอันดับถัดไปผู้ใช้จะรันวีเอ็มสองวีเอ็ม (ผู้ใช้สามารถกำหนดค่าแบบอื่นดูดูจากเว็บไซต์ <a href="https://docs.cloud-init.io/en/latest/" rel="noopener" target="_blank">cloud-init documentation</a> ได้)</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ cat config.file
+#cloud-config
+users:
+  - name: ubuntu
+chpasswd:
+  list: |
+    ubuntu: vasabilab
+  expire: False
+ssh_pwauth: True
+$</code></pre></div>
+<p>ในวีเอ็มแรก ผู้ใช้จะสร้างและรันวีเอ็มชื่อ B-focal-1 โดยมีรายละเอียดดังนี้</p>
+<ol type="1">
+<li><p>--flavor m1.small.1 : ใช้ Flavor m1.small.1 (2 vcpus, 1 GB Ram, 8 GB disk)</p></li>
+<li><p>--image ubuntu-focal-server : เกสต์โอเอสคือ Ubuntu 20.04 Server และใช้ Local storage บนเครื่อง compute host ที่รันวีเอ็มเก็บอิมเมจ เมื่อลบวีเอ็มอิมเมจนี้จะถูกลบไปด้วย</p></li>
+<li><p>--key-name B-key : ใช้คีย์ SSH Key คือ B-key.pem ล็อกอินได้</p></li>
+<li><p>--network B-net-1 : เชื่อมต่อกับระบบเครือข่ายเสมือน B-net-1</p></li>
+<li><p>--security-group icmp-ssh-http-https : ใช้กลุ่มกฎรักษาความปลอดภัย icmp-ssh-http-https</p></li>
+<li><p>--user-data ./config.file : กำหหนดให้ใช้พาสเวิร์ด ตามที่กำหนดในไฟล์ config.file</p></li>
+<li><p>--wait : ให้รอจนกว่าการสร้างจะเสร็จจึงกลับสู่ Command Line</p></li>
+<li><p>ให้มีชื่อว่า B-focal-1</p></li>
+</ol>
+<p>เมื่อการสร้างวีเอ็มหลังจากกดปุ่มเอ็นเตอร์เสร็จแล้ว โอเพนสแตคจะรายงานสถานะของวีเอ็มบนหน้าจอ</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack server create --flavor m1.small.1 \
+  --image ubuntu-focal-server \
+  --key-name B-key \
+  --network B-net-1 \
+  --security-group icmp-ssh-http-https \
+  --user-data ./config.file \
+  --wait \
+  B-focal-1
+
++-----------------------------+------------------------------------------------------------+
+| Field                       | Value                                                      |
++-----------------------------+------------------------------------------------------------+
+| OS-DCF:diskConfig           | MANUAL                                                     |
+| OS-EXT-AZ:availability_zone | nova                                                       |
+| OS-EXT-STS:power_state      | Running                                                    |
+| OS-EXT-STS:task_state       | None                                                       |
+| OS-EXT-STS:vm_state         | active                                                     |
+| OS-SRV-USG:launched_at      | 2021-06-26T16:35:12.000000                                 |
+| OS-SRV-USG:terminated_at    | None                                                       |
+| addresses                   | B-net-1=192.10.112.75                                      |
+| adminPass                   | LSQXeXBf2k7b                                               |
+| image                       | ubuntu-focal-server (30e10a77-b7d4-4f11-86e9-6a08976aca00) |
+| key_name                    | B-key                                                      |
+| name                        | B-focal-1                                                  |
+| progress                    | 0                                                          |
+| project_id                  | 27e97117aa73416997aef7de86ccbe0e                           |
+| properties                  |                                                            |
+| security_groups             | name='icmp-ssh-http-https'                                 |
+| status                      | ACTIVE                                                     |
+| updated                     | 2021-06-26T16:35:12Z                                       |
+| user_id                     | aa21d4a4a4f744a390b1a1c3a4d01c5e                           |
+| volumes_attached            |                                                            |
++-----------------------------+------------------------------------------------------------+</code></pre></div>
+<p>ผู้ใช้จะรันวีเอ็มเครื่องที่สอง ซึ่งคำสั่งที่ใช้รันจะแตกต่างจากของวีเอ็มแรกดังนี้</p>
+<ol type="1">
+<li><p>--image ubuntu-21.04-server : ใช้อิมเมจของ Ubuntu 21.04 Server เป็นเกสต์โอเอส</p></li>
+<li><p>--boot-from-volume 10 : กำหนดให้โอเพนสแตคสร้างหน่วยเก็บข้อมูล Volume ขนาด 10 GB เพื่อเก็บ Disk Image ของเกสต์โอเอส เมื่อลบวีเอ็ม อิมเมจนี้จะยังคงอยู่ในหน่วยเก็บข้อมูล Volume ของโอเพนสแตค</p></li>
+<li><p>B-ub2104-1 : ชื่อวีเอ็ม</p></li>
+</ol>
+<p>พารามิเตอร์ที่เหลือนั้นเหมือนกับคำสั่งรันวีเอ็มแรก</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack server create --flavor m1.small.1 \
+  --image ubuntu-21.04-server \
+  --boot-from-volume 10 \
+  --key-name B-key \
+  --network B-net-1 \
+  --security-group icmp-ssh-http-https \
+  --user-data ./config.file \
+  --wait \
+  B-ub2104-1
+
++-----------------------------+----------------------------------------------------------+
+| Field                       | Value                                                    |
++-----------------------------+----------------------------------------------------------+
+| OS-DCF:diskConfig           | MANUAL                                                   |
+| OS-EXT-AZ:availability_zone | nova                                                     |
+| OS-EXT-STS:power_state      | Running                                                  |
+| OS-EXT-STS:vm_state         | active                                                   |
+..
+| addresses                   | B-net-1=192.10.112.223                                   |
+| flavor                      | m1.small.1 (311c5ab8-4a31-401c-a352-52881be1fbbf)        |
+| hostId                      | efc7a98885aba2723da8e7aaa9e1b09ef4be24c0d9250ad6e8a4889a |
+| id                          | 8b5c994c-b0d2-4083-8fa0-f39ca739bb0a                     |
+| image                       |                                                          |
+| key_name                    | B-key                                                    |
+| name                        | B-ub2104-1                                               |
+| progress                    | 0                                                        |
+| project_id                  | 27e97117aa73416997aef7de86ccbe0e                         |
+| properties                  |                                                          |
+| security_groups             | name='icmp-ssh-http-https'                               |
+| status                      | ACTIVE                                                   |
+| updated                     | 2021-06-27T15:21:30Z                                     |
+| user_id                     | aa21d4a4a4f744a390b1a1c3a4d01c5e                         |
+| volumes_attached            | id='7737b233-a4fd-4325-9382-abd2849b36e2'                |
++-----------------------------+----------------------------------------------------------+
+
+$</code></pre></div>
+<p>ผู้ใช้สามารถใช้คำสั่งข้างล่างเพื่อเช็คว่าวีเอ็มใช้ Volume เพื่อเก็บ Disk Image ซึ่งจะเห็นได้ว่าโอเพนสแตคสร้าง Volume ขนาด 10 GB ซึ่งถูกนำไปใช้เก็บ Boot Image ของวีเอ็ม เกสต์โอเอสจะมองเห็น Volume นี้เป็นอุปกรณ์ /dev/vda</p>
+<div class="code"><div class="code-head"><span class="code-label">Terminal</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack volume list
++-----------------------------------+------+--------+------+-------------------------------------+
+| ID                                | Name | Status | Size | Attached to                         |
++-----------------------------------+------+--------+------+-------------------------------------+
+| 7737b233-a4fd-4325-9382-abd2849b..|      | in-use |   10 | Attached to B-ub2104-1 on /dev/vda  |
++-----------------------------------+------+--------+------+-------------------------------------+
+$</code></pre></div>
+<h3 id="sec-1-3-10">๑.3.10 การสร้าง Floating IP และสร้างความเกี่ยวข้องกับวีเอ็ม</h3>
+<p>หลังจากที่ผู้ใช้รันวีเอ็มทั้งสองแล้ว ถ้าผู้ใช้ต้องการล็อกอินทางไกลเข้าสู่วีเอ็ม ผู้ใช้จะต้องสร้าง Floating IP และสร้างความเกี่ยวข้องของไอพีนั้นกับวีเอ็ม ในอันดับแรกผู้ใช้สามารถสร้าง Floating IP ดังนี้</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack floating ip create provider1
+..
+$ openstack floating ip list
+
++--------------------------------------+---------------------+------------------+------+----------
+| ID                                   | Floating IP Address | Fixed IP Address | Port | Floating
++--------------------------------------+---------------------+------------------+------+----------
+| e42f15a6-cffd-438b-b546-84383c22645e | 192.168.20.164      | None             | None | acfadb67-
++--------------------------------------+---------------------+------------------+------+----------
+..
+----------------------------+----------------------------------+
+Network                     | Project                          |
+----------------------------+----------------------------------+
+b51a-47b8-8149-afb2d879e36b | 27e97117aa73416997aef7de86ccbe0e |
+----------------------------+----------------------------------+
+
+$</code></pre></div>
+<p>Floating IP ที่ได้รับจัดสรรคือ 192.168.20.164 หลังจากนั้นผู้ใช้จะออกคำสั่งให้ระบบโอเพนสแตคแสดงรายการวีเอ็ม เพื่อเลือกวีเอ็มที่จะสร้างความเกี่ยวข้อง</p>
+<div class="code"><div class="code-head"><span class="code-label">Terminal</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack server list
++--------------------------------------+------------+--------+------------------------+-----------
+| ID                                   | Name       | Status | Networks               | Image
++--------------------------------------+------------+--------+------------------------+-----------
+| 8b5c994c-b0d2-4083-8fa0-f39ca739bb0a | B-ub2104-1 | ACTIVE | B-net-1=192.10.112.223 |
+| e1140e20-01fe-4c2a-82e4-4f04b75a592e | B-focal-1  | ACTIVE | B-net-1=192.10.112.75  | ubuntu-foc
++--------------------------------------+------------+--------+------------------------+-----------
+..
+----------+------------+
+          | Flavor     |
+----------+------------+
+          | m1.small.1 |
+al-server | m1.small.1 |
+----------+------------+
+$</code></pre></div>
+<p>หลังจากนั้น ผู้ใช้จะสร้างความเกี่ยวข้องของ Floating IP 192.168.20.164 กับวีเอ็ม B-focal-1</p>
+<div class="code"><div class="code-head"><span class="code-label">Terminal</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack server add floating ip B-focal-1 192.168.20.164
+$ openstack server list
++--------------------------------------+------------+--------+------------------------------------
+| ID                                   | Name       | Status | Networks
++--------------------------------------+------------+--------+------------------------------------
+| 8b5c994c-b0d2-4083-8fa0-f39ca739bb0a | B-ub2104-1 | ACTIVE | B-net-1=192.10.112.223
+| e1140e20-01fe-4c2a-82e4-4f04b75a592e | B-focal-1  | ACTIVE | B-net-1=192.10.112.75, 192.168.20.1
++--------------------------------------+------------+--------+------------------------------------
+..
+---+---------------------+------------+
+   | Image               | Flavor     |
+---+---------------------+------------+
+   |                     | m1.small.1 |
+64 | ubuntu-focal-server | m1.small.1 |
+---+---------------------+------------+</code></pre></div>
+<p>ผู้ใช้สามารถล็อกอินทางไกลเข้าสูวีเอ็ม B-focal-1 ทาง Floating IP ได้สองวิธี วิธีแรกผู้ใช้ล็อกอินทางไกลด้วยคีย์ B-key.pem โดยไม่ต้องใส่พาสเวิร์ด และวิธีที่สองที่ไม่ได้ใช้คีย์จึงต้องใช้พาสเวิร์ด vasabilab</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ ssh -i ./B-key.pem ubuntu@192.168.20.164
+..
+ubuntu@b-focal-1:~$ exit
+$
+$ ssh ubuntu@192.168.20.164
+Password:
+..
+ubuntu@b-focal-1:~$ exit
+$</code></pre></div>
+<p>หลังจากนั้น ผู้ใช้ต้องการเปลี่ยนความเกี่ยวข้องของ Floating IP จากวีเอ็ม B-focal-1 ไปเป็นวีเอ็ม B-ub2104-1 แทน ผู้ใช้สามารถยกเลิกการเกี่ยวข้อง</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack floating ip unset --port 192.168.20.164
+$ openstack server list
+
++--------------------------------------+------------+--------+------------------------+-----------
+| ID                                   | Name       | Status | Networks               | Image
++--------------------------------------+------------+--------+------------------------+-----------
+| 8b5c994c-b0d2-4083-8fa0-f39ca739bb0a | B-ub2104-1 | ACTIVE | B-net-1=192.10.112.223 |
+| e1140e20-01fe-4c2a-82e4-4f04b75a592e | B-focal-1  | ACTIVE | B-net-1=192.10.112.75  | ubuntu-foc
++--------------------------------------+------------+--------+------------------------+-----------
+..
+----------+------------+
+          | Flavor     |
+----------+------------+
+          | m1.small.1 |
+al-server | m1.small.1 |
+----------+------------+</code></pre></div>
+<p>และสร้างความเกี่ยวข้องใหม่ดังนี้</p>
+<div class="code"><div class="code-head"><span class="code-label">Terminal</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ openstack server add floating ip B-ub2104-1 192.168.20.164
+$ openstack server list
+
++--------------------------------------+------------+--------+------------------------------------
+| ID                                   | Name       | Status | Networks
++--------------------------------------+------------+--------+------------------------------------
+| 8b5c994c-b0d2-4083-8fa0-f39ca739bb0a | B-ub2104-1 | ACTIVE | B-net-1=192.10.112.223, 192.168.20.
+| e1140e20-01fe-4c2a-82e4-4f04b75a592e | B-focal-1  | ACTIVE | B-net-1=192.10.112.75
++--------------------------------------+------------+--------+------------------------------------
+..
+----+---------------------+------------+
+    | Image               | Flavor     |
+----+---------------------+------------+
+164 |                     | m1.small.1 |
+    | ubuntu-focal-server | m1.small.1 |
+----+---------------------+------------+
+
+$</code></pre></div>
+<p>ก่อนที่ผู้ใช้จะล็อกอินทางไกลได้ ผู้ใช้ต้อง <em><strong>ลบรหัสแสดงความเป็นตัวตน</strong></em> ของเครื่องวีเอ็ม B-focal-1 ที่เครื่อง Client จำไว้ว่าเป็นเครื่องที่มีค่าไอพีคือ 192.168.20.164 ก่อนด้วยคำสั่ง ssh-keygen แล้วจึงจะสามารถใช้ ssh ล็อกอินทางไกลไปที่ 192.168.20.164 ซึ่งในตอนนี้คือวีเอ็ม B-ub2104-1 ได้</p>
+<div class="code"><div class="code-head"><span class="code-label">On a client computer</span><button aria-label="คัดลอก" class="copy" type="button">คัดลอก</button></div><pre><code>$ ssh-keygen -R 192.168.20.164
+$ ssh -i ./B-key.pem ubuntu@192.168.20.164
+..
+ubuntu@b-ub2104-1:~$ exit
+$
+$ ssh ubuntu@192.168.20.164
+Password:
+..
+ubuntu@b-ub2104-1:~$ exit</code></pre></div>
+<h3 id="sec-1-3-11">๑.3.11 ข้อแนะนำเกี่ยวกับการใช้คำสั่ง Command Line Interfaces อื่น</h3>
+<p>ตัวอย่างทั้งหมดที่บรรยายเป็นเพียงส่วนน้อยของคำสั่ง Command Line Interfaces ของโอเพนสแตคเท่านั้น ระบบโอเพนสแตคมีคำสั่งอีกมากที่ผู้ใช้สามารถอ้างอิงได้ที่เว็บไซต์</p>
+<p><a href="https://docs.openstack.org/python-openstackclient/latest/cli/index.html" rel="noopener" target="_blank">https://docs.openstack.org/python-openstackclient/latest/cli/index.html</a></p>
+<p>คำสั่งเหล่านี้แสดงถึงความพร้อมของโอเพนสแตคที่มีเครื่องมือให้ผู้ใช้สามารถนำไปใช้งานและแก้ปัญหาที่ซับซ้อนได้</p>
+<h2 id="sec-1-4">๑.4 บทสรุป</h2>
+<p>ในบทนี้ได้บรรยายการติดตั้งระบบโอเพนสแตคด้วยสคริปต์ ซึ่งสามารถอ่านรายละเอียดของสคริปต์ได้ในภาคผนวก ก. หลังจากนั้นได้บรรยายการใช้งานระบบโอเพนสแตคโดยใช้เว็บอินเตอร์เฟส หรือ OpenStack Dashboard และสุดท้ายบรรยายการใช้ Command Line Interfaces ของระบบโอเพนสแตค</p>
+<aside class="callout"><p class="callout-title">แหล่งข้อมูลการศึกษา</p><a href="https://vasabilab.github.io/cci_chapter7.html" rel="noopener" target="_blank">https://vasabilab.github.io/cci_chapter7.html</a></aside>
+<h2 id="sec-1-5">๑.5 แบบฝึกหัด</h2>
+<p><strong>ข้อ 1.</strong> ขอให้ใช้เครื่องคอมพิวเตอร์จริงหรือเวอร์ชวลแมชชีนสร้างเครื่องโฮสต์คอมพิวเตอร์ตามข้อกำหนดในตารางที่ 7-2 และทดลองติดตั้งระบบโอเพนสแตค ตามคำอธิบายในตอนที่ 7.1 ของบทนี้</p>
+<p><strong>ข้อ 2.</strong> ขอให้ใช้เว็บอินเตอร์เฟส และ Command Line Interfaces ของโอเพนสแตค ทำสิ่งต่อไปนี้</p>
+<ol type="1">
+<li><p>สร้างระบบเครือข่ายภายในหนึ่งเครือข่าย และ</p></li>
+<li><p>สร้างวีเอ็มแบบ Ubuntu สองเครื่องบนระบบเครือข่ายนั้น</p></li>
+<li><p>โดยที่วีเอ็มทั้งสอง ต้องสามารถสื่อสารกันได้ และ</p></li>
+<li><p>สามารถสื่อสารกับอินเทอร์เน็ตได้ และ</p></li>
+<li><p>จะต้องอนุญาตให้คอมพิวเตอร์ภายนอกระบบโอเพนสแตคเรียกดูเว็บไซต์ บนวีเอ็มทั้งสองได้</p></li>
+</ol>
+<p><strong>ข้อ. 3</strong> จงติดตั้งระบบฐานข้อมูลบนเครื่องวีเอ็มสามเครื่อง และใช้ระบบกาเลอร์ล่า (Galera) จัดการความซ้ำซ้อนของระบบฐานข้อมูลนั้น</p>
+<p><strong>ข้อ. 4</strong> จงอธิบายข้อดีและข้อเสียของระบบจัดการเครือข่ายเสมือนแบบซ้ำซ้อน (VRRP) และระบบจัดการเครือข่ายเสมือนแบบกระจาย (DVR) ของระบบโอเพนสแตค</p>
+
+    </article>
+    <footer class="foot"><a href="#top">↑ กลับขึ้นด้านบน</a></footer>
+  </main>
+</div>
+<div class="lightbox" hidden><img alt=""><p></p></div>
+<script src="assets/script.js"></script>
+</body>
+</html>
